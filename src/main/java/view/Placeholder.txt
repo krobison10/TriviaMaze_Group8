@@ -1,0 +1,1 @@
+View package contains all classes that have anything to do with interacting with the user.
