@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f79c244-ffee-4a03-900e-856553e3fadd" name="Changes" comment="Added driver class and updated placeholder files to explain purpose of each package within the MVC design pattern">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2f79c244-ffee-4a03-900e-856553e3fadd" name="Changes" comment="Added model classes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,7 +74,7 @@
       <workItem from="1666897892685" duration="247000" />
       <workItem from="1667069832304" duration="1065000" />
       <workItem from="1667077612886" duration="3690000" />
-      <workItem from="1667249253146" duration="670000" />
+      <workItem from="1667249253146" duration="1555000" />
     </task>
     <task id="LOCAL-00001" summary="Added MVC Packages and added placeholder files">
       <created>1666892904677</created>
@@ -85,7 +90,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666898029235</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added model classes">
+      <created>1667253973926</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667253973926</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +136,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added MVC Packages and added placeholder files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added MVC Packages and added placeholder files" />
+    <MESSAGE value="Added model classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added model classes" />
   </component>
 </project>
