@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f79c244-ffee-4a03-900e-856553e3fadd" name="Changes" comment="Added model classes" />
+    <list default="true" id="2f79c244-ffee-4a03-900e-856553e3fadd" name="Changes" comment="Added some more classes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/DoorState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -74,7 +78,7 @@
       <workItem from="1666897892685" duration="247000" />
       <workItem from="1667069832304" duration="1065000" />
       <workItem from="1667077612886" duration="3690000" />
-      <workItem from="1667249253146" duration="1555000" />
+      <workItem from="1667249253146" duration="2809000" />
     </task>
     <task id="LOCAL-00001" summary="Added MVC Packages and added placeholder files">
       <created>1666892904677</created>
@@ -97,7 +101,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667253973926</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added some more classes">
+      <created>1667254240952</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667254240952</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,6 +148,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added MVC Packages and added placeholder files" />
     <MESSAGE value="Added model classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added model classes" />
+    <MESSAGE value="Added some more classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added some more classes" />
   </component>
 </project>
