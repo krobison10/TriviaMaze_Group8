@@ -1,1 +1,0 @@
-Controller package contains all classes that handle program logic, links the model and view.
