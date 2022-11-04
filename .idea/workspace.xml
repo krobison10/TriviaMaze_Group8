@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f79c244-ffee-4a03-900e-856553e3fadd" name="Changes" comment="Added DoorStates enum">
+    <list default="true" id="2f79c244-ffee-4a03-900e-856553e3fadd" name="Changes" comment="Added new classes from UML revision, deleted placeholders">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Door.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,12 +16,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -79,6 +85,8 @@
       <workItem from="1667077612886" duration="3690000" />
       <workItem from="1667249253146" duration="4300000" />
       <workItem from="1667419183796" duration="1820000" />
+      <workItem from="1667500585949" duration="3344000" />
+      <workItem from="1667598459408" duration="837000" />
     </task>
     <task id="LOCAL-00001" summary="Added MVC Packages and added placeholder files">
       <created>1666892904677</created>
@@ -115,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667256465275</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added new classes from UML revision, deleted placeholders">
+      <created>1667501017315</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667501017315</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,6 +172,7 @@
     <MESSAGE value="Added model classes" />
     <MESSAGE value="Added some more classes" />
     <MESSAGE value="Added DoorStates enum" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added DoorStates enum" />
+    <MESSAGE value="Added new classes from UML revision, deleted placeholders" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new classes from UML revision, deleted placeholders" />
   </component>
 </project>
