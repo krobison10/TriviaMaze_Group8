@@ -16,7 +16,7 @@ public class Door {
     private DoorStates myState;
 
 
-    public Door(final Question theQuestion) {
+    Door(final Question theQuestion) {
         myQuestion = theQuestion;
     }
 
