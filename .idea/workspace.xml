@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f79c244-ffee-4a03-900e-856553e3fadd" name="Changes" comment="Made Door constructor package-private, as it should not be created by entities outside of model">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="2f79c244-ffee-4a03-900e-856553e3fadd" name="Changes" comment="Boilerplate for TriviaMazeController and documentation of fields">
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TriviaMazeInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TriviaMazeInitializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +86,7 @@
       <workItem from="1667419183796" duration="1820000" />
       <workItem from="1667500585949" duration="3344000" />
       <workItem from="1667598459408" duration="7182000" />
+      <workItem from="1667764201722" duration="904000" />
     </task>
     <task id="LOCAL-00001" summary="Added MVC Packages and added placeholder files">
       <created>1666892904677</created>
@@ -157,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667603816159</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Boilerplate for TriviaMazeController and documentation of fields">
+      <created>1667764987066</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1667764987066</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +212,7 @@
     <MESSAGE value="Boilerplate for Room class, documentation of current fields." />
     <MESSAGE value="Boilerplate for TriviaMaze class, documentation of current fields." />
     <MESSAGE value="Made Door constructor package-private, as it should not be created by entities outside of model" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made Door constructor package-private, as it should not be created by entities outside of model" />
+    <MESSAGE value="Boilerplate for TriviaMazeController and documentation of fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="Boilerplate for TriviaMazeController and documentation of fields" />
   </component>
 </project>
