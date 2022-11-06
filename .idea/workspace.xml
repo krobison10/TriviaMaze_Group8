@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f79c244-ffee-4a03-900e-856553e3fadd" name="Changes" comment="Implementation of functionality for Room classes. Minor changes to related classes.">
+    <list default="true" id="2f79c244-ffee-4a03-900e-856553e3fadd" name="Changes" comment="Implementation of functionality for TriviaMaze class. Minor changes to related classes.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/TriviaMaze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/TriviaMaze.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +88,7 @@
       <workItem from="1667419183796" duration="1820000" />
       <workItem from="1667500585949" duration="3344000" />
       <workItem from="1667598459408" duration="7182000" />
-      <workItem from="1667764201722" duration="9336000" />
+      <workItem from="1667764201722" duration="10010000" />
     </task>
     <task id="LOCAL-00001" summary="Added MVC Packages and added placeholder files">
       <created>1666892904677</created>
@@ -180,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667772319396</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Implementation of functionality for TriviaMaze class. Minor changes to related classes.">
+      <created>1667773825678</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1667773825678</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,6 +238,7 @@
     <MESSAGE value="Boilerplate for TriviaMazeController and documentation of fields" />
     <MESSAGE value="Boilerplate for TriviaMazeInitializer and documentation of fields" />
     <MESSAGE value="Implementation of functionality for Room classes. Minor changes to related classes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementation of functionality for Room classes. Minor changes to related classes." />
+    <MESSAGE value="Implementation of functionality for TriviaMaze class. Minor changes to related classes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementation of functionality for TriviaMaze class. Minor changes to related classes." />
   </component>
 </project>

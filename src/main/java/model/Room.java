@@ -41,39 +41,6 @@ public class Room {
     }
 
     /**
-     * Loops through all the directions, for each direction, if in bounds
-     * it either gets a reference to a door object from the adjacent room
-     * to use for this room, or creates a new one if there isn't one yet.
-     * @param theMaze a reference to the TriviaMaze
-     * @return a List of doors for the room
-     */
-    private List<Door> setDoors(final TriviaMaze theMaze) {
-        Door[] init = {null, null, null, null};
-        List<Door> result = Arrays.asList(init);
-        if(myPosX - 1 >= 0) {
-            //Get door from room to the west that current room would share
-            var adjacent = theMaze.getRoom(myPosX - 1, myPosY).getDoors().get(2);
-            result.set(0, (adjacent == null ? new Door() : adjacent));
-        }
-        if(myPosY - 1 >= 0) {
-            //Get door from room to the north that current room would share
-            var adjacent = theMaze.getRoom(myPosX, myPosY - 1).getDoors().get(3);
-            result.set(1, (adjacent == null ? new Door() : adjacent));
-        }
-        if(myPosX + 1 < theMaze.getWidth()) {
-            //Get door from room to the east that current room would share
-            var adjacent = theMaze.getRoom(myPosX + 1, myPosY).getDoors().get(0);
-            result.set(2, (adjacent == null ? new Door() : adjacent));
-        }
-        if(myPosY + 1 < theMaze.getHeight()) {
-            //Get door from room to the north that current room would share
-            var adjacent = theMaze.getRoom(myPosX, myPosY + 1).getDoors().get(1);
-            result.set(3, (adjacent == null ? new Door() : adjacent));
-        }
-        return result;
-    }
-
-    /**
      * @return a List of the doors that the room has
      */
     public List<Door> getDoors() {
@@ -118,5 +85,38 @@ public class Room {
     @Deprecated
     public String toString() {
         return "";
+    }
+
+    /**
+     * Loops through all the directions, for each direction, if in bounds
+     * it either gets a reference to a door object from the adjacent room
+     * to use for this room, or creates a new one if there isn't one yet.
+     * @param theMaze a reference to the TriviaMaze
+     * @return a List of doors for the room
+     */
+    private List<Door> setDoors(final TriviaMaze theMaze) {
+        Door[] init = {null, null, null, null};
+        List<Door> result = Arrays.asList(init);
+        if(myPosX - 1 >= 0) {
+            //Get door from room to the west that current room would share
+            var adjacent = theMaze.getRoom(myPosX - 1, myPosY).getDoors().get(2);
+            result.set(0, (adjacent == null ? new Door() : adjacent));
+        }
+        if(myPosY - 1 >= 0) {
+            //Get door from room to the north that current room would share
+            var adjacent = theMaze.getRoom(myPosX, myPosY - 1).getDoors().get(3);
+            result.set(1, (adjacent == null ? new Door() : adjacent));
+        }
+        if(myPosX + 1 < theMaze.getWidth()) {
+            //Get door from room to the east that current room would share
+            var adjacent = theMaze.getRoom(myPosX + 1, myPosY).getDoors().get(0);
+            result.set(2, (adjacent == null ? new Door() : adjacent));
+        }
+        if(myPosY + 1 < theMaze.getHeight()) {
+            //Get door from room to the north that current room would share
+            var adjacent = theMaze.getRoom(myPosX, myPosY + 1).getDoors().get(1);
+            result.set(3, (adjacent == null ? new Door() : adjacent));
+        }
+        return result;
     }
 }

@@ -34,20 +34,6 @@ public class TriviaMaze {
     }
 
     /**
-     * Creates new rooms for every position in the Room[][] array.
-     * @return the initialized array.
-     */
-    private Room[][] createRooms() {
-        var output = new Room[myHeight][myWidth];
-        for(int i = 0; i < myHeight; i++) {
-            for(int j = 0; j < myWidth; j++) {
-                output[i][j] = new Room(j, i, this);
-            }
-        }
-        return output;
-    }
-
-    /**
      * @param theX the X position from the room (0 based).
      * @param theY the Y position from the room (0 based).
      * @return the Room in the location specified, null if the room is
@@ -102,7 +88,22 @@ public class TriviaMaze {
      * of Door.
      * @param theDoor the Door object to be added.
      */
-    void addDoor(final Door theDoor) {
+    List<Door> addDoor(final Door theDoor) {
         myDoors.add(theDoor);
+        return myDoors;
+    }
+
+    /**
+     * Creates new rooms for every position in the Room[][] array.
+     * @return the initialized array.
+     */
+    private Room[][] createRooms() {
+        var output = new Room[myHeight][myWidth];
+        for(int i = 0; i < myHeight; i++) {
+            for(int j = 0; j < myWidth; j++) {
+                output[i][j] = new Room(j, i, this);
+            }
+        }
+        return output;
     }
 }

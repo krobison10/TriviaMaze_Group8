@@ -31,11 +31,6 @@ public class Door {
         return myQuestion;
     }
 
-    private Question ChangeQuestion(final Question theQuestion) {
-        myQuestion = theQuestion;
-        return myQuestion;
-    }
-
     public DoorStates getState() {
         return myState;
     }
@@ -43,6 +38,11 @@ public class Door {
     public DoorStates setState(final DoorStates theState) {
         myState = theState;
         return myState;
+    }
+
+    public Question ChangeQuestion(final Question theQuestion) {
+        myQuestion = theQuestion;
+        return myQuestion;
     }
 
 
