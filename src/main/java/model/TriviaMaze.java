@@ -1,33 +1,50 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 
 public class TriviaMaze {
     /**
      * Stores all the rooms that the maze contains.
      */
-    private Room[][] myRooms;
+    private final Room[][] myRooms;
     /**
      * Stores all the doors that the maze contains for convenient
      * access to the entire set of doors in the maze. Stored in a
      * HashSet to simplify process of adding doors during maze creation
      * to avoid duplicates.
      */
-    private HashSet<Door> myDoors;
+    private final List<Door> myDoors;
     /**
      * Stores a reference to the player object that the maze contains.
      */
-    private Player myPlayer;
+    private final Player myPlayer;
     /**
      * Represents the width and height of the maze in terms of rooms.
      * For example: "5 rooms wide, 5 rooms tall"
      */
-    private int myWidth, myHeight;
+    private final int myWidth, myHeight;
 
     public TriviaMaze(final int theWidth, final int theHeight) {
+        myWidth = theWidth;
+        myHeight = theHeight;
+        myRooms = createRooms();
+        myPlayer = new Player();
+        myDoors = new ArrayList<>();
+    }
 
+    /**
+     * Creates new rooms for every position in the Room[][] array.
+     * @return the initialized array.
+     */
+    private Room[][] createRooms() {
+        var output = new Room[myHeight][myWidth];
+        for(int i = 0; i < myHeight; i++) {
+            for(int j = 0; j < myWidth; j++) {
+                output[i][j] = new Room(j, i, this);
+            }
+        }
+        return output;
     }
 
     /**
@@ -41,33 +58,51 @@ public class TriviaMaze {
         if(theX >= 0 && theY >= 0 && theX < myWidth && theY < myHeight) {
             result = myRooms[theY][theX];
         }
-//        else {
-//            throw new IndexOutOfBoundsException("Position given is out of range");
-//        }
         return result;
     }
 
-    public ArrayList<Room> getAllRooms() {
-        return (ArrayList<Room>) Arrays.asList(myRooms);
+    /**
+     * @return a clone of the 2d array of all the rooms.
+     */
+    public Room[][] getAllRooms() {
+        return myRooms.clone();
     }
 
+    /**
+     * @return the Player.
+     */
     public Player player() {
         return myPlayer;
     }
 
-    public HashSet<Door> getAllDoors() {
+    /**
+     * @return a list that contains all the doors in the entire maze.
+     */
+    public List<Door> getAllDoors() {
         return myDoors;
     }
 
+    /**
+     * @return the width of the maze.
+     */
     public int getWidth() {
         return myWidth;
     }
 
+    /**
+     * @return the height of the maze.
+     */
     public int getHeight() {
         return myHeight;
     }
 
+    /**
+     * Adds a door to the list which contains all the doors in the maze.
+     * This method probably shouldn't be used outside the constructor
+     * of Door.
+     * @param theDoor the Door object to be added.
+     */
     void addDoor(final Door theDoor) {
-
+        myDoors.add(theDoor);
     }
 }
