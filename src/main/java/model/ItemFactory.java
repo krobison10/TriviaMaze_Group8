@@ -4,15 +4,15 @@ package model;
  * Item Factory that create new item
  */
 public class ItemFactory {
-    public Item createItem(String itemName, String itemFunction)
+    public Item createItem(String theItemName, String theItemFunction)
     {
-        if(itemFunction.equalsIgnoreCase("fifty option"))
+        if(theItemFunction.equalsIgnoreCase("fifty option"))
         {
-            return new ItemFiftyFiftyOption(itemName,itemFunction);
+            return new ItemFiftyFiftyOption(theItemName,theItemFunction);
         }
-        if(itemFunction.equalsIgnoreCase("change question"))
+        if(theItemFunction.equalsIgnoreCase("change question"))
         {
-            return new ItemQuestionChange(itemName,itemFunction);
+            return new ItemQuestionChange(theItemName,theItemFunction);
         }
         else{
             throw new IllegalArgumentException("Illegal Argument");
