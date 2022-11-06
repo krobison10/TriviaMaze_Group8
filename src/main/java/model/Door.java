@@ -20,6 +20,13 @@ public class Door {
         myQuestion = theQuestion;
     }
 
+    /**
+     * Constructs a door and assigns it a random question from the question bank.
+     */
+    Door() {
+        //myQuestion = QuestionBank.getRandomQuestion()
+    }
+
     public Question getQuestion() {
         return myQuestion;
     }

@@ -30,8 +30,21 @@ public class TriviaMaze {
 
     }
 
-    public Room getRoom(final int theXPos, final int theYPos) {
-        return null;
+    /**
+     * @param theX the X position from the room (0 based).
+     * @param theY the Y position from the room (0 based).
+     * @return the Room in the location specified, null if the room is
+     * not in bounds.
+     */
+    public Room getRoom(final int theX, final int theY) {
+        Room result = null;
+        if(theX >= 0 && theY >= 0 && theX < myWidth && theY < myHeight) {
+            result = myRooms[theY][theX];
+        }
+//        else {
+//            throw new IndexOutOfBoundsException("Position given is out of range");
+//        }
+        return result;
     }
 
     public ArrayList<Room> getAllRooms() {
@@ -44,6 +57,14 @@ public class TriviaMaze {
 
     public HashSet<Door> getAllDoors() {
         return myDoors;
+    }
+
+    public int getWidth() {
+        return myWidth;
+    }
+
+    public int getHeight() {
+        return myHeight;
     }
 
     void addDoor(final Door theDoor) {
