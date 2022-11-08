@@ -1,18 +1,25 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class BuildGUI {
+public class BuildGUI implements ActionListener {
 
-    public static void main(String theArgs[]) {
+    private JFrame mazeWindow;
+    private JMenuBar menuBar;
+    private JMenu startMenu, helpMenu;
+    private JMenuItem newGame, saveGame, exitGame, rules, controls, credits;
+    private JButton playButton;
+
+    public void buildFrame() {
 
         final int windowSizeWidth = 500;
         final int windowSizeHeight = 500;
 
         // create JFrame
-        JFrame mazeWindow = new JFrame();
+        mazeWindow = new JFrame();
         mazeWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mazeWindow.setResizable(false);
         mazeWindow.setTitle("Trivia Maze");
@@ -20,18 +27,20 @@ public class BuildGUI {
         mazeWindow.setLocationRelativeTo(null);
 
         // Create menu bar
-        JMenuBar menuBar = new JMenuBar();
+        menuBar = new JMenuBar();
         // Create menu
-        JMenu startMenu = new JMenu("Start");
-        JMenu helpMenu = new JMenu("Help");
+        startMenu = new JMenu("Start");
+        helpMenu = new JMenu("Help");
         // Create menu items
-        JMenuItem newGame = new JMenuItem("New Game");
-        JMenuItem saveGame = new JMenuItem("Save Game");
-        JMenuItem exitGame = new JMenuItem("Exit Game");
-        JMenuItem howToPlay = new JMenuItem("Rules & Controls");
-        JMenuItem credits = new JMenuItem("Credits");
+        newGame = new JMenuItem("New");
+        saveGame = new JMenuItem("Save");
+        exitGame = new JMenuItem("Exit");
+        rules = new JMenuItem("Rules");
+        controls = new JMenuItem("Controls");
+        credits = new JMenuItem("Credits");
         // Create buttons
-        JButton playButton = new JButton("Play");
+        playButton = new JButton("Play");
+
         // Add menu to menubar
         menuBar.add(startMenu);
         menuBar.add(helpMenu);
@@ -40,14 +49,61 @@ public class BuildGUI {
         startMenu.add(saveGame);
         startMenu.add(exitGame);
         // Add menu items to help menu
-        helpMenu.add(howToPlay);
+        helpMenu.add(rules);
+        helpMenu.add(controls);
         helpMenu.add(credits);
 
         // Add everything to frame
         mazeWindow.getContentPane().add(BorderLayout.NORTH, menuBar);
         mazeWindow.getContentPane().add(playButton);
 
+        // Add action listeners
+        newGame.addActionListener(this);
+        saveGame.addActionListener(this);
+        exitGame.addActionListener(this);
+        rules.addActionListener(this);
+        controls.addActionListener(this);
+        credits.addActionListener(this);
+
+        // show frame
         mazeWindow.setVisible(true);
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == newGame) {
+            JOptionPane.showMessageDialog(mazeWindow,"Operation not implemented");
+        } else if (e.getSource() == saveGame) {
+            JOptionPane.showMessageDialog(mazeWindow,"Operation not implemented");
+        } else if (e.getSource() == exitGame) {
+            System.exit(0);
+        } else if (e.getSource() == rules) {
+            JOptionPane.showMessageDialog(mazeWindow,gameRules());
+        } else if (e.getSource() == controls) {
+            JOptionPane.showMessageDialog(mazeWindow,gameControls());
+        } else if (e.getSource() == credits) {
+            JOptionPane.showMessageDialog(mazeWindow, gameCredits());
+        }
+    }
+
+    private String gameRules() {
+        return "This is a 5x5 grid maze. \n" +
+                "To enter another room, interact with a locked door. \n" +
+                "Once a door is interacted with, a trivia question will display. \n" +
+                "Answering the question correctly will unlock the door. \n" +
+                "Answering the question incorrectly will lock it permanently. \n" +
+                "You must reach the final room to complete the maze. \n" +
+                "The game ends when the final room is reach or there is no path to th exit, \n" +
+                "due to permanently locked doors";
+    }
+
+    private String gameCredits() {
+        return "Created by Kyler Robison, AJ Garcia, and Minh Le.";
+    }
+
+    private String gameControls() {
+        return "Use arrows or WASD to move left, right up, or down. \n" +
+                "Press 'E' to interact with the environment.";
     }
 }
