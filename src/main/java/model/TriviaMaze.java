@@ -38,15 +38,14 @@ public class TriviaMaze {
     /**
      * @param theX the X position from the room (0 based).
      * @param theY the Y position from the room (0 based).
-     * @return the Room in the location specified, null if the room is
-     * not in bounds.
+     * @return the room at the requested location.
+     * @throws IndexOutOfBoundsException if the room position is out of bounds.
      */
     public Room getRoom(final int theX, final int theY) {
-        Room result = null;
-        if(theX >= 0 && theY >= 0 && theX < myWidth && theY < myHeight) {
-            result = myRooms[theY][theX];
+        if(theX < 0 || theY < 0 || theX >= myWidth || theY >= myHeight) {
+            throw new IndexOutOfBoundsException("Position out of bounds in maze");
         }
-        return result;
+        return myRooms[theY][theX];
     }
 
     /**
@@ -110,9 +109,9 @@ public class TriviaMaze {
     }
 
     /**
-     * Initializes the doors for every room in myrooms by calling
-     * the required method on them. This method cannot be called
-     * before createRooms.
+     * Initializes the doors for every room in myRooms by calling
+     * their initialize method. This method cannot be called
+     * before createRooms is called.
      */
     private Room[][] initializeRooms() {
         for(int i = 0; i < myHeight; i++) {
