@@ -28,9 +28,11 @@ public class TriviaMaze {
     public TriviaMaze(final int theWidth, final int theHeight) {
         myWidth = theWidth;
         myHeight = theHeight;
-        myRooms = createRooms();
         myPlayer = new Player();
         myDoors = new ArrayList<>();
+
+        myRooms = createRooms();
+        initializeRooms();
     }
 
     /**
@@ -51,7 +53,7 @@ public class TriviaMaze {
      * @return a clone of the 2d array of all the rooms.
      */
     public Room[][] getAllRooms() {
-        return myRooms.clone();
+        return myRooms;
     }
 
     /**
@@ -88,9 +90,9 @@ public class TriviaMaze {
      * of Door.
      * @param theDoor the Door object to be added.
      */
-    List<Door> addDoor(final Door theDoor) {
+    Door addDoor(final Door theDoor) {
         myDoors.add(theDoor);
-        return myDoors;
+        return theDoor;
     }
 
     /**
@@ -105,5 +107,19 @@ public class TriviaMaze {
             }
         }
         return output;
+    }
+
+    /**
+     * Initializes the doors for every room in myrooms by calling
+     * the required method on them. This method cannot be called
+     * before createRooms.
+     */
+    private Room[][] initializeRooms() {
+        for(int i = 0; i < myHeight; i++) {
+            for(int j = 0; j < myWidth; j++) {
+                myRooms[i][j].initializeDoors(this);
+            }
+        }
+        return myRooms;
     }
 }
