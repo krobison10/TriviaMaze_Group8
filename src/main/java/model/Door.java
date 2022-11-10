@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Represents a door in the maze. Is a bridge between rooms. All doors contain a question and a
+ * state that determines how the door will behave. Certain rooms will share a door object when they
+ * are adjacent.
+ */
 public class Door {
     /**
      * Represents the question that the door contains
@@ -14,36 +19,53 @@ public class Door {
      * will be un-passable for the remainder of the game.
      */
     private DoorStates myState;
+    /**
+     * Reference to the containing TriviaMaze object. Field may be redundant.
+     */
+    private final TriviaMaze myMaze;
 
 
-    Door(final Question theQuestion) {
-        myQuestion = theQuestion;
+    /**
+     * Constructs a door and assigns it a random question from the question bank, initializes
+     * state to closed.
+     */
+    Door(final TriviaMaze theMaze) {
+        myMaze = theMaze;
+        myState = DoorStates.CLOSED;
+        //myQuestion = theMaze.questionBank().getRandomQuestion(); //QuestionBank not finished yet
     }
 
     /**
-     * Constructs a door and assigns it a random question from the question bank.
+     * @return the question contained by the door.
      */
-    Door() {
-        //myQuestion = QuestionBank.getRandomQuestion()
-    }
-
     public Question getQuestion() {
         return myQuestion;
     }
 
+    /**
+     * @return the current state of the door.
+     */
     public DoorStates getState() {
         return myState;
     }
 
+    /**
+     * updates the state of the door to whatever is passed in.
+     * @param theState the new state of the door.
+     * @return the updated state.
+     */
     public DoorStates setState(final DoorStates theState) {
         myState = theState;
         return myState;
     }
 
-    public Question ChangeQuestion(final Question theQuestion) {
+    /**
+     * Changes the question contained by the door.
+     * @param theQuestion the new question.
+     * @return the updated question.
+     */
+    Question setQuestion(final Question theQuestion) {
         myQuestion = theQuestion;
         return myQuestion;
     }
-
-
 }

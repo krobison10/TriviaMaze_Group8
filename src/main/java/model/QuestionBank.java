@@ -1,36 +1,65 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
- * Class for Question bank
+ * Represents the pool of questions for the game. Reads from a SQLite database
+ * to collect data, then builds and stores a list of Question objects from it.
  */
 public class QuestionBank {
-    private ArrayList<Question> myQuestionBank;
+    /**
+     * The list of Question objects sourced from the database.
+     */
+    private final List<Question> myQuestions;
 
-    // Constructor that create a question bank
-    public QuestionBank() {
-        ArrayList<Question> myQuestionBank= new ArrayList<Question>();
+
+    QuestionBank() {
+        myQuestions = new ArrayList<>();
+        initializeQuestions();
     }
 
-    // Add Question to the question bank
-    public void addQuestion(Question theQuestion){
-            myQuestionBank.add(theQuestion);
+    /**
+     * Adds a new Question to the list.
+     * @param theQuestion the Question to be added.
+     */
+    void addQuestion(final Question theQuestion) {
+        myQuestions.add(theQuestion);
     }
 
-    // Remove Question from the inventory
-    public void removeQuestion(Question theQuestion){
-        if(myQuestionBank.size() > 0){
-            myQuestionBank.remove(theQuestion);
+    /**
+     * Removes the first occurrence of a Question from the list.
+     * @param theQuestion the Question to be removed.
+     */
+    void removeQuestion(final Question theQuestion) {
+        if(!myQuestions.isEmpty()) {
+            myQuestions.remove(theQuestion);
         }
-        else {
-            System.out.println("Question Bank is empty. Cannot remove Question.");
-        }
     }
-    public Question getQuestion(int theQuestionPosition){
-        return myQuestionBank.get(theQuestionPosition);
+
+    /**
+     * Gets a question at a certain index in the list.
+     * @param thePos the index.
+     * @return the Question object
+     */
+    Question getQuestion(final int thePos) {
+        return myQuestions.remove(thePos);
     }
-    public Question getRandomQuestion(int theRandomNumber){
-        return getQuestion(theRandomNumber);
+
+    /**
+     * Gets and removes a random Question from the list.
+     * @return the randomly selected Question.
+     */
+    Question getRandomQuestion() {
+        Random rnd = new Random();
+        return getQuestion(rnd.nextInt(0, myQuestions.size()));
+    }
+
+    /**
+     * Reads from a database and adds Question objects to the list.
+     */
+    private void initializeQuestions() {
+        //DB functions go here
     }
 }
