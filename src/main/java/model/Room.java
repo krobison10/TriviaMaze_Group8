@@ -69,6 +69,21 @@ public class Room {
     }
 
     /**
+     *
+     * @param theItem the Item to be added to the room.
+     * @return true if the item was added successfully, false if the room already contained an item.
+     * In the false case, the existing item will be kept and the item to be added will be ignored.
+     */
+    public boolean addItem(final Item theItem) {
+        boolean successful = false;
+        if(myItem == null) {
+            myItem = theItem;
+            successful = true;
+        }
+        return successful;
+    }
+
+    /**
      * @return the X position of the room within the maze.
      */
     public int getX() {
@@ -88,7 +103,7 @@ public class Room {
     @Override
     @Deprecated
     public String toString() {
-        return "";
+        return "Room: X=" + myPosX + ", Y=" + myPosY + ", Item: " + myItem + "\nDoors: " + myDoors;
     }
 
     /**
