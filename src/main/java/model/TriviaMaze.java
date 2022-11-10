@@ -3,6 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The main driver class for the model package. Represents the main maze and contains
+ * all the rooms within. Upon construction, automatically initializes necessary objects
+ * in model, and stores the data or references to the data in some way.
+ */
 public class TriviaMaze {
     /**
      * Stores all the rooms that the maze contains.
@@ -10,9 +15,7 @@ public class TriviaMaze {
     private final Room[][] myRooms;
     /**
      * Stores all the doors that the maze contains for convenient
-     * access to the entire set of doors in the maze. Stored in a
-     * HashSet to simplify process of adding doors during maze creation
-     * to avoid duplicates.
+     * access to the entire list of doors in the maze.
      */
     private final List<Door> myDoors;
     /**
@@ -24,13 +27,18 @@ public class TriviaMaze {
      * For example: "5 rooms wide, 5 rooms tall"
      */
     private final int myWidth, myHeight;
+    /**
+     * The questionBank object for the instance of the TriviaMaze. Builds and
+     * contains all the Questions for the maze.
+     */
+    private final QuestionBank myQuestionBank;
 
     public TriviaMaze(final int theWidth, final int theHeight) {
         myWidth = theWidth;
         myHeight = theHeight;
         myPlayer = new Player();
         myDoors = new ArrayList<>();
-
+        myQuestionBank = new QuestionBank();
         myRooms = createRooms();
         initializeRooms();
     }
@@ -95,6 +103,13 @@ public class TriviaMaze {
     }
 
     /**
+     * @return the QuestionBank for the triviaMaze.
+     */
+    QuestionBank questionBank() {
+        return myQuestionBank;
+    }
+
+    /**
      * Creates new rooms for every position in the Room[][] array.
      * @return the initialized array.
      */
@@ -116,7 +131,7 @@ public class TriviaMaze {
     private Room[][] initializeRooms() {
         for(int i = 0; i < myHeight; i++) {
             for(int j = 0; j < myWidth; j++) {
-                myRooms[i][j].initializeDoors(this);
+                myRooms[i][j].initializeDoors();
             }
         }
         return myRooms;
