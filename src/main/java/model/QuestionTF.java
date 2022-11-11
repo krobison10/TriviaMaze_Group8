@@ -8,7 +8,7 @@ public class QuestionTF extends QuestionSelection {
     private String[] myOptions;
     private int myAnswerPosition;
 
-    public QuestionTF(String myPrompt, String[] myOptions, int myAnswerPosition) {
+    QuestionTF(String myPrompt, String[] myOptions, int myAnswerPosition) {
         this.myPrompt = myPrompt;
         this.myOptions = myOptions;
         this.myAnswerPosition = myAnswerPosition;

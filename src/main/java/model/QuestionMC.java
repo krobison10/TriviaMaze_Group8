@@ -8,7 +8,7 @@ public class QuestionMC extends QuestionSelection {
     private String[] myOptions;
     private int myAnswerPosition;
 
-    public QuestionMC(String myPrompt, String[] myOptions, int myAnswerPosition) {
+    QuestionMC(String myPrompt, String[] myOptions, int myAnswerPosition) {
         this.myPrompt = myPrompt;
         this.myOptions = myOptions;
         this.myAnswerPosition = myAnswerPosition;
