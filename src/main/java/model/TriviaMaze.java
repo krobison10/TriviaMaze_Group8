@@ -38,7 +38,7 @@ public class TriviaMaze {
         myHeight = theHeight;
         myPlayer = new Player();
         myDoors = new ArrayList<>();
-        myQuestionBank = new QuestionBank();
+        myQuestionBank = new QuestionBank("questions.db");
         myRooms = createRooms();
         initializeRooms();
     }
