@@ -3,7 +3,7 @@ package model;
 /**
  * Item that eliminate two wrong answer from multiple choice question
  */
-public class ItemFiftyFiftyOption extends Item {
+public class ItemWrongOptionRemoval extends Item {
 
     /**
      * Constructor to create item to remove 2 wrong answers
@@ -11,7 +11,7 @@ public class ItemFiftyFiftyOption extends Item {
      * @param theItemDescription description of the item to be created
      * @param theItemType type of the item to be created
      */
-    ItemFiftyFiftyOption(String theItemName, String theItemDescription, String theItemType) {
+    ItemWrongOptionRemoval(String theItemName, String theItemDescription, String theItemType) {
         super.setItemName(theItemName);
         super.setItemDescription(theItemDescription);
         super.setItemType(theItemType);

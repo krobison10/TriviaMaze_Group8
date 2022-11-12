@@ -13,7 +13,15 @@ public class ItemInventory {
      * Constructor that create an empty inventory for player
      */
     public ItemInventory() {
-        ArrayList<Item> myInventory= new ArrayList<Item>();
+        this.myInventory= new ArrayList<Item>();
+    }
+
+    /**
+     * Get inventory's size
+     * @return number of items in the inventory
+     */
+    public int inventorySize(){
+        return myInventory.size();
     }
 
     /**
@@ -21,7 +29,7 @@ public class ItemInventory {
      * @param theItemObject that added to the inventory
      */
     public void addItem(Item theItemObject){
-        if(myInventory.size() < 3){
+        if(myInventory == null || myInventory.size() < 3 ){
             myInventory.add(theItemObject);
         }
         else {
@@ -86,7 +94,7 @@ public class ItemInventory {
             removeItem(selectedItem);
             return typeOfUsedItem;
         } else {
-            System.out.println("Cannot find item. Please type a correct name.");
+            System.out.println("Cannot find item. Please type a correct position number.");
             return "";
         }
     }
