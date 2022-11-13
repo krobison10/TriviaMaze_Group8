@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 /**
  * Class for Free Answer Question Type
  */
@@ -22,5 +24,27 @@ public class QuestionFA extends Question {
      */
     public String getAnswer() {
         return this.myAnswer;
+    }
+
+    /**
+     * Display the hint with some letters from the answer
+     */
+    public void displayHint(){
+        String answer = this.myAnswer;
+        int lastIndex = answer.length() - 1;
+        Random random = new Random();
+        int randomNumber = random.nextInt(lastIndex);
+
+        String hint = "";
+
+        for(int i = 0; i <= lastIndex; i++){
+            if(i == randomNumber){
+                hint = hint + answer.charAt(i);
+            } else {
+                hint += "-";
+            }
+        }
+        System.out.println(this.getPrompt());
+        System.out.println(hint);
     }
 }

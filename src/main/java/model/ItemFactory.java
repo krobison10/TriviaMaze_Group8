@@ -9,14 +9,14 @@ class ItemFactory {
      * @param theName the name of the item to be created.
      * @param theDescription the description of the item to be created.
      * @param theType the type of item to be created. Can be either
-     *                'wrong option removal' or 'change question' or 'hint display',
+     *                'option removal' or 'change question' or 'hint display',
      *                otherwise an exception will be thrown.
      * @return an instance of an Item.
      */
     static Item createItem(final String theName, final String theDescription, final String theType) {
 
-        if(theType.equalsIgnoreCase("wrong option removal")) {
-            return new ItemWrongOptionRemoval(theName, theDescription, theType);
+        if(theType.equalsIgnoreCase("option removal")) {
+            return new ItemOptionRemoval(theName, theDescription, theType);
         }
 
         if(theType.equalsIgnoreCase("change question")) {
