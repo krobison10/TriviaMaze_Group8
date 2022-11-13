@@ -21,7 +21,7 @@ class ItemInventoryTest {
                 "change question");
         eraser = myItemFactory.createItem("Eraser",
                 "An eraser that can remove 2 wrong answers.",
-                "wrong option removal");
+                "option removal");
         pencil = myItemFactory.createItem("Pencil",
                 "A pencil that can show some letters in the free answer question type.",
                 "hint display");
