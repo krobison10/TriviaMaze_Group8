@@ -11,12 +11,13 @@ public class BuildGUI implements ActionListener {
     private JMenuBar menuBar;
     private JMenu startMenu, helpMenu;
     private JMenuItem newGame, saveGame, exitGame, rules, controls, credits;
-    private JButton playButton;
+//    private JButton playButton;
 
     public void buildFrame() {
 
-        final int windowSizeWidth = 500;
-        final int windowSizeHeight = 500;
+        // initial welcome screen size
+        final int windowSizeWidth = 300;
+        final int windowSizeHeight = 300;
 
         // create JFrame
         mazeWindow = new JFrame();
@@ -39,7 +40,7 @@ public class BuildGUI implements ActionListener {
         controls = new JMenuItem("Controls");
         credits = new JMenuItem("Credits");
         // Create buttons
-        playButton = new JButton("Play");
+//        playButton = new JButton("Play");
 
         // Add menu to menubar
         menuBar.add(startMenu);
@@ -55,7 +56,7 @@ public class BuildGUI implements ActionListener {
 
         // Add everything to frame
         mazeWindow.getContentPane().add(BorderLayout.NORTH, menuBar);
-        mazeWindow.getContentPane().add(playButton);
+//        mazeWindow.getContentPane().add(playButton);
 
         // Add action listeners
         newGame.addActionListener(this);
@@ -70,10 +71,14 @@ public class BuildGUI implements ActionListener {
 
     }
 
+    /**
+     * Gives actions to the menu bar items.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newGame) {
-            JOptionPane.showMessageDialog(mazeWindow,"Operation not implemented");
+            buildMazeUI();
         } else if (e.getSource() == saveGame) {
             JOptionPane.showMessageDialog(mazeWindow,"Operation not implemented");
         } else if (e.getSource() == exitGame) {
@@ -87,23 +92,52 @@ public class BuildGUI implements ActionListener {
         }
     }
 
-    private String gameRules() {
-        return "This is a 5x5 grid maze. \n" +
-                "To enter another room, interact with a locked door. \n" +
-                "Once a door is interacted with, a trivia question will display. \n" +
-                "Answering the question correctly will unlock the door. \n" +
-                "Answering the question incorrectly will lock it permanently. \n" +
-                "You must reach the final room to complete the maze. \n" +
-                "The game ends when the final room is reach or there is no path to th exit, \n" +
-                "due to permanently locked doors";
+    /**
+     * Builds the Trivia Maze UI
+     */
+    public void buildMazeUI() {
+        TriviaMazeUI maze = TriviaMazeUI.getTriviaMaze();
+        mazeWindow.add(maze);
+        mazeWindow.pack();
+        mazeWindow.setLocationRelativeTo(null);
+        mazeWindow.setVisible(true);
+        maze.BeginTriviaMaze();
     }
 
+    /**
+     * Displays the game rules when selected from the menu bar
+     * @return
+     */
+    private String gameRules() {
+
+        return """
+                This is a 5x5 grid maze.
+                To enter another room, interact with a locked door.
+                Once a door is interacted with, a trivia question will display.
+                Answering the question correctly will unlock the door.
+                Answering the question incorrectly will lock it permanently.
+                You must reach the final room to complete the maze.
+                The game ends when the final room is reached or there is no path to the exit,
+                due to permanently locked doors";
+                """;
+    }
+
+    /**
+     * Displays the game credits when selected from the menu bar.
+     * @return
+     */
     private String gameCredits() {
         return "Created by Kyler Robison, AJ Garcia, and Minh Le.";
     }
 
+    /**
+     * Shows the game controls when selected from the menu bar.
+     * @return
+     */
     private String gameControls() {
-        return "Use arrows or WASD to move left, right up, or down. \n" +
-                "Press 'E' to interact with the environment.";
+        return """
+                Use arrows or WASD to move left, right up, or down.
+                Press 'E' to interact with the environment.
+                """;
     }
 }
