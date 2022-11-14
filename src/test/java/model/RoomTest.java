@@ -47,7 +47,7 @@ class RoomTest {
         var maze = new TriviaMaze(1, 1);
         var room = maze.getRoom(0, 0);
         assertNull(room.getItem(), "New room object already had item");
-        assertTrue(room.addItem(new ItemQuestionChange("", "")),
+        assertTrue(room.addItem(new ItemQuestionChange("", "", "")),
                 "Didn't return true on successful add");
         assertNotNull(room.getItem(), "Item null after adding item");
     }
@@ -57,10 +57,10 @@ class RoomTest {
     void testAddItemWhenNotEmpty() {
         var maze = new TriviaMaze(1, 1);
         var room = maze.getRoom(0, 0);
-        Item item = new ItemQuestionChange("", "");
+        Item item = new ItemQuestionChange("", "", "");
         assertNull(room.getItem(), "Room not empty");
         assertTrue(room.addItem(item), "Successfully adding an item didn't return true");
-        assertFalse(room.addItem(new ItemQuestionChange(" ", " ")),
+        assertFalse(room.addItem(new ItemQuestionChange(" ", " ", " ")),
                 "Failing to add item to full room didn't return  false");
         assertEquals(item, room.getItem(),
                 "Item changed when adding to a room that already had an item");
@@ -72,7 +72,7 @@ class RoomTest {
         var maze = new TriviaMaze(1, 1);
         var room = maze.getRoom(0, 0);
         assertNull(room.getItem(), "Room not empty");
-        var item = new ItemQuestionChange("", "");
+        var item = new ItemQuestionChange("", "", "");
         assertTrue(room.addItem(item), "Successfully adding an item didn't return true");
         assertEquals(room.takeItem(), item, "Item taken different from item added");
         assertNull(room.takeItem(), "Room not empty after item taken");
