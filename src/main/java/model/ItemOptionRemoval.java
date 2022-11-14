@@ -1,16 +1,17 @@
 package model;
 
 /**
- * Item that change question
+ * Item that eliminate two wrong answer from multiple choice question
  */
-public class ItemQuestionChange extends Item{
+public class ItemOptionRemoval extends Item {
+
     /**
-     * Constructor to create item that change question
+     * Constructor to create item to remove 2 wrong answers
      * @param theItemName name of the item to be created
      * @param theItemDescription description of the item to be created
      * @param theItemType type of the item to be created
      */
-    ItemQuestionChange(String theItemName, String theItemDescription, String theItemType) {
+    ItemOptionRemoval(String theItemName, String theItemDescription, String theItemType) {
         super.setItemName(theItemName);
         super.setItemDescription(theItemDescription);
         super.setItemType(theItemType);

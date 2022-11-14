@@ -21,7 +21,7 @@ public class TriviaMaze {
     /**
      * Stores a reference to the player object that the maze contains.
      */
-    private final Player myPlayer;
+//    private final Player myPlayer;
     /**
      * Represents the width and height of the maze in terms of rooms.
      * For example: "5 rooms wide, 5 rooms tall"
@@ -36,7 +36,7 @@ public class TriviaMaze {
     public TriviaMaze(final int theWidth, final int theHeight) {
         myWidth = theWidth;
         myHeight = theHeight;
-        myPlayer = new Player();
+//        myPlayer = new Player();
         myDoors = new ArrayList<>();
         myQuestionBank = new QuestionBank("../TriviaMaze_group8/databases/questions.db");
         myRooms = createRooms();
@@ -66,9 +66,9 @@ public class TriviaMaze {
     /**
      * @return the Player.
      */
-    public Player player() {
-        return myPlayer;
-    }
+//    public Player player() {
+//        return myPlayer;
+//    }
 
     /**
      * @return a list that contains all the doors in the entire maze.
