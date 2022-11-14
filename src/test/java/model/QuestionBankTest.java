@@ -16,7 +16,7 @@ class QuestionBankTest {
 
     @BeforeAll
     static void init() throws NoSuchMethodException {
-        qb = new QuestionBank("test_questions.db");
+        qb = new QuestionBank("../TriviaMaze_group8/databases/test_questions.db");
 
         //Reflection to access private methods
         initializeQuestions = qb.getClass().getDeclaredMethod("initializeQuestions", String.class);
@@ -26,13 +26,14 @@ class QuestionBankTest {
     @Test
     @DisplayName("QuestionBank: read question objects from database")
     void initializeQuestions() throws Exception {
-        List<Question> questions = (List<Question>) initializeQuestions.invoke(qb, "test_questions.db");
+        List<Question> questions = (List<Question>)
+                initializeQuestions.invoke(qb, "../TriviaMaze_group8/databases/test_questions.db");
         assertEquals(3, questions.size());
     }
     @Test
     @DisplayName("QuestionBank: add question")
     void addQuestion() {
-        qb = new QuestionBank("test_questions.db");
+        qb = new QuestionBank("../TriviaMaze_group8/databases/test_questions.db");
         int size = qb.size();
         qb.addQuestion(new QuestionFA("", ""));
         assertEquals(size + 1, qb.size());
@@ -41,7 +42,7 @@ class QuestionBankTest {
     @Test
     @DisplayName("QuestionBank: remove question")
     void removeQuestion() {
-        qb = new QuestionBank("test_questions.db");
+        qb = new QuestionBank("../TriviaMaze_group8/databases/test_questions.db");
         int size = qb.size();
         Question q = qb.getQuestion(0);
         qb.removeQuestion(q);
@@ -51,7 +52,7 @@ class QuestionBankTest {
     @Test
     @DisplayName("QuestionBank: remove random question")
     void getRandomQuestion() {
-        qb = new QuestionBank("test_questions.db");
+        qb = new QuestionBank("../TriviaMaze_group8/databases/test_questions.db");
         int size = qb.size();
         qb.getRandomQuestion();
         assertEquals(size - 1, qb.size());
