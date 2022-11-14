@@ -18,6 +18,11 @@ public class QuestionBank {
     private final List<Question> myQuestions;
 
     /**
+     * Represents the amount of questions currently stored.
+     */
+    private int size;
+
+    /**
      * Constructs and stores a list of Question objects given a SQLite database filename.
      * @param theDBFilename the filename of the database.
      */
@@ -59,6 +64,13 @@ public class QuestionBank {
     Question getRandomQuestion() {
         Random rnd = new Random();
         return getQuestion(rnd.nextInt(0, myQuestions.size()));
+    }
+
+    /**
+     * @return the quantity of questions currently stored.
+     */
+    int size() {
+        return myQuestions.size();
     }
 
     /**
