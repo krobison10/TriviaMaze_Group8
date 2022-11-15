@@ -1,7 +1,7 @@
 package controller;
 
 import model.TriviaMaze;
-import view.TriviaMazeUI;
+import view.BuildGUI;
 
 public class TriviaMazeController {
     /**
@@ -11,14 +11,17 @@ public class TriviaMazeController {
     /**
      * Reference to the main class of the view package
      */
-    private TriviaMazeUI myUI;
+    private BuildGUI myUI;
 
     public TriviaMazeController() {
-
+        initialize();
     }
 
     private void initialize() {
+        myMaze = new TriviaMaze(5, 5);
+        myUI = new BuildGUI();
 
+        myUI.buildFrame();
     }
 
     private boolean gameLoop() {

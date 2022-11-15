@@ -1,13 +1,9 @@
 package driver;
 
-import view.BuildGUI;
+import controller.TriviaMazeController;
 
 public class Main {
     public static void main(String[] args) {
-
-        // Build frame
-        BuildGUI gui = new BuildGUI();
-        gui.buildFrame();
-
+        new TriviaMazeController();
     }
 }
