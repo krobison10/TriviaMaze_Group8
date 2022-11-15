@@ -11,6 +11,7 @@ public class BuildGUI implements ActionListener {
     private JMenuBar menuBar;
     private JMenu startMenu, helpMenu;
     private JMenuItem newGame, saveGame, exitGame, rules, controls, credits;
+    private TriviaMazeUI maze;
 //    private JButton playButton;
 
     public void buildFrame() {
@@ -96,12 +97,14 @@ public class BuildGUI implements ActionListener {
      * Builds the Trivia Maze UI
      */
     public void buildMazeUI() {
-        TriviaMazeUI maze = TriviaMazeUI.getTriviaMaze();
-        mazeWindow.add(maze);
-        mazeWindow.pack();
-        mazeWindow.setLocationRelativeTo(null);
-        mazeWindow.setVisible(true);
-        maze.BeginTriviaMaze();
+        if (maze == null) {
+            maze = TriviaMazeUI.getTriviaMaze();
+            mazeWindow.add(maze);
+            mazeWindow.pack();
+            mazeWindow.setLocationRelativeTo(null);
+            mazeWindow.setVisible(true);
+            maze.BeginTriviaMaze();
+        }
     }
 
     /**
