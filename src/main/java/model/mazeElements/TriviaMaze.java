@@ -1,4 +1,6 @@
-package model;
+package model.mazeElements;
+
+import model.questions.QuestionBank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ public class TriviaMaze {
     /**
      * Stores a reference to the player object that the maze contains.
      */
-//    private final Player myPlayer;
+    private final Player myPlayer;
     /**
      * Represents the width and height of the maze in terms of rooms.
      * For example: "5 rooms wide, 5 rooms tall"
@@ -33,12 +35,12 @@ public class TriviaMaze {
      */
     private final QuestionBank myQuestionBank;
 
-    public TriviaMaze(final int theWidth, final int theHeight) {
+    public TriviaMaze(final int theWidth, final int theHeight, final String theDBName) {
         myWidth = theWidth;
         myHeight = theHeight;
-//        myPlayer = new Player();
+        myPlayer = new Player();
         myDoors = new ArrayList<>();
-        myQuestionBank = new QuestionBank("../TriviaMaze_group8/databases/questions.db");
+        myQuestionBank = new QuestionBank("../TriviaMaze_group8/databases/" + theDBName);
         myRooms = createRooms();
         initializeRooms();
     }
@@ -66,9 +68,9 @@ public class TriviaMaze {
     /**
      * @return the Player.
      */
-//    public Player player() {
-//        return myPlayer;
-//    }
+    public Player player() {
+        return myPlayer;
+    }
 
     /**
      * @return a list that contains all the doors in the entire maze.

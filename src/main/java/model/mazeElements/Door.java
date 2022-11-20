@@ -1,4 +1,6 @@
-package model;
+package model.mazeElements;
+
+import model.questions.Question;
 
 /**
  * Represents a door in the maze. Is a bridge between rooms. All doors contain a question and a

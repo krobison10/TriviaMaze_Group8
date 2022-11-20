@@ -1,9 +1,14 @@
-package model;
+package model.factories;
+
+import model.items.Item;
+import model.items.ItemHintDisplay;
+import model.items.ItemOptionRemoval;
+import model.items.ItemQuestionChange;
 
 /**
  * Factory for item objects.
  */
-class ItemFactory {
+public class ItemFactory {
     /**
      * Returns a subclass instance of Item based on request.
      * @param theName the name of the item to be created.
@@ -13,7 +18,7 @@ class ItemFactory {
      *                otherwise an exception will be thrown.
      * @return an instance of an Item.
      */
-    static Item createItem(final String theName, final String theDescription, final String theType) {
+    public static Item createItem(final String theName, final String theDescription, final String theType) {
 
         if(theType.equalsIgnoreCase("option removal")) {
             return new ItemOptionRemoval(theName, theDescription, theType);

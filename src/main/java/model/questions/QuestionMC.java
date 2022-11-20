@@ -1,4 +1,4 @@
-package model;
+package model.questions;
 
 /**
  * Multiple choice questions
@@ -11,7 +11,7 @@ public class QuestionMC extends QuestionSelection {
      * @param theOptions string array of the options for user to choose from
      * @param theAnswerPosition the index of the correct option
      */
-    QuestionMC(String thePrompt, String[] theOptions, int theAnswerPosition) {
+    public QuestionMC(String thePrompt, String[] theOptions, int theAnswerPosition) {
         super.setPrompt(thePrompt);
         super.setOptions(theOptions);
         super.setAnswerPosition(theAnswerPosition);

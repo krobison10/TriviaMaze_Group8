@@ -1,4 +1,4 @@
-package model;
+package model.mazeElements;
 
 import controller.KeyInput;
 import view.TriviaMazeUI;
@@ -27,6 +27,8 @@ public class Player {
 
         setDefaultValues();
     }
+
+    public Player() {}
 
     /**
      * PLayer default values.

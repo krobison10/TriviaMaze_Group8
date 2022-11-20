@@ -1,6 +1,6 @@
 package controller;
 
-import model.TriviaMaze;
+import model.mazeElements.TriviaMaze;
 import view.TriviaMazeUI;
 
 public class TriviaMazeInitializer {

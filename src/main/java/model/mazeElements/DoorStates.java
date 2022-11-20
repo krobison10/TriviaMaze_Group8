@@ -1,4 +1,4 @@
-package model;
+package model.mazeElements;
 
 public enum DoorStates {
     CLOSED,

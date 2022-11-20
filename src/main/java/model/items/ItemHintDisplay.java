@@ -1,4 +1,4 @@
-package model;
+package model.items;
 
 /**
  * Item that change question
@@ -10,7 +10,7 @@ public class ItemHintDisplay extends Item{
      * @param theItemDescription description of the item to be created
      * @param theItemType type of the item to be created
      */
-    ItemHintDisplay(String theItemName, String theItemDescription, String theItemType) {
+    public ItemHintDisplay(String theItemName, String theItemDescription, String theItemType) {
         super.setItemName(theItemName);
         super.setItemDescription(theItemDescription);
         super.setItemType(theItemType);

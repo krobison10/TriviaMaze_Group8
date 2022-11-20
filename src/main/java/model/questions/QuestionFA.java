@@ -1,4 +1,4 @@
-package model;
+package model.questions;
 
 import java.util.Random;
 
@@ -13,7 +13,7 @@ public class QuestionFA extends Question {
      * @param thePrompt of the question
      * @param theAnswer of the question
      */
-    QuestionFA(String thePrompt, String theAnswer) {
+    public QuestionFA(String thePrompt, String theAnswer) {
         super.setPrompt(thePrompt);
         this.myAnswer = theAnswer;
     }

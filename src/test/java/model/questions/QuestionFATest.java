@@ -1,5 +1,6 @@
-package model;
+package model.questions;
 
+import model.questions.QuestionFA;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;

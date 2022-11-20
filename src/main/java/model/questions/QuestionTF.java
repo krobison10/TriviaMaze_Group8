@@ -1,4 +1,4 @@
-package model;
+package model.questions;
 
 /**
  * True False questions
@@ -11,7 +11,7 @@ public class QuestionTF extends QuestionSelection {
      * @param theOptions string array of the options for user to choose from
      * @param theAnswerPosition the index of the correct option
      */
-    QuestionTF(String thePrompt, String[] theOptions, int theAnswerPosition) {
+    public QuestionTF(String thePrompt, String[] theOptions, int theAnswerPosition) {
         super.setPrompt(thePrompt);
         super.setOptions(theOptions);
         super.setAnswerPosition(theAnswerPosition);

@@ -1,6 +1,6 @@
 package controller;
 
-import model.TriviaMaze;
+import model.mazeElements.TriviaMaze;
 import view.BuildGUI;
 
 public class TriviaMazeController {
@@ -18,7 +18,7 @@ public class TriviaMazeController {
     }
 
     private void initialize() {
-        myMaze = new TriviaMaze(5, 5);
+        myMaze = new TriviaMaze(5, 5, "CS_trivia_questions.db");
         myUI = new BuildGUI();
 
         myUI.buildFrame();

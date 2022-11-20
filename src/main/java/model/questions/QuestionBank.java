@@ -1,5 +1,6 @@
-package model;
+package model.questions;
 
+import model.factories.QuestionFactory;
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.*;
@@ -26,7 +27,7 @@ public class QuestionBank {
      * Constructs and stores a list of Question objects given a SQLite database filename.
      * @param theDBFilename the filename of the database.
      */
-    QuestionBank(final String theDBFilename) {
+    public QuestionBank(final String theDBFilename) {
         myQuestions = initializeQuestions(theDBFilename);
     }
 

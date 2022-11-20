@@ -1,4 +1,6 @@
-package model;
+package model.mazeElements;
+
+import model.items.Item;
 
 import java.util.ArrayList;
 import java.util.Arrays;

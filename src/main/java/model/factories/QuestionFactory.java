@@ -1,9 +1,14 @@
-package model;
+package model.factories;
+
+import model.questions.Question;
+import model.questions.QuestionFA;
+import model.questions.QuestionMC;
+import model.questions.QuestionTF;
 
 /**
  * Factory that creates appropriate instances of Question objects.
  */
-class QuestionFactory {
+public class QuestionFactory {
 
     /**
      * Creates a Selection Question, meaning that the answer is chosen
@@ -14,7 +19,7 @@ class QuestionFactory {
      * @param theAnswerIndex the position of the answer within the list of options.
      * @return an instance of the appropriate Question object.
      */
-    static Question createQuestion
+    public static Question createQuestion
     (final String thePrompt, final int theAnswerIndex, final String... theOptions) {
 
         if(theOptions.length == 2) {
@@ -34,7 +39,7 @@ class QuestionFactory {
      * @param theAnswer the answer for the question.
      * @return an instance of the appropriate Question object.
      */
-    static Question createQuestion(String thePrompt, String theAnswer) {
+    public static Question createQuestion(String thePrompt, String theAnswer) {
         return new QuestionFA(thePrompt,theAnswer);
     }
 }

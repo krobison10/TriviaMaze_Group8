@@ -1,4 +1,4 @@
-package model;
+package model.items;
 
 /**
  * Item that eliminate two wrong answer from multiple choice question
@@ -11,7 +11,7 @@ public class ItemOptionRemoval extends Item {
      * @param theItemDescription description of the item to be created
      * @param theItemType type of the item to be created
      */
-    ItemOptionRemoval(String theItemName, String theItemDescription, String theItemType) {
+    public ItemOptionRemoval(String theItemName, String theItemDescription, String theItemType) {
         super.setItemName(theItemName);
         super.setItemDescription(theItemDescription);
         super.setItemType(theItemType);

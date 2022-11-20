@@ -1,5 +1,6 @@
-package model;
+package model.factories;
 
+import model.items.Item;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,15 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ItemFactoryTest {
 
-    private static ItemFactory myItemFactory;
     private static Item ruler;
     private static Item eraser;
     private static Item pencil;
-
-    @BeforeAll
-    static void setUpBeforeClass() throws Exception {
-        myItemFactory = new ItemFactory();
-    }
 
     @AfterAll
     static void tearDownAfterClass() throws Exception {
@@ -24,7 +19,7 @@ class ItemFactoryTest {
     @Test()
     @DisplayName("Create item to change question")
     void testCreateQuestionChangeItem() {
-        ruler = myItemFactory.createItem("Ruler",
+        ruler = ItemFactory.createItem("Ruler",
                 "A ruler that can change the question.",
                 "change question");
         assertEquals("change question", ruler.getItemType(),
@@ -34,7 +29,7 @@ class ItemFactoryTest {
     @Test()
     @DisplayName("Create item to remove 2 wrong options")
     void testCreateItemToRemoveWrongOptions() {
-        eraser = myItemFactory.createItem("Eraser",
+        eraser = ItemFactory.createItem("Eraser",
                 "An eraser that can remove 2 wrong answers.",
                 "option removal");
         assertEquals("option removal", eraser.getItemType(),
@@ -44,7 +39,7 @@ class ItemFactoryTest {
     @Test()
     @DisplayName("Create item to display hints for free answer question type")
     void testCreateItemToDisplayHints() {
-        pencil = myItemFactory.createItem("Pencil",
+        pencil = ItemFactory.createItem("Pencil",
                 "A pencil that can show some letters in the free answer question type.",
                 "hint display");
         assertEquals("hint display", pencil.getItemType(),
@@ -55,7 +50,7 @@ class ItemFactoryTest {
     @DisplayName("Create item with wrong type throw exception")
     void testCreateItemWithWrongType() {
         Throwable exception = assertThrows(IllegalArgumentException.class,
-                () -> myItemFactory.createItem("New Item",
+                () -> ItemFactory.createItem("New Item",
                         "An item that can hide the option.",
                         "hide the options"));
         System.out.println(exception);

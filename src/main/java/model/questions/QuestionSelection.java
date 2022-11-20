@@ -1,4 +1,4 @@
-package model;
+package model.questions;
 
 /**
  * Abstract class for Question in Multiple choice or True/False

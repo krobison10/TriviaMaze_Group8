@@ -1,7 +1,7 @@
 package view;
 
 import controller.KeyInput;
-import model.Player;
+import model.mazeElements.Player;
 
 import javax.swing.*;
 import java.awt.*;

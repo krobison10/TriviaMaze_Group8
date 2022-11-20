@@ -1,5 +1,6 @@
-package model;
+package model.items;
 
+import model.factories.ItemFactory;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ItemInventoryTest {
 
     private static ItemInventory myInventory;
-    private static ItemFactory myItemFactory;
     private static Item ruler;
     private static Item eraser;
     private static Item pencil;
@@ -15,14 +15,13 @@ class ItemInventoryTest {
     @BeforeEach
     void setUpBeforeClass() throws Exception {
         myInventory = new ItemInventory();
-        myItemFactory = new ItemFactory();
-        ruler = myItemFactory.createItem("Ruler",
+        ruler = ItemFactory.createItem("Ruler",
                 "A ruler that can change the question.",
                 "change question");
-        eraser = myItemFactory.createItem("Eraser",
+        eraser = ItemFactory.createItem("Eraser",
                 "An eraser that can remove 2 wrong answers.",
                 "option removal");
-        pencil = myItemFactory.createItem("Pencil",
+        pencil = ItemFactory.createItem("Pencil",
                 "A pencil that can show some letters in the free answer question type.",
                 "hint display");
     }
