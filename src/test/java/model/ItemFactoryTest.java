@@ -5,6 +5,9 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Unit test for Item Factory class
+ */
 class ItemFactoryTest {
 
     private static ItemFactory myItemFactory;
@@ -59,5 +62,17 @@ class ItemFactoryTest {
                         "An item that can hide the option.",
                         "hide the options"));
         System.out.println(exception);
+        System.out.println("Item type is not correct");
+    }
+
+    @Test()
+    @DisplayName("Create item with null value throw exception")
+    void testCreateItemWithNullValue() {
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                () -> myItemFactory.createItem("",
+                        "",
+                        ""));
+        System.out.println(exception);
+        System.out.println("Item name should not be null");
     }
 }

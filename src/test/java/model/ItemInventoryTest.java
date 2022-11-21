@@ -4,6 +4,9 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Unit test for Item Inventory class
+ */
 class ItemInventoryTest {
 
     private static ItemInventory myInventory;

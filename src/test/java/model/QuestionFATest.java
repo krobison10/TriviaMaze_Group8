@@ -4,6 +4,9 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit test for QuestionFA class
+ */
 class QuestionFATest {
 
     private QuestionFA myQuestionFA;
