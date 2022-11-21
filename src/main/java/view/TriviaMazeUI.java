@@ -2,22 +2,28 @@ package view;
 
 import controller.KeyInput;
 import model.mazeElements.Player;
+import model.tiles.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class TriviaMazeUI extends JPanel implements Runnable{
 
+    public static final int TILE_SIZE = 24;
+
+    public static final int NUM_TILES = 31;
+
+    TileManager tileManager = new TileManager(this);
     // game size
-    final int gameWidth = 550;
-    final int gameHeight = 550;
+    public static final int GAME_WIDTH = NUM_TILES * TILE_SIZE;
+    public static final int GAME_HEIGHT = NUM_TILES * TILE_SIZE;
     // key inputs
-    KeyInput keys = new KeyInput();
+    private KeyInput keys = new KeyInput();
     // Thread to contain the maze
-    Thread gameThread;
+    private Thread gameThread;
 
     // Player instance
-    Player player = new Player(this, keys);
+    private Player player = new Player(this, keys);
     // game FPS
     private final int fps = 25;
     // Player refresh speed multiplier
@@ -29,11 +35,13 @@ public class TriviaMazeUI extends JPanel implements Runnable{
      * Properties of trivia maze
      */
     private TriviaMazeUI() {
-        this.setPreferredSize(new Dimension(gameWidth, gameHeight));
-        this.setBackground(Color.BLUE);
+        this.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+        this.setBackground(Color.gray);
         this.setDoubleBuffered(true);
         this.addKeyListener(keys);
         this.setFocusable(true);
+
+        tileManager.loadMap();
     }
 
     /**
@@ -99,6 +107,8 @@ public class TriviaMazeUI extends JPanel implements Runnable{
         super.paintComponent(g);
         // Casts graphics to 2D graphics for more functionality
         Graphics2D g2 = (Graphics2D)g;
+
+        tileManager.draw(g2);
         player.draw(g2);
         g2.dispose();
     }

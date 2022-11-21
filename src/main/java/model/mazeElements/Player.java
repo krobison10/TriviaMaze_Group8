@@ -12,7 +12,7 @@ public class Player {
     // Player location on axis.
     private int playerLocationX, playerLocationY;
     // Player size
-    private final int playerSize = 50;
+    private final int playerSize = TriviaMazeUI.TILE_SIZE;
     // Player speed
     private int playerSpeed;
 
@@ -34,9 +34,8 @@ public class Player {
      * PLayer default values.
      */
     public void setDefaultValues() {
-        playerLocationX = 0;
-        playerLocationY = 0;
-        playerSpeed = 20;
+        playerLocationX = playerLocationY = 3 * TriviaMazeUI.TILE_SIZE;
+        playerSpeed = TriviaMazeUI.TILE_SIZE / 2;
     }
 
     /**
@@ -89,7 +88,8 @@ public class Player {
      * @param changeX
      */
     public void setPlayerLocationX(int changeX) {
-        if (getPlayerLocationX() + changeX <= 500 && getPlayerLocationX() + changeX >= 0) {
+        int max = TriviaMazeUI.GAME_WIDTH - TriviaMazeUI.TILE_SIZE;
+        if (getPlayerLocationX() + changeX <= max && getPlayerLocationX() + changeX >= 0) {
             playerLocationX += changeX;
         }
     }
@@ -100,7 +100,8 @@ public class Player {
      * @param changeY
      */
     public void setPlayerLocationY(int changeY) {
-        if (getPlayerLocationY() + changeY <= 500 && getPlayerLocationY() + changeY >= 0) {
+        int max = TriviaMazeUI.GAME_WIDTH - TriviaMazeUI.TILE_SIZE;
+        if (getPlayerLocationY() + changeY <= max && getPlayerLocationY() + changeY >= 0) {
             playerLocationY += changeY;
         }
     }
