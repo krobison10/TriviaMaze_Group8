@@ -34,7 +34,7 @@ public class Door {
     Door(final TriviaMaze theMaze) {
         myMaze = theMaze;
         myState = DoorStates.CLOSED;
-        //myQuestion = theMaze.questionBank().getRandomQuestion(); //QuestionBank not finished yet
+        myQuestion = theMaze.questionBank().getRandomQuestion(); //QuestionBank not finished yet
     }
 
     /**

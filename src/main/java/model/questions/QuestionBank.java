@@ -23,9 +23,16 @@ public class QuestionBank {
      */
     private int size;
 
+    //Testing purposes only
+    @Deprecated
+    public static void main(String[] args) {
+        QuestionBank qb = new QuestionBank("../TriviaMaze_Group8/databases/CS_trivia_questions.db");
+        var questions = qb.myQuestions;
+    }
+
     /**
      * Constructs and stores a list of Question objects given a SQLite database filename.
-     * @param theDBFilename the filename of the database.
+     * @param theDBFilename the filename of the database, requires a relative path from project root.
      */
     public QuestionBank(final String theDBFilename) {
         myQuestions = initializeQuestions(theDBFilename);
@@ -35,7 +42,7 @@ public class QuestionBank {
      * Adds a new Question to the list.
      * @param theQuestion the Question to be added.
      */
-    void addQuestion(final Question theQuestion) {
+    public void addQuestion(final Question theQuestion) {
         myQuestions.add(theQuestion);
     }
 
@@ -43,7 +50,7 @@ public class QuestionBank {
      * Removes the first occurrence of a Question from the list.
      * @param theQuestion the Question to be removed.
      */
-    void removeQuestion(final Question theQuestion) {
+    public void removeQuestion(final Question theQuestion) {
         if(!myQuestions.isEmpty()) {
             myQuestions.remove(theQuestion);
         }
@@ -54,7 +61,7 @@ public class QuestionBank {
      * @param thePos the index.
      * @return the Question object
      */
-    Question getQuestion(final int thePos) {
+    public Question getQuestion(final int thePos) {
         return myQuestions.remove(thePos);
     }
 
@@ -62,7 +69,7 @@ public class QuestionBank {
      * Gets and removes a random Question from the list.
      * @return the randomly selected Question.
      */
-    Question getRandomQuestion() {
+    public Question getRandomQuestion() {
         Random rnd = new Random();
         return getQuestion(rnd.nextInt(0, myQuestions.size()));
     }
