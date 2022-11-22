@@ -11,7 +11,7 @@ public class BuildGUI implements ActionListener {
     private JMenuBar menuBar;
     private JMenu startMenu, helpMenu;
     private JMenuItem newGame, saveGame, exitGame, rules, controls, credits;
-    private TriviaMazeUI maze;
+    private TMPanel maze;
 //    private JButton playButton;
 
     public void buildFrame() {
@@ -54,6 +54,7 @@ public class BuildGUI implements ActionListener {
         helpMenu.add(rules);
         helpMenu.add(controls);
         helpMenu.add(credits);
+
 
         // Add everything to frame
         mazeWindow.getContentPane().add(BorderLayout.NORTH, menuBar);
@@ -98,7 +99,7 @@ public class BuildGUI implements ActionListener {
      */
     public void buildMazeUI() {
         if (maze == null) {
-            maze = TriviaMazeUI.getTriviaMaze();
+            maze = TMPanel.getTriviaMaze();
             mazeWindow.add(maze);
             mazeWindow.pack();
             mazeWindow.setLocationRelativeTo(null);

@@ -1,65 +1,59 @@
 package model.tiles;
 
-import view.TriviaMazeUI;
+import view.TMPanel;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Objects;
 
 public class TileManager {
-    TriviaMazeUI myTUI;
-    Tile[] tile;
-    int[][] mapData;
+    Tile[] myTiles;
+    int[][] myMapData;
 
-    public TileManager(TriviaMazeUI TUI) {
-        myTUI = TUI;
-        tile = new Tile[5];
-
-        getTileImage();
+    public TileManager() {
+        myTiles = new Tile[3];
+        loadMap();
+        getTileImages();
     }
 
-    public void getTileImage() {
+    public void getTileImages() {
         try {
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/wall.png"));
+            myTiles[1] = new Tile(ImageIO.read(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/wall.png"))));
+            myTiles[2] = new Tile(ImageIO.read(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/door.png"))));
         }
-        catch (Exception e) {
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public int[][] getMapData() {
+        return myMapData;
+    }
+
+    public Tile getTile(final int theIndex) {
+        return myTiles[theIndex];
+    }
+
     public void loadMap() {
-        try {
-            FileReader fr = new FileReader("map.txt");
-            mapData = new int[31][31];
-            int val;
-            for(int i = 0; i < 31; i++) {
-                for(int j = 0; j < 32; j++) {
+        try (FileReader fr = new FileReader("map2.txt")) {
+            int nt = TMPanel.NUM_TILES;
+            myMapData = new int[nt][nt];
+
+            for(int i = 0; i < nt+1; i++) {
+                for(int j = 0; j < nt+1; j++) {
                     char s = (char) fr.read();
                     if(s == ' ') s = '0';
-                    if(s == '\n' || s == '\uFFFF') continue;
-                    mapData[i][j] = Integer.parseInt(String.valueOf(s));
+                    if(s != '\n' && s != '\uFFFF') {
+                        myMapData[i][j] = Integer.parseInt(String.valueOf(s));
+                    }
                 }
             }
         }
         catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public void draw(Graphics2D g2) {
-
-        int bound = 31;
-        int ts = TriviaMazeUI.TILE_SIZE;
-        int tileNum;
-        for(int col = 0; col < bound; col++)
-        {
-            for(int row = 0; row < bound; row++)
-            {
-                tileNum = mapData[row][col];
-                if(tileNum != 1) continue;
-                g2.drawImage(tile[tileNum].image, col*ts, row*ts, ts, ts, null);
-            }
         }
     }
 }
