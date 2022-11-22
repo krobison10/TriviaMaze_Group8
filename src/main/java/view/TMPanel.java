@@ -6,31 +6,36 @@ import model.mazeElements.Player;
 import javax.swing.*;
 import java.awt.*;
 
-public class TriviaMazeUI extends JPanel implements Runnable{
+public class TMPanel extends JPanel implements Runnable{
+
+    public static final int TILE_SIZE = 24;
+
+    public static final int NUM_TILES = 31;
 
     // game size
-    final int gameWidth = 550;
-    final int gameHeight = 550;
+    public static final int GAME_SIZE = NUM_TILES * TILE_SIZE;
     // key inputs
-    KeyInput keys = new KeyInput();
+    private KeyInput keys = new KeyInput();
     // Thread to contain the maze
-    Thread gameThread;
+    private Thread gameThread;
 
     // Player instance
-    Player player = new Player(this, keys);
+    private Player player = new Player(this, keys);
     // game FPS
     private final int fps = 25;
     // Player refresh speed multiplier
     private final int speedMultiplier = 3;
     // maze instance used later to prevent multiple games from running
-    private static TriviaMazeUI triviaMazeInstance = null;
+    private static TMPanel triviaMazeInstance = null;
+
+    public final GraphicDrawer graphicDrawer = new GraphicDrawer(player);
 
     /**
      * Properties of trivia maze
      */
-    private TriviaMazeUI() {
-        this.setPreferredSize(new Dimension(gameWidth, gameHeight));
-        this.setBackground(Color.BLUE);
+    private TMPanel() {
+        this.setPreferredSize(new Dimension(GAME_SIZE + 300, GAME_SIZE));
+        this.setBackground(Color.gray);
         this.setDoubleBuffered(true);
         this.addKeyListener(keys);
         this.setFocusable(true);
@@ -41,9 +46,9 @@ public class TriviaMazeUI extends JPanel implements Runnable{
      * (emi-singleton)
      * @return
      */
-    public static TriviaMazeUI getTriviaMaze() {
+    public static TMPanel getTriviaMaze() {
         if (triviaMazeInstance == null) {
-            triviaMazeInstance = new TriviaMazeUI();
+            triviaMazeInstance = new TMPanel();
         }
         return triviaMazeInstance;
     }
@@ -98,8 +103,11 @@ public class TriviaMazeUI extends JPanel implements Runnable{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         // Casts graphics to 2D graphics for more functionality
-        Graphics2D g2 = (Graphics2D)g;
-        player.draw(g2);
+        Graphics2D g2 = (Graphics2D) g;
+
+        graphicDrawer.drawTiles(g2);
+        graphicDrawer.drawPlayer(g2);
+
         g2.dispose();
     }
 }

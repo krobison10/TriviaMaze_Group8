@@ -1,18 +1,15 @@
 package model.mazeElements;
 
 import controller.KeyInput;
-import view.TriviaMazeUI;
-import java.awt.*;
+import view.TMPanel;
 
 public class Player {
 
 
-    TriviaMazeUI setup;
-    KeyInput keys;
+    private TMPanel setup;
+    private KeyInput keys;
     // Player location on axis.
     private int playerLocationX, playerLocationY;
-    // Player size
-    private final int playerSize = 50;
     // Player speed
     private int playerSpeed;
 
@@ -21,7 +18,7 @@ public class Player {
      * @param setup
      * @param keys
      */
-    public Player(TriviaMazeUI setup, KeyInput keys) {
+    public Player(TMPanel setup, KeyInput keys) {
         this.setup = setup;
         this.keys = keys;
 
@@ -34,9 +31,8 @@ public class Player {
      * PLayer default values.
      */
     public void setDefaultValues() {
-        playerLocationX = 0;
-        playerLocationY = 0;
-        playerSpeed = 20;
+        playerLocationX = playerLocationY = 3 * TMPanel.TILE_SIZE;
+        playerSpeed = TMPanel.TILE_SIZE / 2;
     }
 
     /**
@@ -54,17 +50,6 @@ public class Player {
                 setPlayerLocationX(playerSpeed);
             }
         }
-    }
-
-    /**
-     * Draws the player.
-     * @param g2
-     */
-    public void draw(Graphics2D g2) {
-
-        // temp player until graphics are decided
-        g2.setColor(Color.white);
-        g2.fillRect(getPlayerLocationX(),getPlayerLocationY(),playerSize,playerSize);
     }
 
     /**
@@ -89,7 +74,8 @@ public class Player {
      * @param changeX
      */
     public void setPlayerLocationX(int changeX) {
-        if (getPlayerLocationX() + changeX <= 500 && getPlayerLocationX() + changeX >= 0) {
+        int max = TMPanel.GAME_SIZE - TMPanel.TILE_SIZE;
+        if (getPlayerLocationX() + changeX <= max && getPlayerLocationX() + changeX >= 0) {
             playerLocationX += changeX;
         }
     }
@@ -100,7 +86,8 @@ public class Player {
      * @param changeY
      */
     public void setPlayerLocationY(int changeY) {
-        if (getPlayerLocationY() + changeY <= 500 && getPlayerLocationY() + changeY >= 0) {
+        int max = TMPanel.GAME_SIZE - TMPanel.TILE_SIZE;
+        if (getPlayerLocationY() + changeY <= max && getPlayerLocationY() + changeY >= 0) {
             playerLocationY += changeY;
         }
     }
