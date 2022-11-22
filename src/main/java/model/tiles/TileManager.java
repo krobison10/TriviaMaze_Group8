@@ -20,9 +20,9 @@ public class TileManager {
     public void getTileImages() {
         try {
             myTiles[1] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/wall.png"))));
+                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png"))));
             myTiles[2] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/door.png"))));
+                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/door.png"))));
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -38,7 +38,7 @@ public class TileManager {
     }
 
     public void loadMap() {
-        try (FileReader fr = new FileReader("map2.txt")) {
+        try (FileReader fr = new FileReader("../TriviaMaze_Group8/src/main/resources/maps/map2.txt")) {
             int nt = TMPanel.NUM_TILES;
             myMapData = new int[nt][nt];
 
