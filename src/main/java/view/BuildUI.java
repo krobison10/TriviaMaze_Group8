@@ -1,11 +1,13 @@
 package view;
 
+import controller.TriviaMazeController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BuildGUI implements ActionListener {
+public class BuildUI implements ActionListener {
 
     private JFrame mazeWindow;
     private JMenuBar menuBar;
@@ -13,6 +15,11 @@ public class BuildGUI implements ActionListener {
     private JMenuItem newGame, saveGame, exitGame, rules, controls, credits;
     private TMPanel maze;
 //    private JButton playButton;
+    private TriviaMazeController myController;
+
+    public BuildUI(final TriviaMazeController theController) {
+        myController = theController;
+    }
 
     public void buildFrame() {
 
@@ -104,7 +111,7 @@ public class BuildGUI implements ActionListener {
             mazeWindow.pack();
             mazeWindow.setLocationRelativeTo(null);
             mazeWindow.setVisible(true);
-            maze.BeginTriviaMaze();
+            myController.startNewGame(maze);
         }
     }
 

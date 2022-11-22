@@ -6,34 +6,32 @@ import model.mazeElements.Player;
 import javax.swing.*;
 import java.awt.*;
 
-public class TMPanel extends JPanel implements Runnable{
+public class TMPanel extends JPanel{
 
     public static final int TILE_SIZE = 24;
 
     public static final int NUM_TILES = 31;
 
-    // game size
     public static final int GAME_SIZE = NUM_TILES * TILE_SIZE;
-    // key inputs
-    private KeyInput keys = new KeyInput();
-    // Thread to contain the maze
-    private Thread gameThread;
 
-    // Player instance
-    private Player player = new Player(this, keys);
-    // game FPS
-    private final int fps = 25;
-    // Player refresh speed multiplier
-    private final int speedMultiplier = 3;
+    private final KeyInput keys;
+
+    private final Player player;
+
+    public final GraphicDrawer graphicDrawer;
+
     // maze instance used later to prevent multiple games from running
     private static TMPanel triviaMazeInstance = null;
 
-    public final GraphicDrawer graphicDrawer = new GraphicDrawer(player);
 
     /**
      * Properties of trivia maze
      */
     private TMPanel() {
+        keys = new KeyInput();
+        player = new Player();
+        graphicDrawer = new GraphicDrawer(player);
+
         this.setPreferredSize(new Dimension(GAME_SIZE + 300, GAME_SIZE));
         this.setBackground(Color.gray);
         this.setDoubleBuffered(true);
@@ -53,46 +51,9 @@ public class TMPanel extends JPanel implements Runnable{
         return triviaMazeInstance;
     }
 
-    /**
-     * Begins trivia maze thread
-     */
-    public void BeginTriviaMaze() {
-        gameThread = new Thread(this);
-        gameThread.start();
-    }
-
-    /**
-     * Updates player location in the game
-     */
-    public void updateGame() {
-        player.updatePlayer();
-    }
-
-    /**
-     * Keeps thread running.
-     * Tracks sleep time between key presses for player movement.
-     * Sleep time is important so movement is manageable.
-     */
-    @Override
-    public void run() {
-        double interval = 1000000000 / fps;
-        double nextDrawTime = System.nanoTime() + interval;
-
-        while (gameThread != null) {
-            requestFocus(); // need this to keep key listener working
-            updateGame();
-            repaint();
-
-            // delays the key press listener
-            try {
-                double remainingDrawTime = nextDrawTime - System.nanoTime();
-                remainingDrawTime = remainingDrawTime / 1000000;
-                Thread.sleep((long)remainingDrawTime);
-                nextDrawTime += interval * speedMultiplier;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    public void update() {
+        requestFocus(); // need this to keep key listener working
+        repaint();
     }
 
     /**
@@ -109,5 +70,13 @@ public class TMPanel extends JPanel implements Runnable{
         graphicDrawer.drawPlayer(g2);
 
         g2.dispose();
+    }
+
+    public KeyInput getKeys() {
+        return keys;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

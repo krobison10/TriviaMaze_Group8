@@ -1,7 +1,8 @@
 package controller;
 
 import model.mazeElements.TriviaMaze;
-import view.BuildGUI;
+import view.BuildUI;
+import view.TMPanel;
 
 public class TriviaMazeController {
     /**
@@ -11,23 +12,24 @@ public class TriviaMazeController {
     /**
      * Reference to the main class of the view package
      */
-    private BuildGUI myUI;
+    private BuildUI myUI;
 
     public TriviaMazeController() {
         initialize();
     }
 
     private void initialize() {
-        myMaze = new TriviaMaze
-                (5, 5, "CS_trivia_questions.db");
-        myUI = new BuildGUI();
+        myMaze = new TriviaMaze(5, 5, "CS_trivia_questions.db");
+        myUI = new BuildUI(this);
 
         myUI.buildFrame();
     }
 
-    private boolean gameLoop() {
-        return false;
+    public void startNewGame(final TMPanel thePanel) {
+        Game game = new Game(thePanel);
+        game.start();
     }
+
 
     private boolean promptQuestion() {
         return false;

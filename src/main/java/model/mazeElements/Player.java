@@ -1,56 +1,13 @@
 package model.mazeElements;
 
-import controller.KeyInput;
 import view.TMPanel;
 
 public class Player {
 
-
-    private TMPanel setup;
-    private KeyInput keys;
     // Player location on axis.
     private int playerLocationX, playerLocationY;
     // Player speed
-    private int playerSpeed;
-
-    /**
-     * Player instantiation. Sets up TriviaMazUI, key listeners, and set player default values.
-     * @param setup
-     * @param keys
-     */
-    public Player(TMPanel setup, KeyInput keys) {
-        this.setup = setup;
-        this.keys = keys;
-
-        setDefaultValues();
-    }
-
-    public Player() {}
-
-    /**
-     * PLayer default values.
-     */
-    public void setDefaultValues() {
-        playerLocationX = playerLocationY = 3 * TMPanel.TILE_SIZE;
-        playerSpeed = TMPanel.TILE_SIZE / 2;
-    }
-
-    /**
-     * Reads key press input and updates player location accordingly.
-     */
-    public void updatePlayer() {
-        if (keys.up || keys.down || keys.left || keys.right || keys.neutral) {
-            if (keys.up) {
-                setPlayerLocationY(-playerSpeed);
-            } else if (keys.down) {
-                setPlayerLocationY(playerSpeed);
-            } else if (keys.left) {
-                setPlayerLocationX(-playerSpeed);
-            } else if (keys.right) {
-                setPlayerLocationX(playerSpeed);
-            }
-        }
-    }
+    private int speed;
 
     /**
      * Returns player's location on X axis.
@@ -90,5 +47,13 @@ public class Player {
         if (getPlayerLocationY() + changeY <= max && getPlayerLocationY() + changeY >= 0) {
             playerLocationY += changeY;
         }
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 }
