@@ -168,7 +168,7 @@ public class PlayerController {
         myPlayer.setPlayerLocationX(3 * TMPanel.TILE_SIZE);
         myPlayer.setSpeed(TMPanel.TILE_SIZE / 2);
         direction = "neutral";
-        directionMemory = "down";
+        directionMemory = "neutral";
         keys.neutral = true;
     }
 }
