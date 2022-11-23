@@ -1,7 +1,8 @@
 package view;
 
-import model.tiles.TileManager;
+import controller.PlayerController;
 import model.mazeElements.Player;
+import model.tiles.TileManager;
 
 import java.awt.*;
 
@@ -12,6 +13,7 @@ class GraphicDrawer {
     GraphicDrawer(final Player thePlayer) {
         myTM = new TileManager();
         myPlayer = thePlayer;
+
     }
 
     void drawTiles(final Graphics2D theG2) {
@@ -29,10 +31,12 @@ class GraphicDrawer {
         }
     }
 
+    /**
+     * Draws player using new location
+     * @param theG2
+     */
     void drawPlayer(final Graphics2D theG2) {
-        theG2.setColor(Color.white);
-        int size = TMPanel.TILE_SIZE;
-        theG2.fillRect(myPlayer.getPlayerLocationX(),myPlayer.getPlayerLocationY(), size, size);
+        PlayerController.drawMe(theG2, Player.getPlayerLocationX(), Player.getPlayerLocationY());
     }
 
 }
