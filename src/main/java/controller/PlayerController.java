@@ -1,6 +1,7 @@
 package controller;
 
 import model.mazeElements.Player;
+import model.tiles.TileManager;
 import view.TMPanel;
 
 import javax.imageio.ImageIO;
@@ -24,6 +25,8 @@ public class PlayerController {
     public static String direction;
     // Player's old facing direction
     public static String directionMemory;
+    public static boolean playerCollision = false;
+
 
 
     /**
@@ -32,8 +35,9 @@ public class PlayerController {
      * @param theKeys
      */
     public PlayerController(final Player thePlayer, final KeyInput theKeys) {
-        this.myPlayer = thePlayer;
-        this.keys = theKeys;
+        myPlayer = thePlayer;
+        keys = theKeys;
+
         initPlayer();
         getPlayerImage();
 
@@ -46,17 +50,38 @@ public class PlayerController {
         if (keys.up || keys.down || keys.left || keys.right || keys.neutral) {
             if (keys.up) {
                 direction = "up";
-                myPlayer.setPlayerLocationY(-myPlayer.getSpeed());
+                setNewLocationAndCheckCollision();
+//                myPlayer.setPlayerLocationY(-myPlayer.getSpeed());
             } else if (keys.down) {
                 direction = "down";
-                myPlayer.setPlayerLocationY(myPlayer.getSpeed());
+                setNewLocationAndCheckCollision();
+
+//                myPlayer.setPlayerLocationY(myPlayer.getSpeed());
             } else if (keys.left) {
                 direction = "left";
-                myPlayer.setPlayerLocationX(-myPlayer.getSpeed());
+                setNewLocationAndCheckCollision();
+
+//                myPlayer.setPlayerLocationX(-myPlayer.getSpeed());
             } else if (keys.right) {
                 direction = "right";
-                myPlayer.setPlayerLocationX(myPlayer.getSpeed());
+                setNewLocationAndCheckCollision();
+
+//                myPlayer.setPlayerLocationX(myPlayer.getSpeed());
             }
+
+//            if (!keys.neutral) {
+//                playerCollision = testCollision(myPlayer, direction);
+//            }
+//
+//            if (!playerCollision) {
+//                switch (direction) {
+//                    case "up" -> myPlayer.setPlayerLocationY(-myPlayer.getSpeed());
+//                    case "down" -> myPlayer.setPlayerLocationY(myPlayer.getSpeed());
+//                    case "left" -> myPlayer.setPlayerLocationX(-myPlayer.getSpeed());
+//                    case "right" -> myPlayer.setPlayerLocationX(myPlayer.getSpeed());
+//                }
+//            }
+
             spriteCounter++;
             if (spriteCounter > 2) {
                 if (spriteNum == 1) {
@@ -76,6 +101,7 @@ public class PlayerController {
             }
             direction = "";
         }
+//        direction = "";
     }
 
     /**
@@ -166,9 +192,43 @@ public class PlayerController {
     public void initPlayer() {
         myPlayer.setPlayerLocationY(3 * TMPanel.TILE_SIZE);
         myPlayer.setPlayerLocationX(3 * TMPanel.TILE_SIZE);
-        myPlayer.setSpeed(TMPanel.TILE_SIZE / 2);
+        myPlayer.setSpeed(TMPanel.TILE_SIZE);
         direction = "neutral";
         directionMemory = "neutral";
         keys.neutral = true;
+    }
+
+    public boolean testCollision(Player mp, String dir) {
+
+        int xLoc = mp.getPlayerLocationX();
+        int yLoc = mp.getPlayerLocationY();
+        int row = yLoc / 24;
+        int col = xLoc / 24;
+
+        switch (dir) {
+            case "up" -> row -= 1;
+            case "down" -> row += 1;
+            case "left" -> col -= 1;
+            case "right" -> col += 1;
+        }
+
+        int tileNum = TileManager.myMapData[row][col];
+        return TileManager.myTiles[tileNum].isCollidable();
+
+    }
+
+    public void setNewLocationAndCheckCollision() {
+        if (!keys.neutral) {
+            playerCollision = testCollision(myPlayer, direction);
+        }
+
+        if (!playerCollision) {
+            switch (direction) {
+                case "up" -> myPlayer.setPlayerLocationY(-myPlayer.getSpeed());
+                case "down" -> myPlayer.setPlayerLocationY(myPlayer.getSpeed());
+                case "left" -> myPlayer.setPlayerLocationX(-myPlayer.getSpeed());
+                case "right" -> myPlayer.setPlayerLocationX(myPlayer.getSpeed());
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.Collision;
 import controller.KeyInput;
 import model.mazeElements.Player;
 
@@ -22,6 +23,7 @@ public class TMPanel extends JPanel{
 
     // maze instance used later to prevent multiple games from running
     private static TMPanel triviaMazeInstance = null;
+
 
 
     /**

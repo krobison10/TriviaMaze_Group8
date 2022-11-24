@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class TileManager {
-    Tile[] myTiles;
-    int[][] myMapData;
+    public static Tile[] myTiles;
+    public static int[][] myMapData;
 
     public TileManager() {
         myTiles = new Tile[3];
@@ -19,10 +19,17 @@ public class TileManager {
 
     public void getTileImages() {
         try {
+            myTiles[0] = new Tile(ImageIO.read(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png"))));
+            myTiles[0].setCollidable(false);
             myTiles[1] = new Tile(ImageIO.read(
                     Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png"))));
+            myTiles[1].setCollidable(true);
+
             myTiles[2] = new Tile(ImageIO.read(
                     Objects.requireNonNull(getClass().getResourceAsStream("/tiles/door.png"))));
+            myTiles[2].setCollidable(true);
+
         }
         catch (IOException e) {
             e.printStackTrace();
