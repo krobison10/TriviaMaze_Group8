@@ -53,7 +53,7 @@ public class TriviaMaze {
      */
     public Room getRoom(final int theX, final int theY) {
         if(theX < 0 || theY < 0 || theX >= myWidth || theY >= myHeight) {
-            throw new IndexOutOfBoundsException("Position out of bounds in maze");
+            return null;
         }
         return myRooms[theY][theX];
     }

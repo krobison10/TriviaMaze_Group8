@@ -1,5 +1,6 @@
 package controller;
 
+import model.mazeElements.TriviaMaze;
 import view.TMPanel;
 
 public class Game implements Runnable {
@@ -16,9 +17,9 @@ public class Game implements Runnable {
     private PlayerController myPlayerController;
 
 
-    public Game(final TMPanel thePanel) {
+    public Game(final TriviaMaze theMaze, final TMPanel thePanel) {
         myPanel = thePanel;
-        myPlayerController = new PlayerController(myPanel.getPlayer(), myPanel.getKeys());
+        myPlayerController = new PlayerController(theMaze, myPanel.getPlayer(), myPanel.getKeys());
     }
 
     public void start() {
@@ -35,6 +36,7 @@ public class Game implements Runnable {
         while (gameThread != null) {
             myPanel.update();
             myPlayerController.updatePlayer();
+            myPlayerController.updateCurrentRoom();
 
             // delays the key press listener
             try {

@@ -1,6 +1,8 @@
 package controller;
 
 import model.mazeElements.Player;
+import model.mazeElements.Room;
+import model.mazeElements.TriviaMaze;
 import view.TMPanel;
 
 import javax.imageio.ImageIO;
@@ -10,6 +12,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class PlayerController {
+
+    private final TriviaMaze myTriviaMaze;
 
     private final Player myPlayer;
 
@@ -31,12 +35,13 @@ public class PlayerController {
      * @param thePlayer
      * @param theKeys
      */
-    public PlayerController(final Player thePlayer, final KeyInput theKeys) {
-        this.myPlayer = thePlayer;
-        this.keys = theKeys;
+    public PlayerController(final TriviaMaze theTriviaMaze, final Player thePlayer, final KeyInput theKeys) {
+        myTriviaMaze = theTriviaMaze;
+        myPlayer = thePlayer;
+        keys = theKeys;
         initPlayer();
         getPlayerImage();
-
+        updateCurrentRoom();
     }
 
     /**
@@ -84,7 +89,7 @@ public class PlayerController {
     public void getPlayerImage() {
         try {
             // up sprites
-            up1 = ImageIO.read(new FileInputStream("../TriviaMaze_Group8/src/main/resources/Player/player_down1.png"));
+            up1 = ImageIO.read(new FileInputStream("../TriviaMaze_Group8/src/main/resources/Player/player_up1.png"));
             up2 = ImageIO.read(new FileInputStream("../TriviaMaze_Group8/src/main/resources/Player/player_up2.png"));
             neutralUp = ImageIO.read(new FileInputStream("../TriviaMaze_Group8/src/main/resources/player/player_up_neutral.png"));
             // down sprites
@@ -170,5 +175,15 @@ public class PlayerController {
         direction = "neutral";
         directionMemory = "neutral";
         keys.neutral = true;
+    }
+
+    public void updateCurrentRoom() {
+        int tileX = myPlayer.getPlayerLocationX() / TMPanel.TILE_SIZE;
+        int tileY = myPlayer.getPlayerLocationY() / TMPanel.TILE_SIZE;
+
+        int roomX = tileX % 6 == 0 ? -1 : (int) Math.ceil(tileX / 6f);
+        int roomY = tileY % 6 == 0 ? -1 : (int) Math.ceil(tileY / 6f);
+
+        Room currentRoom = myTriviaMaze.getRoom(roomX - 1, roomY - 1);
     }
 }

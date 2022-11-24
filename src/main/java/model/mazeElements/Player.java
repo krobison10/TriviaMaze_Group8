@@ -5,7 +5,7 @@ import view.TMPanel;
 public class Player {
 
     // Player location on axis.
-    private static int playerLocationX, playerLocationY;
+    private int playerLocationX, playerLocationY;
     // Player speed
     private int speed;
 
@@ -13,7 +13,7 @@ public class Player {
      * Returns player's location on X axis.
      * @return
      */
-    public static int getPlayerLocationX() {
+    public int getPlayerLocationX() {
         return playerLocationX;
     }
 
@@ -21,7 +21,7 @@ public class Player {
      * Returns player's location on Y axis.
      * @return
      */
-    public static int getPlayerLocationY() {
+    public int getPlayerLocationY() {
         return playerLocationY;
     }
 

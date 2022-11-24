@@ -36,7 +36,7 @@ class GraphicDrawer {
      * @param theG2
      */
     void drawPlayer(final Graphics2D theG2) {
-        PlayerController.drawMe(theG2, Player.getPlayerLocationX(), Player.getPlayerLocationY());
+        PlayerController.drawMe(theG2, myPlayer.getPlayerLocationX(), myPlayer.getPlayerLocationY());
     }
 
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import model.mazeElements.Room;
 import model.mazeElements.TriviaMaze;
 import view.BuildUI;
 import view.TMPanel;
@@ -26,10 +27,13 @@ public class TriviaMazeController {
     }
 
     public void startNewGame(final TMPanel thePanel) {
-        Game game = new Game(thePanel);
+        Game game = new Game(myMaze, thePanel);
         game.start();
     }
 
+    void updateCurrentRoom(final Room theRoom) {
+
+    }
 
     private boolean promptQuestion() {
         return false;
