@@ -93,6 +93,48 @@ public class TriviaMaze {
         return myHeight;
     }
 
+    public boolean existsPathToExit() {
+        boolean[][] subProblems = new boolean[myHeight][myWidth];
+        subProblems[0][0] = true;
+        return pathExistsHelper(0, 0, subProblems);
+    }
+
+    private boolean pathExistsHelper(final int theY, final int theX, final boolean[][] theSubs) {
+
+        //Base case, current room is the destination
+        if(theX == myWidth - 1 && theY == myWidth - 1) {
+            return true;
+        }
+
+        Room curRoom = getRoom(theX, theY);
+
+        //Stores the sets of values needed to be added to x and y to find x and y of
+        //neighbouring rooms in the order south, east, north, then west.
+        int[][] adjacencies = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+        /* Stores the integer needed to receive the current door from the current room.
+        Recall that 0 through three retrieves the doors starting with west through south
+        going clockwise, so to go counter-clockwise starting with south door, need to
+        decrement from 3 */
+        int adjX, adjY, doorDir = 3;
+        for(int[] adj : adjacencies) {
+            adjX = theX + adj[0];
+            adjY = theY + adj[1];
+            //If room exists in the direction, and it doesn't already have a path to entrance,
+            //and door isn't blocked, then traverse in that direction
+            if(getRoom(adjX, adjY) != null
+                    && !theSubs[adjY][adjX]
+                    && curRoom.getDoors().get(doorDir).getState() != DoorStates.BLOCKED) {
+
+                theSubs[adjY][adjX] = true;
+                if(pathExistsHelper(adjY, adjX, theSubs)) return true;
+
+            }
+            doorDir--;
+        }
+        return false;
+    }
+
     /**
      * Adds a door to the list which contains all the doors in the maze.
      * This method probably shouldn't be used outside the constructor
