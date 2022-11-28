@@ -3,6 +3,7 @@ package controller;
 import model.mazeElements.Player;
 import model.mazeElements.Room;
 import model.mazeElements.TriviaMaze;
+import model.tiles.TileManager;
 import view.TMPanel;
 
 import javax.imageio.ImageIO;
@@ -12,9 +13,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class PlayerController {
+
     private final KeyInput keys;
     // Sprite counters to numbered image
     private int spriteCounter = 0;
+
     private static int spriteNum = 1;
     // Player sprite image variables
     private static BufferedImage up1, up2, down1, down2, left1, left2, right1, right2,
@@ -27,6 +30,8 @@ public class PlayerController {
      * Global point of access to instance of PlayerController.
      */
     public static PlayerController instance;
+
+    public static boolean playerCollision = false;
 
 
     /**
@@ -47,17 +52,18 @@ public class PlayerController {
         if (keys.up || keys.down || keys.left || keys.right || keys.neutral) {
             if (keys.up) {
                 direction = "up";
-                Player.instance.setPlayerLocationY(-Player.instance.getSpeed());
+                updatePlayerLocation();
             } else if (keys.down) {
                 direction = "down";
-                Player.instance.setPlayerLocationY(Player.instance.getSpeed());
+                updatePlayerLocation();
             } else if (keys.left) {
                 direction = "left";
-                Player.instance.setPlayerLocationX(-Player.instance.getSpeed());
+                updatePlayerLocation();
             } else if (keys.right) {
                 direction = "right";
-                Player.instance.setPlayerLocationX(Player.instance.getSpeed());
+                updatePlayerLocation();
             }
+            //tracks which directional sprite image to use
             spriteCounter++;
             if (spriteCounter > 2) {
                 if (spriteNum == 1) {
@@ -68,6 +74,7 @@ public class PlayerController {
                 spriteCounter = 0;
             }
         }
+        // remembers player's direction to load correct neutral sprite
         if (!keys.up && !keys.down && !keys.right && !keys.left && keys.neutral) {
             switch (direction) {
                 case "down" -> directionMemory = "down";
@@ -75,7 +82,7 @@ public class PlayerController {
                 case "left" -> directionMemory = "left";
                 case "right" -> directionMemory = "right";
             }
-            direction = "";
+            direction = ""; // reset direction
         }
     }
 
@@ -165,9 +172,9 @@ public class PlayerController {
      * Player default values.
      */
     public void initPlayer() {
-        Player.instance.setPlayerLocationY(3 * TMPanel.TILE_SIZE);
-        Player.instance.setPlayerLocationX(3 * TMPanel.TILE_SIZE);
-        Player.instance.setSpeed(TMPanel.TILE_SIZE / 2);
+        Player.instance.setLocationY(3 * TMPanel.TILE_SIZE);
+        Player.instance.setLocationX(3 * TMPanel.TILE_SIZE);
+        Player.instance.setSpeed(TMPanel.TILE_SIZE);
         direction = "neutral";
         directionMemory = "neutral";
         keys.neutral = true;
@@ -181,5 +188,51 @@ public class PlayerController {
         int roomY = tileY % 6 == 0 ? -1 : (int) Math.ceil(tileY / 6f);
 
         Room currentRoom = TriviaMaze.instance.getRoom(roomX - 1, roomY - 1);
+    }
+    /**
+     * Grabs the current position of the player, checks the position the player is requesting to go,
+     * and returns is the tile is collidable or not.
+     * @param dir
+     * @return
+     */
+    public boolean isTileCollidable(String dir) {
+
+        // stores player location x and y
+        int xLocation = Player.instance.getPlayerLocationX();
+        int yLocation = Player.instance.getPlayerLocationY();
+        // uses player location x,y to find which tile in the maze player is on
+        int mapRow = yLocation / 24;
+        int mapCol = xLocation / 24;
+
+        // prepares to check tiles to be advanced to
+        switch (dir) {
+            case "up" -> mapRow -= 1;
+            case "down" -> mapRow += 1;
+            case "left" -> mapCol -= 1;
+            case "right" -> mapCol += 1;
+        }
+
+        // stores tile player is wanting to advance to
+        int tileNum = TileManager.instance.getMapData()[mapRow][mapCol];
+        //returns true is tile is collidable and player cannot advance to it
+        return TileManager.instance.getTile(tileNum).isCollidable();
+
+    }
+
+    /**
+     * Updates player location after checking if move is legal (collidable)
+     */
+    public void updatePlayerLocation() {
+
+        playerCollision = isTileCollidable(direction);
+
+        if (!playerCollision) {
+            switch (direction) {
+                case "up" -> Player.instance.setLocationY(-Player.instance.getSpeed());
+                case "down" -> Player.instance.setLocationY(Player.instance.getSpeed());
+                case "left" -> Player.instance.setLocationX(-Player.instance.getSpeed());
+                case "right" -> Player.instance.setLocationX(Player.instance.getSpeed());
+            }
+        }
     }
 }

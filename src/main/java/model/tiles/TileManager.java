@@ -35,6 +35,8 @@ public class TileManager {
      */
     public void getTileImages() {
         try {
+            myTiles[0] = new Tile(ImageIO.read(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png"))), false);
             myTiles[1] = new Tile(ImageIO.read(
                     Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png"))), true);
             myTiles[2] = new Tile(ImageIO.read(
@@ -47,6 +49,7 @@ public class TileManager {
                     Objects.requireNonNull(getClass().getResourceAsStream("/tiles/pencil.png"))), false);
             myTiles[6] = new Tile(ImageIO.read(
                     Objects.requireNonNull(getClass().getResourceAsStream("/tiles/gold.png"))), false);
+
         }
         catch (IOException e) {
             e.printStackTrace();

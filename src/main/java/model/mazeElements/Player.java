@@ -9,6 +9,9 @@ public class Player {
      */
     private int myLocationX, myLocationY;
 
+    private final int coordinateMax = TMPanel.GAME_SIZE - (TMPanel.TILE_SIZE * 2);
+
+    private final int coordinateMin = TMPanel.TILE_SIZE;
     /**
      * The speed of the player.
      */
@@ -41,9 +44,8 @@ public class Player {
      * Also ensures player image does not leave game window.
      * @param theChangeX the change in the X value.
      */
-    public void setPlayerLocationX(final int theChangeX) {
-        int max = TMPanel.GAME_SIZE - TMPanel.TILE_SIZE;
-        if (getPlayerLocationX() + theChangeX <= max && getPlayerLocationX() + theChangeX >= 0) {
+    public void setLocationX(final int theChangeX) {
+        if (getPlayerLocationX() + theChangeX <= coordinateMax && getPlayerLocationX() + theChangeX >= coordinateMin) {
             myLocationX += theChangeX;
         }
     }
@@ -53,9 +55,8 @@ public class Player {
      * Also ensures player image does not leave game window.
      * @param theChangeY the change in the Y value.
      */
-    public void setPlayerLocationY(final int theChangeY) {
-        int max = TMPanel.GAME_SIZE - TMPanel.TILE_SIZE;
-        if (getPlayerLocationY() + theChangeY <= max && getPlayerLocationY() + theChangeY >= 0) {
+    public void setLocationY(final int theChangeY) {
+    if (getPlayerLocationY() + theChangeY <= coordinateMax && getPlayerLocationY() + theChangeY >= coordinateMin) {
             myLocationY += theChangeY;
         }
     }
