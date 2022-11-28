@@ -3,6 +3,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+/src/main/resources/maps/randommap.txt
+
 ### IntelliJ IDEA ###
 .idea/
 .idea/misc.xml
