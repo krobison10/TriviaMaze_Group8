@@ -29,10 +29,6 @@ public class Room {
      * then the reference will be null.
      */
     private List<Door> myDoors;
-    /**
-     * Reference to the containing maze.
-     */
-    private final TriviaMaze myMaze;
 
     /**
      * Constructs a room object and handles necessary operations such
@@ -49,8 +45,6 @@ public class Room {
         }
         myPosX = theX;
         myPosY = theY;
-
-        myMaze = theMaze;
 
         //Makes sure that myDoors isn't null to avoid null references when initializeDoors is called
         Door[] temp = {null, null, null, null};
@@ -135,25 +129,27 @@ public class Room {
     private List<Door> setDoors() {
         Door[] init = {null, null, null, null};
         List<Door> result = Arrays.asList(init);
+        var maze = TriviaMaze.instance;
+
         if(myPosX - 1 >= 0) {
             //Get door from room to the west that current room would share
-            var adjacent = myMaze.getRoom(myPosX - 1, myPosY).getDoors().get(2);
-            result.set(0, (adjacent == null ? myMaze.addDoor(new Door(myMaze)) : adjacent));
+            var adjacent = maze.getRoom(myPosX - 1, myPosY).getDoors().get(2);
+            result.set(0, (adjacent == null ? maze.addDoor(new Door()) : adjacent));
         }
         if(myPosY - 1 >= 0) {
             //Get door from room to the north that current room would share
-            var adjacent = myMaze.getRoom(myPosX, myPosY - 1).getDoors().get(3);
-            result.set(1, (adjacent == null ? myMaze.addDoor(new Door(myMaze)) : adjacent));
+            var adjacent = maze.getRoom(myPosX, myPosY - 1).getDoors().get(3);
+            result.set(1, (adjacent == null ? maze.addDoor(new Door()) : adjacent));
         }
-        if(myPosX + 1 < myMaze.getWidth()) {
+        if(myPosX + 1 < maze.getWidth()) {
             //Get door from room to the east that current room would share
-            var adjacent = myMaze.getRoom(myPosX + 1, myPosY).getDoors().get(0);
-            result.set(2, (adjacent == null ? myMaze.addDoor(new Door(myMaze)) : adjacent));
+            var adjacent = maze.getRoom(myPosX + 1, myPosY).getDoors().get(0);
+            result.set(2, (adjacent == null ? maze.addDoor(new Door()) : adjacent));
         }
-        if(myPosY + 1 < myMaze.getHeight()) {
+        if(myPosY + 1 < maze.getHeight()) {
             //Get door from room to the north that current room would share
-            var adjacent = myMaze.getRoom(myPosX, myPosY + 1).getDoors().get(1);
-            result.set(3, (adjacent == null ? myMaze.addDoor(new Door(myMaze)) : adjacent));
+            var adjacent = maze.getRoom(myPosX, myPosY + 1).getDoors().get(1);
+            result.set(3, (adjacent == null ? maze.addDoor(new Door()) : adjacent));
         }
         return result;
     }

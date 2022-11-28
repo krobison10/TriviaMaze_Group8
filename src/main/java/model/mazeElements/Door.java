@@ -21,20 +21,15 @@ public class Door {
      * will be un-passable for the remainder of the game.
      */
     private DoorStates myState;
-    /**
-     * Reference to the containing TriviaMaze object. Field may be redundant.
-     */
-    private final TriviaMaze myMaze;
 
 
     /**
      * Constructs a door and assigns it a random question from the question bank, initializes
      * state to closed.
      */
-    Door(final TriviaMaze theMaze) {
-        myMaze = theMaze;
+    Door() {
         myState = DoorStates.CLOSED;
-        myQuestion = theMaze.questionBank().getRandomQuestion();
+        myQuestion = TriviaMaze.instance.questionBank().getRandomQuestion();
     }
 
     /**

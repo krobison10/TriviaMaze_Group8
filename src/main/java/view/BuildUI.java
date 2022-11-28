@@ -14,11 +14,11 @@ public class BuildUI implements ActionListener {
     private JMenu startMenu, helpMenu;
     private JMenuItem newGame, saveGame, exitGame, rules, controls, credits;
     private TMPanel maze;
+    public static BuildUI instance;
 //    private JButton playButton;
-    private TriviaMazeController myController;
 
-    public BuildUI(final TriviaMazeController theController) {
-        myController = theController;
+    public BuildUI() {
+        instance = this;
     }
 
     public void buildFrame() {
@@ -111,7 +111,7 @@ public class BuildUI implements ActionListener {
             mazeWindow.pack();
             mazeWindow.setLocationRelativeTo(null);
             mazeWindow.setVisible(true);
-            myController.startNewGame(maze);
+            TriviaMazeController.instance.startNewGame();
         }
     }
 

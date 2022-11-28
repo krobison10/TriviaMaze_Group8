@@ -1,33 +1,35 @@
 package controller;
 
+import model.mazeElements.Player;
 import model.mazeElements.Room;
 import model.mazeElements.TriviaMaze;
+import model.tiles.TileManager;
 import view.BuildUI;
-import view.TMPanel;
 
 public class TriviaMazeController {
     /**
-     * Reference to the main class of the model package
+     * Global access point to the instance of TriviaMazeController.
      */
-    private TriviaMaze myMaze;
-    /**
-     * Reference to the main class of the view package
-     */
-    private BuildUI myUI;
+    public static TriviaMazeController instance;
 
     public TriviaMazeController() {
         initialize();
     }
 
     private void initialize() {
-        myMaze = new TriviaMaze(5, 5, "CS_trivia_questions.db");
-        myUI = new BuildUI(this);
+        instance = this;
+        new TriviaMaze(5, 5, "CS_trivia_questions.db");
+        new Player();
+        new PlayerController();
+        new TileManager();
+        new BuildUI();
+        //Instance of TMPanel created with legitimate singleton
 
-        myUI.buildFrame();
+        BuildUI.instance.buildFrame();
     }
 
-    public void startNewGame(final TMPanel thePanel) {
-        Game game = new Game(myMaze, thePanel);
+    public void startNewGame() {
+        Game game = new Game();
         game.start();
     }
 

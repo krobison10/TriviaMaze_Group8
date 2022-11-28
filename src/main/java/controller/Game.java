@@ -1,26 +1,14 @@
 package controller;
 
-import model.mazeElements.TriviaMaze;
 import view.TMPanel;
 
 public class Game implements Runnable {
 
     private Thread gameThread;
-
     // game FPS
     private final int fps = 25;
     // Player refresh speed multiplier
     private final int speedMultiplier = 3;
-
-    private TMPanel myPanel;
-
-    private PlayerController myPlayerController;
-
-
-    public Game(final TriviaMaze theMaze, final TMPanel thePanel) {
-        myPanel = thePanel;
-        myPlayerController = new PlayerController(theMaze, myPanel.getPlayer(), myPanel.getKeys());
-    }
 
     public void start() {
         gameThread = new Thread(this);
@@ -34,9 +22,9 @@ public class Game implements Runnable {
         double nextDrawTime = System.nanoTime() + interval;
 
         while (gameThread != null) {
-            myPanel.update();
-            myPlayerController.updatePlayer();
-            myPlayerController.updateCurrentRoom();
+            TMPanel.getTriviaMaze().update();
+            PlayerController.instance.updatePlayer();
+            PlayerController.instance.updateCurrentRoom();
 
             // delays the key press listener
             try {

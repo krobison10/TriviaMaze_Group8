@@ -7,13 +7,10 @@ import model.tiles.TileManager;
 import java.awt.*;
 
 class GraphicDrawer {
-    private final TileManager myTM;
-    private final Player myPlayer;
+    public static GraphicDrawer instance;
 
-    GraphicDrawer(final Player thePlayer) {
-        myTM = new TileManager();
-        myPlayer = thePlayer;
-
+    GraphicDrawer() {
+        instance = this;
     }
 
     void drawTiles(final Graphics2D theG2) {
@@ -23,9 +20,10 @@ class GraphicDrawer {
         {
             for(int row = 0; row < bound; row++)
             {
-                tileNum = myTM.getMapData()[row][col];
+                tileNum = TileManager.instance.getMapData()[row][col];
                 if(tileNum != 0) {
-                    theG2.drawImage(myTM.getTile(tileNum).image(), col * ts, row * ts, ts, ts, null);
+                    theG2.drawImage(TileManager.instance.getTile(tileNum).image(),
+                            col * ts, row * ts, ts, ts, null);
                 }
             }
         }
@@ -36,7 +34,7 @@ class GraphicDrawer {
      * @param theG2
      */
     void drawPlayer(final Graphics2D theG2) {
-        PlayerController.drawMe(theG2, myPlayer.getPlayerLocationX(), myPlayer.getPlayerLocationY());
+        PlayerController.drawMe(theG2, Player.instance.getPlayerLocationX(), Player.instance.getPlayerLocationY());
     }
 
 }

@@ -1,7 +1,6 @@
 package view;
 
 import controller.KeyInput;
-import model.mazeElements.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,10 +15,6 @@ public class TMPanel extends JPanel{
 
     private final KeyInput keys;
 
-    private final Player player;
-
-    public final GraphicDrawer graphicDrawer;
-
     // maze instance used later to prevent multiple games from running
     private static TMPanel triviaMazeInstance = null;
 
@@ -28,9 +23,10 @@ public class TMPanel extends JPanel{
      * Properties of trivia maze
      */
     private TMPanel() {
+        //Create singleton instance
+        new GraphicDrawer();
+
         keys = new KeyInput();
-        player = new Player();
-        graphicDrawer = new GraphicDrawer(player);
 
         this.setPreferredSize(new Dimension(GAME_SIZE + 300, GAME_SIZE));
         this.setBackground(Color.gray);
@@ -40,8 +36,8 @@ public class TMPanel extends JPanel{
     }
 
     /**
-     * Returns a new TriviaMazeUI is one has not yet been instantiated.
-     * (emi-singleton)
+     * Returns a new TriviaMazeUI if one has not yet been instantiated.
+     * (semi-singleton)
      * @return
      */
     public static TMPanel getTriviaMaze() {
@@ -66,17 +62,13 @@ public class TMPanel extends JPanel{
         // Casts graphics to 2D graphics for more functionality
         Graphics2D g2 = (Graphics2D) g;
 
-        graphicDrawer.drawTiles(g2);
-        graphicDrawer.drawPlayer(g2);
+        GraphicDrawer.instance.drawTiles(g2);
+        GraphicDrawer.instance.drawPlayer(g2);
 
         g2.dispose();
     }
 
     public KeyInput getKeys() {
         return keys;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 }

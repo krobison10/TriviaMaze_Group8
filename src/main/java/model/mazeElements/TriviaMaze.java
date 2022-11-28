@@ -34,6 +34,10 @@ public class TriviaMaze {
      * contains all the Questions for the maze.
      */
     private final QuestionBank myQuestionBank;
+    /**
+     * Stores the instance of the TriviaMaze.
+     */
+    public static TriviaMaze instance;
 
     /**
      * Constructs and initializes the underlying implementation of the
@@ -45,6 +49,7 @@ public class TriviaMaze {
      *                  directory.
      */
     public TriviaMaze(final int theWidth, final int theHeight, final String theDBName) {
+        instance = this;
         myWidth = theWidth;
         myHeight = theHeight;
         myPlayer = new Player();

@@ -13,6 +13,14 @@ public class Player {
      * The speed of the player.
      */
     private int mySpeed;
+    /**
+     * Global point of access to instance of Player.
+     */
+    public static Player instance;
+
+    public Player() {
+        instance = this;
+    }
 
     /**
      * @return the player's location on the X axis.

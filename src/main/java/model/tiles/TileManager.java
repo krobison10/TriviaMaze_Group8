@@ -17,10 +17,13 @@ public class TileManager {
      */
     private int[][] myMapData;
 
+    public static TileManager instance;
+
     /**
      * Constructs and initializes the TileManager.
      */
     public TileManager() {
+        instance = this;
         myTiles = new Tile[3];
         loadMap();
         getTileImages();

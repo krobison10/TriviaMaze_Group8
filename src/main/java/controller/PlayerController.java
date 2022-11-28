@@ -12,11 +12,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class PlayerController {
-
-    private final TriviaMaze myTriviaMaze;
-
-    private final Player myPlayer;
-
     private final KeyInput keys;
     // Sprite counters to numbered image
     private int spriteCounter = 0;
@@ -28,17 +23,18 @@ public class PlayerController {
     public static String direction;
     // Player's old facing direction
     public static String directionMemory;
+    /**
+     * Global point of access to instance of PlayerController.
+     */
+    public static PlayerController instance;
 
 
     /**
      * Initializes player object.
-     * @param thePlayer
-     * @param theKeys
      */
-    public PlayerController(final TriviaMaze theTriviaMaze, final Player thePlayer, final KeyInput theKeys) {
-        myTriviaMaze = theTriviaMaze;
-        myPlayer = thePlayer;
-        keys = theKeys;
+    public PlayerController() {
+        instance = this;
+        keys = TMPanel.getTriviaMaze().getKeys();
         initPlayer();
         getPlayerImage();
         updateCurrentRoom();
@@ -51,16 +47,16 @@ public class PlayerController {
         if (keys.up || keys.down || keys.left || keys.right || keys.neutral) {
             if (keys.up) {
                 direction = "up";
-                myPlayer.setPlayerLocationY(-myPlayer.getSpeed());
+                Player.instance.setPlayerLocationY(-Player.instance.getSpeed());
             } else if (keys.down) {
                 direction = "down";
-                myPlayer.setPlayerLocationY(myPlayer.getSpeed());
+                Player.instance.setPlayerLocationY(Player.instance.getSpeed());
             } else if (keys.left) {
                 direction = "left";
-                myPlayer.setPlayerLocationX(-myPlayer.getSpeed());
+                Player.instance.setPlayerLocationX(-Player.instance.getSpeed());
             } else if (keys.right) {
                 direction = "right";
-                myPlayer.setPlayerLocationX(myPlayer.getSpeed());
+                Player.instance.setPlayerLocationX(Player.instance.getSpeed());
             }
             spriteCounter++;
             if (spriteCounter > 2) {
@@ -169,21 +165,21 @@ public class PlayerController {
      * Player default values.
      */
     public void initPlayer() {
-        myPlayer.setPlayerLocationY(3 * TMPanel.TILE_SIZE);
-        myPlayer.setPlayerLocationX(3 * TMPanel.TILE_SIZE);
-        myPlayer.setSpeed(TMPanel.TILE_SIZE / 2);
+        Player.instance.setPlayerLocationY(3 * TMPanel.TILE_SIZE);
+        Player.instance.setPlayerLocationX(3 * TMPanel.TILE_SIZE);
+        Player.instance.setSpeed(TMPanel.TILE_SIZE / 2);
         direction = "neutral";
         directionMemory = "neutral";
         keys.neutral = true;
     }
 
     public void updateCurrentRoom() {
-        int tileX = myPlayer.getPlayerLocationX() / TMPanel.TILE_SIZE;
-        int tileY = myPlayer.getPlayerLocationY() / TMPanel.TILE_SIZE;
+        int tileX = Player.instance.getPlayerLocationX() / TMPanel.TILE_SIZE;
+        int tileY = Player.instance.getPlayerLocationY() / TMPanel.TILE_SIZE;
 
         int roomX = tileX % 6 == 0 ? -1 : (int) Math.ceil(tileX / 6f);
         int roomY = tileY % 6 == 0 ? -1 : (int) Math.ceil(tileY / 6f);
 
-        Room currentRoom = myTriviaMaze.getRoom(roomX - 1, roomY - 1);
+        Room currentRoom = TriviaMaze.instance.getRoom(roomX - 1, roomY - 1);
     }
 }
