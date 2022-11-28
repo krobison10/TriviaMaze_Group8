@@ -4,58 +4,66 @@ import view.TMPanel;
 
 public class Player {
 
-    // Player location on axis.
-    private int playerLocationX, playerLocationY;
-    // Player speed
-    private int speed;
+    /**
+     * The coordinates of the player in the maze.
+     */
+    private int myLocationX, myLocationY;
 
     /**
-     * Returns player's location on X axis.
-     * @return
+     * The speed of the player.
+     */
+    private int mySpeed;
+
+    /**
+     * @return the player's location on the X axis.
      */
     public int getPlayerLocationX() {
-        return playerLocationX;
+        return myLocationX;
     }
 
     /**
-     * Returns player's location on Y axis.
-     * @return
+     * @return the player's location on the Y axis.
      */
     public int getPlayerLocationY() {
-        return playerLocationY;
+        return myLocationY;
     }
 
     /**
      * Sets player's location on X axis (left/right movement).
      * Also ensures player image does not leave game window.
-     * @param changeX
+     * @param theChangeX the change in the X value.
      */
-    public void setPlayerLocationX(int changeX) {
+    public void setPlayerLocationX(final int theChangeX) {
         int max = TMPanel.GAME_SIZE - TMPanel.TILE_SIZE;
-        if (getPlayerLocationX() + changeX <= max && getPlayerLocationX() + changeX >= 0) {
-            playerLocationX += changeX;
+        if (getPlayerLocationX() + theChangeX <= max && getPlayerLocationX() + theChangeX >= 0) {
+            myLocationX += theChangeX;
         }
     }
 
     /**
      * Set player's location on Y axis (up/down movement).
      * Also ensures player image does not leave game window.
-     * @param changeY
+     * @param theChangeY the change in the Y value.
      */
-    public void setPlayerLocationY(int changeY) {
+    public void setPlayerLocationY(final int theChangeY) {
         int max = TMPanel.GAME_SIZE - TMPanel.TILE_SIZE;
-        if (getPlayerLocationY() + changeY <= max && getPlayerLocationY() + changeY >= 0) {
-            playerLocationY += changeY;
+        if (getPlayerLocationY() + theChangeY <= max && getPlayerLocationY() + theChangeY >= 0) {
+            myLocationY += theChangeY;
         }
     }
 
+    /**
+     * @return the speed value of the player object.
+     */
     public int getSpeed() {
-        return speed;
+        return mySpeed;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    /**
+     * Sets the speed value of the player.
+     * @param theSpeed the new speed.
+     */
+    public void setSpeed(final int theSpeed) {
+        mySpeed = theSpeed;
     }
-
-
 }
