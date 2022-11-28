@@ -50,38 +50,18 @@ public class PlayerController {
         if (keys.up || keys.down || keys.left || keys.right || keys.neutral) {
             if (keys.up) {
                 direction = "up";
-                setNewLocationAndCheckCollision();
-//                myPlayer.setPlayerLocationY(-myPlayer.getSpeed());
+                updatePlayerLocation();
             } else if (keys.down) {
                 direction = "down";
-                setNewLocationAndCheckCollision();
-
-//                myPlayer.setPlayerLocationY(myPlayer.getSpeed());
+                updatePlayerLocation();
             } else if (keys.left) {
                 direction = "left";
-                setNewLocationAndCheckCollision();
-
-//                myPlayer.setPlayerLocationX(-myPlayer.getSpeed());
+                updatePlayerLocation();
             } else if (keys.right) {
                 direction = "right";
-                setNewLocationAndCheckCollision();
-
-//                myPlayer.setPlayerLocationX(myPlayer.getSpeed());
+                updatePlayerLocation();
             }
-
-//            if (!keys.neutral) {
-//                playerCollision = testCollision(myPlayer, direction);
-//            }
-//
-//            if (!playerCollision) {
-//                switch (direction) {
-//                    case "up" -> myPlayer.setPlayerLocationY(-myPlayer.getSpeed());
-//                    case "down" -> myPlayer.setPlayerLocationY(myPlayer.getSpeed());
-//                    case "left" -> myPlayer.setPlayerLocationX(-myPlayer.getSpeed());
-//                    case "right" -> myPlayer.setPlayerLocationX(myPlayer.getSpeed());
-//                }
-//            }
-
+            //tracks which directional sprite image to use
             spriteCounter++;
             if (spriteCounter > 2) {
                 if (spriteNum == 1) {
@@ -92,6 +72,7 @@ public class PlayerController {
                 spriteCounter = 0;
             }
         }
+        // remembers player's direction to load correct neutral sprite
         if (!keys.up && !keys.down && !keys.right && !keys.left && keys.neutral) {
             switch (direction) {
                 case "down" -> directionMemory = "down";
@@ -99,9 +80,8 @@ public class PlayerController {
                 case "left" -> directionMemory = "left";
                 case "right" -> directionMemory = "right";
             }
-            direction = "";
+            direction = ""; // reset direction
         }
-//        direction = "";
     }
 
     /**
@@ -198,29 +178,43 @@ public class PlayerController {
         keys.neutral = true;
     }
 
-    public boolean testCollision(Player mp, String dir) {
+    /**
+     * Grabs the current position of the player, checks the position the player is requestion to go,
+     * and returns is the tile is collidable or not.
+     * @param mp
+     * @param dir
+     * @return
+     */
+    public boolean isTileCollidable(Player mp, String dir) {
 
-        int xLoc = mp.getPlayerLocationX();
-        int yLoc = mp.getPlayerLocationY();
-        int row = yLoc / 24;
-        int col = xLoc / 24;
+        // stores player location x and y
+        int xLocation = mp.getPlayerLocationX();
+        int yLocation = mp.getPlayerLocationY();
+        // uses player location x,y to find which tile in the maze player is on
+        int mapRow = yLocation / 24;
+        int mapCol = xLocation / 24;
 
+        // prepares to check tiles to be advanced to
         switch (dir) {
-            case "up" -> row -= 1;
-            case "down" -> row += 1;
-            case "left" -> col -= 1;
-            case "right" -> col += 1;
+            case "up" -> mapRow -= 1;
+            case "down" -> mapRow += 1;
+            case "left" -> mapCol -= 1;
+            case "right" -> mapCol += 1;
         }
 
-        int tileNum = TileManager.myMapData[row][col];
+        // stores tile player is wanting to advance to
+        int tileNum = TileManager.myMapData[mapRow][mapCol];
+        //returns true is tile is collidable and player cannot advance to it
         return TileManager.myTiles[tileNum].isCollidable();
 
     }
 
-    public void setNewLocationAndCheckCollision() {
-        if (!keys.neutral) {
-            playerCollision = testCollision(myPlayer, direction);
-        }
+    /**
+     * Updates player location after checking if move is legal (collidable)
+     */
+    public void updatePlayerLocation() {
+
+        playerCollision = isTileCollidable(myPlayer, direction);
 
         if (!playerCollision) {
             switch (direction) {
