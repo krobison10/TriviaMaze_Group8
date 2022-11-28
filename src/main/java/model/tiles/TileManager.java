@@ -1,5 +1,6 @@
 package model.tiles;
 
+import view.MapGenerator;
 import view.TMPanel;
 
 import javax.imageio.ImageIO;
@@ -24,7 +25,7 @@ public class TileManager {
      */
     public TileManager() {
         instance = this;
-        myTiles = new Tile[3];
+        myTiles = new Tile[7];
         loadMap();
         getTileImages();
     }
@@ -33,6 +34,26 @@ public class TileManager {
      * @return the array containing the map data, contains data for which tile number goes where
      * on the game board.
      */
+    public void getTileImages() {
+        try {
+            myTiles[1] = new Tile(ImageIO.read(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png"))), true);
+            myTiles[2] = new Tile(ImageIO.read(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/door.png"))), true);
+            myTiles[3] = new Tile(ImageIO.read(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/ruler.png"))), false);
+            myTiles[4] = new Tile(ImageIO.read(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/eraser.png"))), false);
+            myTiles[5] = new Tile(ImageIO.read(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/pencil.png"))), false);
+            myTiles[6] = new Tile(ImageIO.read(
+                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/gold.png"))), false);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int[][] getMapData() {
         return myMapData;
     }
@@ -49,8 +70,10 @@ public class TileManager {
     /**
      * Loads the map data in from a file and stores it in the array "myMapData".
      */
-    private void loadMap() {
-        try (FileReader fr = new FileReader("../TriviaMaze_Group8/src/main/resources/maps/map2.txt")) {
+    public void loadMap() {
+        new MapGenerator();
+        try (FileReader fr = new FileReader("../TriviaMaze_Group8/src/main/resources/maps/randommap.txt")) {
+
             int nt = TMPanel.NUM_TILES;
             myMapData = new int[nt][nt];
 
@@ -65,21 +88,6 @@ public class TileManager {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Loads the tile images into the array "myTiles".
-     */
-    private void getTileImages() {
-        try {
-            myTiles[1] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png"))), true);
-            myTiles[2] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/door.png"))), true);
-        }
-        catch (IOException e) {
             e.printStackTrace();
         }
     }
