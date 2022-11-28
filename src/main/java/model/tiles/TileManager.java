@@ -1,6 +1,5 @@
 package model.tiles;
 
-import view.MapGenerator;
 import view.TMPanel;
 
 import javax.imageio.ImageIO;

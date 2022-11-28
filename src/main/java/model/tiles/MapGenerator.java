@@ -1,4 +1,4 @@
-package view;
+package model.tiles;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Random;
