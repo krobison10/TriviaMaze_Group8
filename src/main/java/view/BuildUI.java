@@ -27,7 +27,7 @@ public class BuildUI implements ActionListener {
     /**
      *
      */
-    private JFrame myMazeWindow;
+    public JFrame myMazeWindow;
     /**
      *
      */
@@ -134,12 +134,25 @@ public class BuildUI implements ActionListener {
      * Builds the Trivia Maze UI
      */
     private void buildMazeUI() {
+        JSplitPane mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+        mainPane.setBorder(null);
+        mainPane.setDividerSize(0);
+
         TMPanel maze = TMPanel.getTriviaMaze();
-        myMazeWindow.add(maze);
+        JPanel ui = SidebarManager.getInstance().getPanel();
+
+        mainPane.setLeftComponent(maze);
+        mainPane.setRightComponent(ui);
+
+        myMazeWindow.add(mainPane);
+
         myMazeWindow.pack();
+
         myMazeWindow.setLocationRelativeTo(null);
         myMazeWindow.setVisible(true);
+        myMazeWindow.add(new JButton("Click me!"));
         TriviaMazeController.getInstance().startNewGame();
+        SidebarManager.getInstance().updateForCurrentRoom();
     }
 
     /**

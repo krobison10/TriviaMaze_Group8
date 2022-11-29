@@ -50,7 +50,7 @@ public class TMPanel extends JPanel{
 
         keys = new KeyInput();
 
-        this.setPreferredSize(new Dimension(GAME_SIZE + 300, GAME_SIZE));
+        this.setPreferredSize(new Dimension(GAME_SIZE, GAME_SIZE));
         this.setBackground(Color.gray);
         this.setDoubleBuffered(true);
         this.addKeyListener(keys);
