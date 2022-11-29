@@ -116,6 +116,7 @@ public class BuildUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == myNewGame) {
+            myNewGame.setEnabled(false);
             buildMazeUI();
         } else if (e.getSource() == mySaveGame) {
             JOptionPane.showMessageDialog(myMazeWindow,"Operation not implemented");

@@ -44,7 +44,7 @@ public class Game implements Runnable {
     @Override
     public void run() {
         double interval = 1000000000D / FPS;
-        double nextDrawTime = System.nanoTime() + interval;
+        double nextDrawTime = Math.abs(System.nanoTime() + interval);
 
         while (gameThread != null) {
             TMPanel.getTriviaMaze().frameUpdate();
@@ -52,7 +52,7 @@ public class Game implements Runnable {
 
             // delays the key press listener
             try {
-                double remainingDrawTime = nextDrawTime - System.nanoTime();
+                double remainingDrawTime = Math.abs(nextDrawTime - System.nanoTime());
                 remainingDrawTime = remainingDrawTime / 1000000;
                 Thread.sleep((long)remainingDrawTime);
                 nextDrawTime += interval * SPEED_MULTIPLIER;
