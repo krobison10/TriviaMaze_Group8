@@ -24,9 +24,9 @@ public class Player {
      */
     private static final int COORDINATE_MIN = TMPanel.TILE_SIZE;
     /**
-     * Global point of access to singleton instance of Player.
+     * Singleton instance.
      */
-    public static Player instance;
+    private static Player instance;
     /**
      * The coordinates of the player in the maze.
      */
@@ -40,8 +40,16 @@ public class Player {
     /**
      * Constructs a player object.
      */
-    public Player() {
-        instance = this;
+    private Player() {}
+
+    /**
+     * @return a reference to the singleton instance of the Player object.
+     */
+    public static Player getInstance() {
+        if(instance == null) {
+            instance = new Player();
+        }
+        return instance;
     }
 
     /**

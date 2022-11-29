@@ -6,10 +6,8 @@
 
 package controller;
 
-import model.mazeElements.Player;
 import model.mazeElements.Room;
 import model.mazeElements.TriviaMaze;
-import model.tiles.TileManager;
 import view.BuildUI;
 
 /**
@@ -19,17 +17,26 @@ import view.BuildUI;
  */
 public class TriviaMazeController {
     /**
-     * Global access point to the instance of TriviaMazeController.
+     * Singleton variable.
      */
-    public static TriviaMazeController instance;
+    private static TriviaMazeController instance;
 
     /**
      * Initializes and starts the game.
      */
-    public TriviaMazeController() {
-        initialize();
+    private TriviaMazeController() {
+        new TriviaMaze(5, 5, "CS_trivia_questions.db");
+        BuildUI.getInstance().buildFrame();
+    }
 
-        BuildUI.instance.buildFrame();
+    /**
+     * Global access point to the instance of TriviaMazeController.
+     */
+    public static TriviaMazeController getInstance() {
+        if(instance == null) {
+            instance = new TriviaMazeController();
+        }
+        return instance;
     }
 
     /**
@@ -38,19 +45,6 @@ public class TriviaMazeController {
     public void startNewGame() {
         Game game = new Game();
         game.start();
-    }
-
-    /**
-     * Series of calls for basic initialization of model and view.
-     */
-    private void initialize() {
-        instance = this;
-        new TriviaMaze(5, 5, "CS_trivia_questions.db");
-        new Player();
-        new PlayerController();
-        new TileManager();
-        new BuildUI();
-        //Instance of TMPanel created with legitimate singleton
     }
 
     //Not yet implemented

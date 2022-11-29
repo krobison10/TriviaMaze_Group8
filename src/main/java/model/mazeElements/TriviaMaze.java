@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class TriviaMaze {
     /**
-     * Stores the instance of the TriviaMaze.
+     * Singleton instance.
      */
-    public static TriviaMaze instance;
+    private static TriviaMaze instance;
     /**
      * Stores all the rooms that the maze contains.
      */
@@ -32,10 +32,6 @@ public class TriviaMaze {
      * access to the entire list of doors in the maze.
      */
     private final List<Door> myDoors;
-    /**
-     * Stores a reference to the player object that the maze contains.
-     */
-    private final Player myPlayer;
     /**
      * Represents the width and height of the maze in terms of rooms.
      * For example: "5 rooms wide, 5 rooms tall"
@@ -60,11 +56,21 @@ public class TriviaMaze {
         instance = this;
         myWidth = theWidth;
         myHeight = theHeight;
-        myPlayer = new Player();
         myDoors = new ArrayList<>();
         myQuestionBank = new QuestionBank("../TriviaMaze_group8/databases/" + theDBName);
         myRooms = createRooms();
         initializeRooms();
+    }
+
+    /**
+     * Throws exception if instance doesn't exist, arguments are required to create an instance.
+     * @return the singleton instance.
+     */
+    public static TriviaMaze getInstance() {
+        if(instance == null) {
+            throw new RuntimeException("Attempted to get new instance of singleton without arguments");
+        }
+        return instance;
     }
 
     /**
@@ -84,13 +90,6 @@ public class TriviaMaze {
      */
     public Room[][] getAllRooms() {
         return myRooms;
-    }
-
-    /**
-     * @return the Player object.
-     */
-    public Player player() {
-        return myPlayer;
     }
 
     /**

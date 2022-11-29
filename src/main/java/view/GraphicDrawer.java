@@ -41,9 +41,9 @@ class GraphicDrawer {
         {
             for(int row = 0; row < bound; row++)
             {
-                tileNum = TileManager.instance.getMapData()[row][col];
+                tileNum = TileManager.getInstance().getMapData()[row][col];
                 if(tileNum != 0) {
-                    theG2.drawImage(TileManager.instance.getTile(tileNum).image(),
+                    theG2.drawImage(TileManager.getInstance().getTile(tileNum).image(),
                             col * ts, row * ts, ts, ts, null);
                 }
             }
@@ -56,7 +56,7 @@ class GraphicDrawer {
      */
     void drawPlayer(final Graphics2D theG2) {
         //Possible pro-MVC refactor, move the drawme function into this class
-        PlayerController.instance.drawMe
-                (theG2, Player.instance.getPlayerLocationX(), Player.instance.getPlayerLocationY());
+        PlayerController.getInstance().drawMe
+                (theG2, Player.getInstance().getPlayerLocationX(), Player.getInstance().getPlayerLocationY());
     }
 }

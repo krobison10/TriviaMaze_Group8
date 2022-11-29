@@ -23,7 +23,7 @@ public class BuildUI implements ActionListener {
     /**
      * Singleton instance.
      */
-    public static BuildUI instance;
+    private static BuildUI instance;
     /**
      *
      */
@@ -34,11 +34,17 @@ public class BuildUI implements ActionListener {
     private JMenuItem myNewGame, mySaveGame, myExitGame, myRules, myControls, myCredits;
 //    private JButton playButton;
 
+
+    private BuildUI() {}
+
     /**
-     * Constructs and sets singleton instance.
+     * Returns a reference to the singleton instance.
      */
-    public BuildUI() {
-        instance = this;
+    public static BuildUI getInstance() {
+        if(instance == null) {
+            instance = new BuildUI();
+        }
+        return instance;
     }
 
     /**
@@ -133,7 +139,7 @@ public class BuildUI implements ActionListener {
         myMazeWindow.pack();
         myMazeWindow.setLocationRelativeTo(null);
         myMazeWindow.setVisible(true);
-        TriviaMazeController.instance.startNewGame();
+        TriviaMazeController.getInstance().startNewGame();
     }
 
     /**

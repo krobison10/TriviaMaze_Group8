@@ -32,9 +32,9 @@ public class PlayerController {
     private static BufferedImage up1, up2, down1, down2, left1, left2, right1, right2,
             neutralUp, neutralDown, neutralLeft, neutralRight;
     /**
-     * Global point of access to instance of PlayerController.
+     * Singleton.
      */
-    public static PlayerController instance;
+    private static PlayerController instance;
     /**
      * Reference to KeyInput object to get current input from user.
      */
@@ -61,12 +61,21 @@ public class PlayerController {
     /**
      * Initializes player object.
      */
-    public PlayerController() {
-        instance = this;
+    private PlayerController() {
         myKeys = TMPanel.getTriviaMaze().getKeys();
         initPlayer();
         loadSprites();
         updateCurrentRoom();
+    }
+
+    /**
+     * Global point of access to instance of PlayerController.
+     */
+    public static PlayerController getInstance() {
+        if(instance == null) {
+            instance = new PlayerController();
+        }
+        return instance;
     }
 
     /**
@@ -183,8 +192,8 @@ public class PlayerController {
     private boolean isTileCollidable(final String dir) {
 
         // stores player location x and y
-        int xLocation = Player.instance.getPlayerLocationX();
-        int yLocation = Player.instance.getPlayerLocationY();
+        int xLocation = Player.getInstance().getPlayerLocationX();
+        int yLocation = Player.getInstance().getPlayerLocationY();
         // uses player location x,y to find which tile in the maze player is on
         int mapRow = yLocation / 24;
         int mapCol = xLocation / 24;
@@ -198,9 +207,9 @@ public class PlayerController {
         }
 
         // stores tile player is wanting to advance to
-        int tileNum = TileManager.instance.getMapData()[mapRow][mapCol];
+        int tileNum = TileManager.getInstance().getMapData()[mapRow][mapCol];
         //returns true is tile is collidable and player cannot advance to it
-        return TileManager.instance.getTile(tileNum).isCollidable();
+        return TileManager.getInstance().getTile(tileNum).isCollidable();
 
     }
 
@@ -210,10 +219,10 @@ public class PlayerController {
     private void movePlayer() {
         if (!isTileCollidable(myDirection)) {
             switch (myDirection) {
-                case "up" -> Player.instance.setLocationY(-Player.instance.getSpeed());
-                case "down" -> Player.instance.setLocationY(Player.instance.getSpeed());
-                case "left" -> Player.instance.setLocationX(-Player.instance.getSpeed());
-                case "right" -> Player.instance.setLocationX(Player.instance.getSpeed());
+                case "up" -> Player.getInstance().setLocationY(-Player.getInstance().getSpeed());
+                case "down" -> Player.getInstance().setLocationY(Player.getInstance().getSpeed());
+                case "left" -> Player.getInstance().setLocationX(-Player.getInstance().getSpeed());
+                case "right" -> Player.getInstance().setLocationX(Player.getInstance().getSpeed());
             }
         }
     }
@@ -222,23 +231,23 @@ public class PlayerController {
      * Does some math to compute which room of the maze the player is in using their location.
      */
     private void updateCurrentRoom() {
-        int tileX = Player.instance.getPlayerLocationX() / TMPanel.TILE_SIZE;
-        int tileY = Player.instance.getPlayerLocationY() / TMPanel.TILE_SIZE;
+        int tileX = Player.getInstance().getPlayerLocationX() / TMPanel.TILE_SIZE;
+        int tileY = Player.getInstance().getPlayerLocationY() / TMPanel.TILE_SIZE;
 
         int roomX = tileX % 6 == 0 ? -1 : (int) Math.ceil(tileX / 6f);
         int roomY = tileY % 6 == 0 ? -1 : (int) Math.ceil(tileY / 6f);
 
         //Future: update to tell something that cares which room the player is in.
-        Room currentRoom = TriviaMaze.instance.getRoom(roomX - 1, roomY - 1);
+        Room currentRoom = TriviaMaze.getInstance().getRoom(roomX - 1, roomY - 1);
     }
 
     /**
      * Sets default values for the player.
      */
     private void initPlayer() {
-        Player.instance.setLocationY(3 * TMPanel.TILE_SIZE);
-        Player.instance.setLocationX(3 * TMPanel.TILE_SIZE);
-        Player.instance.setSpeed(TMPanel.TILE_SIZE);
+        Player.getInstance().setLocationY(3 * TMPanel.TILE_SIZE);
+        Player.getInstance().setLocationX(3 * TMPanel.TILE_SIZE);
+        Player.getInstance().setSpeed(TMPanel.TILE_SIZE);
         myDirection = "neutral";
         myDirectionMemory = "neutral";
         myKeys.setNeutral(true);

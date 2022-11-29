@@ -48,7 +48,7 @@ public class Game implements Runnable {
 
         while (gameThread != null) {
             TMPanel.getTriviaMaze().frameUpdate();
-            PlayerController.instance.frameUpdate();
+            PlayerController.getInstance().frameUpdate();
 
             // delays the key press listener
             try {

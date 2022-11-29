@@ -37,7 +37,7 @@ public class Door {
      */
     Door() {
         myState = DoorStates.CLOSED;
-        myQuestion = TriviaMaze.instance.questionBank().getRandomQuestion();
+        myQuestion = TriviaMaze.getInstance().questionBank().getRandomQuestion();
     }
 
     /**

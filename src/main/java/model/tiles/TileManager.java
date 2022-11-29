@@ -21,9 +21,9 @@ import view.TMPanel;
  */
 public class TileManager {
     /**
-     * Singleton instance of the tile manager
+     * Singleton instance.
      */
-    public static TileManager instance;
+    private static TileManager instance;
     /**
      * Contains the types of tiles.
      */
@@ -37,11 +37,21 @@ public class TileManager {
     /**
      * Constructs and initializes the TileManager.
      */
-    public TileManager() {
+    private TileManager() {
         instance = this;
         myTiles = new Tile[7];
         loadMap();
         loadTileSprites();
+    }
+
+    /**
+     * @return a reference to the singleton instance.
+     */
+    public static TileManager getInstance() {
+        if(instance == null) {
+            instance = new TileManager();
+        }
+        return instance;
     }
 
     public int[][] getMapData() {

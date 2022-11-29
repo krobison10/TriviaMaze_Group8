@@ -45,7 +45,7 @@ public class Room {
      * @param theY represents the Y position in the maze.
      */
     Room(final int theX, final int theY) {
-        if(theX < 0 || theY < 0 || theX >= TriviaMaze.instance.getWidth() || theY >= TriviaMaze.instance.getHeight()) {
+        if(theX < 0 || theY < 0 || theX >= TriviaMaze.getInstance().getWidth() || theY >= TriviaMaze.getInstance().getHeight()) {
             throw new IllegalArgumentException("Position out of bounds");
         }
         myPosX = theX;
@@ -134,7 +134,7 @@ public class Room {
     private List<Door> setDoors() {
         Door[] init = {null, null, null, null};
         List<Door> result = Arrays.asList(init);
-        var maze = TriviaMaze.instance;
+        var maze = TriviaMaze.getInstance();
 
         if(myPosX - 1 >= 0) {
             //Get door from room to the west that current room would share
