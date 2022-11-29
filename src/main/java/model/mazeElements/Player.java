@@ -32,6 +32,10 @@ public class Player {
      */
     private int myLocationX, myLocationY;
     /**
+     * Reference to the current room that the player is in.
+     */
+    private Room currentRoom;
+    /**
      * The speed of the player.
      */
     private int mySpeed;
@@ -40,7 +44,9 @@ public class Player {
     /**
      * Constructs a player object.
      */
-    private Player() {}
+    private Player() {
+        currentRoom = TriviaMaze.getInstance().getRoom(0,0);
+    }
 
     /**
      * @return a reference to the singleton instance of the Player object.
@@ -103,5 +109,20 @@ public class Player {
      */
     public void setSpeed(final int theSpeed) {
         mySpeed = theSpeed;
+    }
+
+    /**
+     * @return a reference to the room that contains the player.
+     */
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    /**
+     * Updates the current room of the player
+     * @param theCurrentRoom the new room.
+     */
+    public void setCurrentRoom(final Room theCurrentRoom) {
+        currentRoom = theCurrentRoom;
     }
 }

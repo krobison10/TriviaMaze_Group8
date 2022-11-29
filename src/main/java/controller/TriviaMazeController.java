@@ -6,9 +6,17 @@
 
 package controller;
 
-import model.mazeElements.Room;
-import model.mazeElements.TriviaMaze;
+import model.mazeElements.*;
+import model.questions.Question;
+import model.questions.QuestionFA;
+import model.questions.QuestionMC;
+import model.questions.QuestionSelection;
+import model.tiles.Tile;
+import model.tiles.TileManager;
 import view.BuildUI;
+import view.SidebarManager;
+
+import javax.swing.*;
 
 /**
  * Main controller class that handles initialization of game and central functions.
@@ -47,8 +55,41 @@ public class TriviaMazeController {
         game.start();
     }
 
-    //Not yet implemented
-    void updateCurrentRoom(final Room theRoom) {
+    public void processAnswerAttempt(final Question theQuestion, final String theAnswer ) {
+        String correctAnswer = Question.getAnswerString(theQuestion);
+        Door door = TriviaMaze.getInstance().getDoor(theQuestion);
+        if(correctAnswer.equalsIgnoreCase(theAnswer.trim())) {
+            door.setState(DoorStates.OPENED);
+        }
+        else {
+            door.setState(DoorStates.BLOCKED);
+        }
+        TileManager.getInstance().updateDoorTile(door);
+        SidebarManager.getInstance().updateForCurrentRoom();
+
+        if(!TriviaMaze.getInstance().existsPathToExit()) {
+            JOptionPane.showMessageDialog(null, "Game over :(");
+        }
+    }
+
+
+
+    void enteredNewRoom() {
+        SidebarManager.getInstance().updateForCurrentRoom();
+    }
+
+    boolean playerInNewRoom(final Room theRoom) {
+        boolean newRoom = theRoom != Player.getInstance().getCurrentRoom();
+        if(newRoom) {
+            Player.getInstance().setCurrentRoom(theRoom);
+            if(theRoom != null) {
+                System.out.println("New not null room");
+            }
+        }
+        return newRoom;
+    }
+
+    private void updateDoorTile() {
 
     }
 }

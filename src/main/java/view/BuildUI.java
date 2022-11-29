@@ -134,6 +134,8 @@ public class BuildUI implements ActionListener {
      * Builds the Trivia Maze UI
      */
     private void buildMazeUI() {
+        //For some reason the default layout manager on splitpane blocks printlns,
+        //if you set its layout manager to null it breaks the layout but printlns work again
         JSplitPane mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         mainPane.setBorder(null);
         mainPane.setDividerSize(0);

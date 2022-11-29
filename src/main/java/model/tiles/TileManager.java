@@ -12,6 +12,10 @@ import java.util.Objects;
 
 import javax.imageio.ImageIO;
 
+import model.mazeElements.Door;
+import model.mazeElements.DoorStates;
+import model.mazeElements.Room;
+import model.mazeElements.TriviaMaze;
 import view.TMPanel;
 
 /**
@@ -52,6 +56,58 @@ public class TileManager {
             instance = new TileManager();
         }
         return instance;
+    }
+
+    /**
+     * Finds the tile position in the map data of a door given a room coordinate and door number.
+     * Door numbers go from 0 to 3 clockwise starting with the east door ending with the south door.
+     * @param roomX X coordinate number of room (0 based).
+     * @param roomY Y coordinate number of room (0 based).
+     * @param doorNum number of the door;
+     * @return an int[] array with x coordinate in position 0 and y coordinate in position 1;
+     */
+    private static int[] findDoorTile(final int roomX, final int roomY, final int doorNum) {
+        int roomCenterTileX = 3 + roomX * 6;
+        int roomCenterTileY = 3 + roomY * 6;
+
+        int[][] adjacency = {{-3, 0}, {0, -3}, {3, 0}, {0, 3}};
+
+        int doorTileX = roomCenterTileX + adjacency[doorNum][0];
+        int doorTileY = roomCenterTileY + adjacency[doorNum][1];
+
+        return new int[] {doorTileX, doorTileY};
+    }
+
+    /**
+     * @param theDoor door object.
+     * @return tile position in the map of the door.
+     * @throws RuntimeException if the door cannot be found.
+     */
+    public static int[] findTilePosOfDoor(final Door theDoor) {
+        Room room;
+        int bound = TriviaMaze.getInstance().getHeight();
+
+        for(int i = 0; i < bound; i++) {
+            for(int j = 0; j < bound; j++) {
+                room = TriviaMaze.getInstance().getRoom(i, j);
+                int doorNum = 0;
+                for(Door d : room.getDoors()) {
+                    if(theDoor == d) {
+                        return findDoorTile(i, j, doorNum);
+                    }
+                    doorNum++;
+                }
+
+            }
+        }
+        throw new RuntimeException("Unable to find door");
+    }
+
+    public void updateDoorTile(final Door theDoor) {
+        int[] coord = findTilePosOfDoor(theDoor);
+        int x = coord[0];
+        int y = coord[1];
+        myMapData[y][x] = theDoor.getState() == DoorStates.OPENED ? 0 : 1;
     }
 
     public int[][] getMapData() {

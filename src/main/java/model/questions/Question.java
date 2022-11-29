@@ -17,6 +17,25 @@ public abstract class Question {
      */
     private String myPrompt;
 
+
+    /**
+     * Returns the answer string of any type of question object.
+     * @param theQuestion the Question object.
+     * @return the answer string.
+     */
+    public static String getAnswerString(final Question theQuestion) {
+        String answer;
+        if(theQuestion instanceof QuestionSelection) {
+            var q = (QuestionSelection) theQuestion;
+            answer = q.getOptions()[q.getAnswerPosition()];
+        }
+        else {
+            var q = (QuestionFA) theQuestion;
+            answer = q.getAnswer();
+        }
+        return answer;
+    }
+
     /**
      * Get the prompt of the question
      * @return the prompt of the question

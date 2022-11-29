@@ -230,15 +230,19 @@ public class PlayerController {
     /**
      * Does some math to compute which room of the maze the player is in using their location.
      */
-    private void updateCurrentRoom() {
+    private synchronized void updateCurrentRoom() {
         int tileX = Player.getInstance().getPlayerLocationX() / TMPanel.TILE_SIZE;
         int tileY = Player.getInstance().getPlayerLocationY() / TMPanel.TILE_SIZE;
+
+        System.out.println(tileX + " " + tileY);
 
         int roomX = tileX % 6 == 0 ? -1 : (int) Math.ceil(tileX / 6f);
         int roomY = tileY % 6 == 0 ? -1 : (int) Math.ceil(tileY / 6f);
 
-        //Future: update to tell something that cares which room the player is in.
         Room currentRoom = TriviaMaze.getInstance().getRoom(roomX - 1, roomY - 1);
+        if(TriviaMazeController.getInstance().playerInNewRoom(currentRoom)) {
+            TriviaMazeController.getInstance().enteredNewRoom();
+        }
     }
 
     /**

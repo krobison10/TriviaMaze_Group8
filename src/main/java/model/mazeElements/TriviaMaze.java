@@ -6,6 +6,7 @@
 
 package model.mazeElements;
 
+import model.questions.Question;
 import model.questions.QuestionBank;
 
 import java.util.ArrayList;
@@ -97,6 +98,15 @@ public class TriviaMaze {
      */
     public List<Door> getAllDoors() {
         return myDoors;
+    }
+
+    public Door getDoor(final Question theQuestion) {
+        for(Door d : myDoors) {
+            if(d.getQuestion() == theQuestion) {
+                return d;
+            }
+        }
+        return null;
     }
 
     /**

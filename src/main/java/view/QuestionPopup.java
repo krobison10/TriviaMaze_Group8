@@ -15,6 +15,7 @@ import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import controller.TriviaMazeController;
 import model.questions.Question;
 import model.questions.QuestionSelection;
 
@@ -78,7 +79,7 @@ public class QuestionPopup {
 
         if(result == 0) {
             if(getInput() != null) {
-                //Code to tell controller that an attempt was made, getInput() will have the answer attempt
+                TriviaMazeController.getInstance().processAnswerAttempt(myQuestion, getInput());
             }
         }
     }
@@ -166,7 +167,7 @@ public class QuestionPopup {
         if(myType == 2) {
             answer = myInputField.getText();
         }
-        if(answer.length() == 0) {
+        if(answer.trim().length() == 0) {
             return null;
         }
         return answer;
