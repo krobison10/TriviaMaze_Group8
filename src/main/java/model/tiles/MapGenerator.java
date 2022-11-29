@@ -6,8 +6,8 @@
 
 package model.tiles;
 
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -32,23 +32,23 @@ public class MapGenerator {
 
     /**
      * Constructor class to create a randommap.txt file
-     * using PrintStream to print all System.out.println to text file
+     * using FileWriter to print text file
      */
     public MapGenerator(){
-        PrintStream fileStream = null;
+        FileWriter filename = null;
         try {
-            fileStream = new PrintStream("../TriviaMaze_Group8/src/main/resources/maps/randommap.txt");
-        } catch (FileNotFoundException e) {
+            filename = new FileWriter("../TriviaMaze_Group8/src/main/resources/maps/randommap.txt");
+            drawRoom(filename);
+            filename.close();
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.setOut(fileStream);
-        drawRoom();
     }
 
     /**
      * Create a new maze with walls, doors and items
      */
-    private void drawRoom(){
+    private void drawRoom(FileWriter filename) throws IOException {
         String fullWall = "1111111111111111111111111111111";
         String middleWall = "1     1     1     1     1     1";
         String bottomWallAndDoor = "1112111112111112111112111112111";
@@ -57,23 +57,23 @@ public class MapGenerator {
         for(int i = 0; i < 31; i++){
             // Full wall for the top and bottom
             if(i == 0 || i == 30){
-                System.out.println(fullWall);
+                filename.write(fullWall + "\n");
             }
             // final line with portal icon
             else if (i == 27){
-                System.out.println(finalLineWithPortal);
+                filename.write(finalLineWithPortal + "\n");
             }
             // Middle line with doors and walls
             else if (i == 6 || i == 12 || i == 18 || i == 24){
-                System.out.println(bottomWallAndDoor);
+                filename.write(bottomWallAndDoor + "\n");
             }
             // Middle line with random items
             else if (i == 3 || i == 9 || i == 15 || i == 21){
-                System.out.println(randomLineWithItems());
+                filename.write(randomLineWithItems() + "\n");
             }
             // Middle wall with no items and walls
             else {
-                System.out.println(middleWall);
+                filename.write(middleWall + "\n");
             }
         }
     }
