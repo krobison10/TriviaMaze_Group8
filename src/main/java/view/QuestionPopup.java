@@ -1,18 +1,27 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package view;
 
-import model.questions.Question;
-import model.questions.QuestionSelection;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Objects;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
+import model.questions.Question;
+import model.questions.QuestionSelection;
+
 /**
  * Contains features to build a popup window for questions and collect the input from the user.
+ *
+ * @author Kyler Robison
  */
 public class QuestionPopup {
 

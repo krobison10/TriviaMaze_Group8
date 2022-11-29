@@ -1,15 +1,23 @@
-package model.mazeElements;
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
 
-import model.items.Item;
+package model.mazeElements;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import model.items.Item;
+
 /**
  * Represents a room in the maze. Contains functionality to initialize itself, specifically about
  * creating doors correctly and handling sharing doors with adjacent rooms. Stores data about its
  * doors and also the item that the room may contain.
+ *
+ * @author Kyler Robison
  */
 public class Room {
     /**
@@ -35,12 +43,9 @@ public class Room {
      * as creation
      * @param theX represents the X position in the maze.
      * @param theY represents the Y position in the maze.
-     * @param theMaze a reference to the TriviaMaze that contains
-     *                the room, so that rooms can be aware of other
-     *                rooms and doors during construction of a room.
      */
-    Room(final int theX, final int theY, final TriviaMaze theMaze) {
-        if(theX < 0 || theY < 0 || theX >= theMaze.getWidth() || theY >= theMaze.getHeight()) {
+    Room(final int theX, final int theY) {
+        if(theX < 0 || theY < 0 || theX >= TriviaMaze.instance.getWidth() || theY >= TriviaMaze.instance.getHeight()) {
             throw new IllegalArgumentException("Position out of bounds");
         }
         myPosX = theX;
@@ -55,7 +60,7 @@ public class Room {
      * @return a List of the doors that the room has
      */
     public List<Door> getDoors() {
-        return myDoors; //Should update to return a copy that doesn't break encapsulation
+        return myDoors;
     }
 
     /**

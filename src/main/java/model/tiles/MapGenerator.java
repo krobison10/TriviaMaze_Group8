@@ -1,15 +1,35 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.tiles;
+
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Random;
 
 /**
  * Create a new map with random positions for items in the maze
+ *
+ * @author Minh Le
  */
 public class MapGenerator {
-    private int numberOfEraser = 3;
-    private int numberOfRuler = 3;
-    private int numberOfPencil = 3;
+    /**
+     *
+     */
+    private int myNumOfErasers = 3;
+    /**
+     *
+     */
+    private int myNumOfRulers = 3;
+    /**
+     *
+     */
+    private int myNumOfPencils = 3;
+
+
     /**
      * Constructor class to create a randommap.txt file
      * using PrintStream to print all System.out.println to text file
@@ -90,15 +110,15 @@ public class MapGenerator {
         Random random = new Random();
         int codeOfItem = random.nextInt(1,6);
         String item;
-        if(codeOfItem == 3 && numberOfRuler > 0){
+        if(codeOfItem == 3 && myNumOfRulers > 0){
             item = "3";
-            numberOfRuler--;
-        } else if(codeOfItem == 4 && numberOfEraser > 0){
+            myNumOfRulers--;
+        } else if(codeOfItem == 4 && myNumOfErasers > 0){
             item = "4";
-            numberOfEraser--;
-        } else if(codeOfItem == 5 && numberOfPencil > 0){
+            myNumOfErasers--;
+        } else if(codeOfItem == 5 && myNumOfPencils > 0){
             item = "5";
-            numberOfPencil--;
+            myNumOfPencils--;
         } else {
             item = " ";
         }

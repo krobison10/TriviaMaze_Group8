@@ -1,26 +1,45 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.mazeElements;
 
 import view.TMPanel;
 
+/**
+ * Represents state and basic behavior of the player in game.
+ *
+ * @author Kyler Robison & AJ Garcia
+ */
 public class Player {
 
+    /**
+     * Max coordinate of player for bound if collision fails.
+     */
+    private static final int COORDINATE_MAX = TMPanel.GAME_SIZE - (TMPanel.TILE_SIZE * 2);
+    /**
+     * Min coordinate of player for bound if collision fails.
+     */
+    private static final int COORDINATE_MIN = TMPanel.TILE_SIZE;
+    /**
+     * Global point of access to singleton instance of Player.
+     */
+    public static Player instance;
     /**
      * The coordinates of the player in the maze.
      */
     private int myLocationX, myLocationY;
-
-    private final int coordinateMax = TMPanel.GAME_SIZE - (TMPanel.TILE_SIZE * 2);
-
-    private final int coordinateMin = TMPanel.TILE_SIZE;
     /**
      * The speed of the player.
      */
     private int mySpeed;
-    /**
-     * Global point of access to instance of Player.
-     */
-    public static Player instance;
 
+
+    /**
+     * Constructs a player object.
+     */
     public Player() {
         instance = this;
     }
@@ -45,7 +64,8 @@ public class Player {
      * @param theChangeX the change in the X value.
      */
     public void setLocationX(final int theChangeX) {
-        if (getPlayerLocationX() + theChangeX <= coordinateMax && getPlayerLocationX() + theChangeX >= coordinateMin) {
+        if (getPlayerLocationX() + theChangeX <= COORDINATE_MAX
+                && getPlayerLocationX() + theChangeX >= COORDINATE_MIN) {
             myLocationX += theChangeX;
         }
     }
@@ -56,7 +76,8 @@ public class Player {
      * @param theChangeY the change in the Y value.
      */
     public void setLocationY(final int theChangeY) {
-    if (getPlayerLocationY() + theChangeY <= coordinateMax && getPlayerLocationY() + theChangeY >= coordinateMin) {
+        if (getPlayerLocationY() + theChangeY <= COORDINATE_MAX
+            && getPlayerLocationY() + theChangeY >= COORDINATE_MIN) {
             myLocationY += theChangeY;
         }
     }

@@ -1,3 +1,9 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.mazeElements;
 
 import model.questions.Question;
@@ -6,6 +12,8 @@ import model.questions.Question;
  * Represents a door in the maze. Is a bridge between rooms. All doors contain a question and a
  * state that determines how the door will behave. Certain rooms will share a door object when they
  * are adjacent.
+ *
+ * @author Kyler Robison
  */
 public class Door {
     /**

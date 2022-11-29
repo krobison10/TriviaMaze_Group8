@@ -1,13 +1,29 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.tiles;
 
-import view.TMPanel;
-
-import javax.imageio.ImageIO;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 
+import javax.imageio.ImageIO;
+
+import view.TMPanel;
+
+/**
+ * Manages the tile system for the game.
+ *
+ * @author Kyler Robison
+ */
 public class TileManager {
+    /**
+     * Singleton instance of the tile manager
+     */
+    public static TileManager instance;
     /**
      * Contains the types of tiles.
      */
@@ -17,7 +33,6 @@ public class TileManager {
      */
     private int[][] myMapData;
 
-    public static TileManager instance;
 
     /**
      * Constructs and initializes the TileManager.
@@ -26,34 +41,7 @@ public class TileManager {
         instance = this;
         myTiles = new Tile[7];
         loadMap();
-        getTileImages();
-    }
-
-    /**
-     * @return the array containing the map data, contains data for which tile number goes where
-     * on the game board.
-     */
-    public void getTileImages() {
-        try {
-            myTiles[0] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png"))), false);
-            myTiles[1] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/wall.png"))), true);
-            myTiles[2] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/door.png"))), true);
-            myTiles[3] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/ruler.png"))), false);
-            myTiles[4] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/eraser.png"))), false);
-            myTiles[5] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/pencil.png"))), false);
-            myTiles[6] = new Tile(ImageIO.read(
-                    Objects.requireNonNull(getClass().getResourceAsStream("/tiles/gold.png"))), false);
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadTileSprites();
     }
 
     public int[][] getMapData() {
@@ -72,9 +60,10 @@ public class TileManager {
     /**
      * Loads the map data in from a file and stores it in the array "myMapData".
      */
-    public void loadMap() {
+    private void loadMap() {
         new MapGenerator();
-        try (FileReader fr = new FileReader("../TriviaMaze_Group8/src/main/resources/maps/randommap.txt")) {
+        try
+        (FileReader fr = new FileReader("../TriviaMaze_Group8/src/main/resources/maps/randommap.txt")) {
 
             int nt = TMPanel.NUM_TILES;
             myMapData = new int[nt][nt];
@@ -90,6 +79,32 @@ public class TileManager {
             }
         }
         catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads and stores sprites for each tile in the array.
+     */
+    private void loadTileSprites() {
+        try {
+            myTiles[0] = new Tile();//Empty tile for 0
+
+            myTiles[1] = new Tile(ImageIO.read(Objects.requireNonNull
+                    (getClass().getResourceAsStream("/tiles/wall.png"))), true);
+            myTiles[2] = new Tile(ImageIO.read(Objects.requireNonNull(
+                    getClass().getResourceAsStream("/tiles/door.png"))), true);
+            myTiles[3] = new Tile(ImageIO.read(Objects.requireNonNull
+                    (getClass().getResourceAsStream("/tiles/ruler.png"))), false);
+            myTiles[4] = new Tile(ImageIO.read(Objects.requireNonNull
+                    (getClass().getResourceAsStream("/tiles/eraser.png"))), false);
+            myTiles[5] = new Tile(ImageIO.read(Objects.requireNonNull
+                    (getClass().getResourceAsStream("/tiles/pencil.png"))), false);
+            myTiles[6] = new Tile(ImageIO.read(Objects.requireNonNull
+                    (getClass().getResourceAsStream("/tiles/gold.png"))), false);
+
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }

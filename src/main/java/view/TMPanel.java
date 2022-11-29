@@ -1,24 +1,44 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package view;
 
-import controller.Collision;
-import controller.KeyInput;
-
-import javax.swing.*;
 import java.awt.*;
 
+import javax.swing.*;
+
+import controller.KeyInput;
+
+/**
+ *
+ *
+ * @author AJ Garcia
+ */
 public class TMPanel extends JPanel{
 
+    /**
+     * Size of the game tiles in pixels.
+     */
     public static final int TILE_SIZE = 24;
-
+    /**
+     * The width and height dimension of the game in terms of tiles.
+     */
     public static final int NUM_TILES = 31;
-
+    /**
+     * The size of the game board
+     */
     public static final int GAME_SIZE = NUM_TILES * TILE_SIZE;
-
-    private final KeyInput keys;
-
-    // maze instance used later to prevent multiple games from running
+    /**
+     * Singleton maze instance used later to prevent multiple games from running
+     */
     private static TMPanel triviaMazeInstance = null;
-
+    /**
+     *
+     */
+    private final KeyInput keys;
 
 
     /**
@@ -49,7 +69,10 @@ public class TMPanel extends JPanel{
         return triviaMazeInstance;
     }
 
-    public void update() {
+    /**
+     * Executes updates for each frame.
+     */
+    public void frameUpdate() {
         requestFocus(); // need this to keep key listener working
         repaint();
     }

@@ -1,3 +1,9 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.factories;
 
 import model.questions.Question;
@@ -7,6 +13,8 @@ import model.questions.QuestionTF;
 
 /**
  * Factory that creates appropriate instances of Question objects.
+ *
+ * @author Minh Le & Kyler Robison
  */
 public class QuestionFactory {
 
@@ -39,7 +47,7 @@ public class QuestionFactory {
      * @param theAnswer the answer for the question.
      * @return an instance of the appropriate Question object.
      */
-    public static Question createQuestion(String thePrompt, String theAnswer) {
-        return new QuestionFA(thePrompt,theAnswer);
+    public static Question createQuestion(final String thePrompt, final String theAnswer) {
+        return new QuestionFA(thePrompt, theAnswer);
     }
 }

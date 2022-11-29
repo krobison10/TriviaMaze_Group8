@@ -1,11 +1,28 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.items;
 
 /**
  * Item abstract class
+ *
+ * @author Minh Le
  */
 public abstract class Item {
+    /**
+     *
+     */
     private String myItemName;
+    /**
+     *
+     */
     private String myItemDescription;
+    /**
+     *
+     */
     private String myItemType;
 
     /**
@@ -13,15 +30,7 @@ public abstract class Item {
      * @return name of the item
      */
     public String getItemName(){
-        return this.myItemName;
-    }
-
-    /**
-     * Add the item's name to the item
-     * @param theItemName the item's name to be added to the item
-     */
-    protected void setItemName(String theItemName){
-        this.myItemName = theItemName;
+        return myItemName;
     }
 
     /**
@@ -29,15 +38,7 @@ public abstract class Item {
      * @return description of the item
      */
     public String getItemDescription(){
-        return this.myItemDescription;
-    }
-
-    /**
-     * Add the item's description to the item
-     * @param theItemDescription description of the item to be added to the item
-     */
-    protected void setItemDescription(String theItemDescription){
-        this.myItemDescription = theItemDescription;
+        return myItemDescription;
     }
 
     /**
@@ -45,13 +46,29 @@ public abstract class Item {
      * @return type of the item
      */
     public String getItemType(){
-        return this.myItemType;
+        return myItemType;
+    }
+
+    /**
+     * Add the item's name to the item
+     * @param theItemName the item's name to be added to the item
+     */
+    protected void setItemName(final String theItemName){
+        myItemName = theItemName;
+    }
+
+    /**
+     * Add the item's description to the item
+     * @param theItemDescription description of the item to be added to the item
+     */
+    protected void setItemDescription(final String theItemDescription){
+        myItemDescription = theItemDescription;
     }
     /**
      * Add the item's type to the item
      * @param theItemType the item's type to be added to the item
      */
-    protected void setItemType(String theItemType){
-        this.myItemType = theItemType;
+    protected void setItemType(final String theItemType){
+        myItemType = theItemType;
     }
 }

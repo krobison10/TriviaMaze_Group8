@@ -1,21 +1,32 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.questions;
 
 import java.util.Random;
 
 /**
  * Class for Free Answer Question Type
+ *
+ * @author Minh Le
  */
 public class QuestionFA extends Question {
-    private String myAnswer;
+    /**
+     *
+     */
+    private final String myAnswer;
 
     /**
      * Constructor to create the Free answer question type
      * @param thePrompt of the question
      * @param theAnswer of the question
      */
-    public QuestionFA(String thePrompt, String theAnswer) {
+    public QuestionFA(final String thePrompt, final String theAnswer) {
         super.setPrompt(thePrompt);
-        this.myAnswer = theAnswer;
+        myAnswer = theAnswer;
     }
 
     /**
@@ -23,14 +34,14 @@ public class QuestionFA extends Question {
      * @return string of answer of the question
      */
     public String getAnswer() {
-        return this.myAnswer;
+        return myAnswer;
     }
 
     /**
      * Display the hint with some letters from the answer
      */
     public void displayHint(){
-        String answer = this.myAnswer;
+        String answer = myAnswer;
         int lastIndex = answer.length() - 1;
         Random random = new Random();
         int randomNumber = random.nextInt(lastIndex);
@@ -44,7 +55,7 @@ public class QuestionFA extends Question {
                 hint += "-";
             }
         }
-        System.out.println(this.getPrompt());
+        System.out.println(getPrompt());
         System.out.println(hint);
     }
 }

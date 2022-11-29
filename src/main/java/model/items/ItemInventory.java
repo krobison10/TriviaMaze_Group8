@@ -1,19 +1,30 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.items;
 
 import java.util.ArrayList;
 
 /**
  * Inventory class that contains the items that player can hold
+ *
+ * @author Minh Le
  */
 public class ItemInventory {
 
-    private ArrayList<Item> myInventory;
+    /**
+     *
+     */
+    private final ArrayList<Item> myInventory;
 
     /**
      * Constructor that create an empty inventory for player
      */
     public ItemInventory() {
-        this.myInventory= new ArrayList<Item>();
+        myInventory = new ArrayList<>();
     }
 
     /**
@@ -28,7 +39,7 @@ public class ItemInventory {
      * Add item to the inventory if player's inventory has less than 3 items
      * @param theItemObject that added to the inventory
      */
-    public void addItem(Item theItemObject){
+    public void addItem(final Item theItemObject){
         if(myInventory == null || myInventory.size() < 3 ){
             myInventory.add(theItemObject);
         }
@@ -41,7 +52,7 @@ public class ItemInventory {
      * Remove item from the inventory if inventory is not empty
      * @param theItemObject item object to be removed
      */
-    public void removeItem(Item theItemObject){
+    public void removeItem(final Item theItemObject){
         if(myInventory.size() > 0){
             myInventory.remove(theItemObject);
         }
@@ -54,7 +65,7 @@ public class ItemInventory {
      * Clone item and add it to the inventory
      * @param theItemObject to be cloned
      */
-    public void cloneItem(Item theItemObject){
+    public void cloneItem(final Item theItemObject){
         addItem(theItemObject);
     }
 
@@ -84,7 +95,7 @@ public class ItemInventory {
      * @param theItemIndex index of the item in the inventory
      * @return type of the item that is used.
      */
-    public String useItem(int theItemIndex) {
+    public String useItem(final int theItemIndex) {
         if(theItemIndex > 0 && theItemIndex <= myInventory.size()){
             Item selectedItem = myInventory.get(theItemIndex - 1);
             System.out.println("You use item " + selectedItem.getItemName() +

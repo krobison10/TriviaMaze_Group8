@@ -1,7 +1,18 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.tiles;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * Represents a tile on the game board.
+ *
+ * @author Kyler Robison
+ */
 public class Tile {
     /**
      * The image for the tile.
@@ -20,6 +31,14 @@ public class Tile {
     public Tile(final BufferedImage theImage, final boolean isCollidable) {
         collidable = isCollidable;
         myImage = theImage;
+    }
+
+    /**
+     * Creates an invisible tile.
+     */
+    public Tile() {
+        collidable = false;
+        myImage = null;
     }
 
     /**

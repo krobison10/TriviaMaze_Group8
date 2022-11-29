@@ -1,3 +1,9 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.items;
 
 import java.sql.Connection;
@@ -12,22 +18,57 @@ import model.factories.ItemFactory;
 import org.sqlite.SQLiteDataSource;
 /**
  * Item database
+ *
+ * @author Minh Le
  */
 public class ItemDatabase {
 
     /**
      * The list of Item initialized from the database.
      */
-    private List<Item> myItemList;
+    private final List<Item> myItemList;
+    /**
+     *
+     */
     private int mySize;
 
     /**
      * Constructor to create an Array List of item database
      */
     ItemDatabase() {
-        this.myItemList = createItemList();
+        myItemList = createItemList();
     }
 
+    /**
+     *
+     * @return
+     */
+    public int getMySize() {
+        return mySize;
+    }
+
+    /**
+     * Gets an item at a certain index in the list.
+     * @param thePosition the index.
+     * @return the Item object
+     */
+    Item getItem(final int thePosition) {
+        return myItemList.get(thePosition);
+    }
+
+    /**
+     * Gets a random item from the list.
+     * @return the randomly selected Item.
+     */
+    Item getRandomItem() {
+        Random random = new Random();
+        return getItem(random.nextInt(0, myItemList.size()));
+    }
+
+    /**
+     *
+     * @return
+     */
     private List<Item> createItemList(){
         List<Item> itemList = new ArrayList<>();
 
@@ -67,27 +108,5 @@ public class ItemDatabase {
         }
         this.mySize = itemList.size();
         return itemList;
-    }
-
-    public int getMySize() {
-        return mySize;
-    }
-
-    /**
-     * Gets an item at a certain index in the list.
-     * @param thePosition the index.
-     * @return the Item object
-     */
-    Item getItem(int thePosition) {
-        return myItemList.get(thePosition);
-    }
-
-    /**
-     * Gets a random item from the list.
-     * @return the randomly selected Item.
-     */
-    Item getRandomItem() {
-        Random random = new Random();
-        return getItem(random.nextInt(0, myItemList.size()));
     }
 }

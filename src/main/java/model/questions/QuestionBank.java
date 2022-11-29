@@ -1,16 +1,24 @@
-package model.questions;
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
 
-import model.factories.QuestionFactory;
-import org.sqlite.SQLiteDataSource;
+package model.questions;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import model.factories.QuestionFactory;
+import org.sqlite.SQLiteDataSource;
+
 /**
  * Represents the pool of questions for the game. Reads from a SQLite database
  * to collect data, then builds and stores a list of Question objects from it.
+ *
+ * @author Kyler Robison
  */
 public class QuestionBank {
     /**
@@ -18,17 +26,6 @@ public class QuestionBank {
      */
     private final List<Question> myQuestions;
 
-    /**
-     * Represents the amount of questions currently stored.
-     */
-    private int size;
-
-    //Testing purposes only
-    @Deprecated
-    public static void main(String[] args) {
-        QuestionBank qb = new QuestionBank("../TriviaMaze_Group8/databases/CS_trivia_questions.db");
-        var questions = qb.myQuestions;
-    }
 
     /**
      * Constructs and stores a list of Question objects given a SQLite database filename.

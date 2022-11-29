@@ -1,3 +1,9 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.factories;
 
 import model.items.Item;
@@ -7,6 +13,8 @@ import model.items.ItemQuestionChange;
 
 /**
  * Factory for item objects.
+ *
+ * @author Minh Le
  */
 public class ItemFactory {
     /**

@@ -1,3 +1,9 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.mazeElements;
 
 import model.questions.QuestionBank;
@@ -9,8 +15,14 @@ import java.util.List;
  * The main driver class for the model package. Represents the main maze and contains
  * all the rooms within. Upon construction, automatically initializes necessary objects
  * in model, and stores the data or references to the data in some way.
+ *
+ * @author Kyler Robison
  */
 public class TriviaMaze {
+    /**
+     * Stores the instance of the TriviaMaze.
+     */
+    public static TriviaMaze instance;
     /**
      * Stores all the rooms that the maze contains.
      */
@@ -34,10 +46,6 @@ public class TriviaMaze {
      * contains all the Questions for the maze.
      */
     private final QuestionBank myQuestionBank;
-    /**
-     * Stores the instance of the TriviaMaze.
-     */
-    public static TriviaMaze instance;
 
     /**
      * Constructs and initializes the underlying implementation of the
@@ -142,7 +150,7 @@ public class TriviaMaze {
         var output = new Room[myHeight][myWidth];
         for(int i = 0; i < myHeight; i++) {
             for(int j = 0; j < myWidth; j++) {
-                output[i][j] = new Room(j, i, this);
+                output[i][j] = new Room(j, i);
             }
         }
         return output;

@@ -1,7 +1,15 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package model.items;
 
 /**
  * Item that eliminate two wrong answer from multiple choice question
+ *
+ * @author Minh Le
  */
 public class ItemOptionRemoval extends Item {
 
@@ -11,7 +19,7 @@ public class ItemOptionRemoval extends Item {
      * @param theItemDescription description of the item to be created
      * @param theItemType type of the item to be created
      */
-    public ItemOptionRemoval(String theItemName, String theItemDescription, String theItemType) {
+    public ItemOptionRemoval(final String theItemName, final String theItemDescription, final String theItemType) {
         super.setItemName(theItemName);
         super.setItemDescription(theItemDescription);
         super.setItemType(theItemType);

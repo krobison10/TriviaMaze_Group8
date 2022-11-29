@@ -1,26 +1,49 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package view;
 
-import controller.TriviaMazeController;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BuildUI implements ActionListener {
+import javax.swing.*;
 
-    private JFrame mazeWindow;
-    private JMenuBar menuBar;
-    private JMenu startMenu, helpMenu;
-    private JMenuItem newGame, saveGame, exitGame, rules, controls, credits;
-    private TMPanel maze;
+import controller.TriviaMazeController;
+
+/**
+ *
+ *
+ * @author AJ Garcia
+ */
+public class BuildUI implements ActionListener {
+    /**
+     * Singleton instance.
+     */
     public static BuildUI instance;
+    /**
+     *
+     */
+    private JFrame myMazeWindow;
+    /**
+     *
+     */
+    private JMenuItem myNewGame, mySaveGame, myExitGame, myRules, myControls, myCredits;
 //    private JButton playButton;
 
+    /**
+     * Constructs and sets singleton instance.
+     */
     public BuildUI() {
         instance = this;
     }
 
+    /**
+     *
+     */
     public void buildFrame() {
 
         // initial welcome screen size
@@ -28,25 +51,25 @@ public class BuildUI implements ActionListener {
         final int windowSizeHeight = 300;
 
         // create JFrame
-        mazeWindow = new JFrame();
-        mazeWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mazeWindow.setResizable(false);
-        mazeWindow.setTitle("Trivia Maze");
-        mazeWindow.setSize(windowSizeWidth,windowSizeHeight);
-        mazeWindow.setLocationRelativeTo(null);
+        myMazeWindow = new JFrame();
+        myMazeWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myMazeWindow.setResizable(false);
+        myMazeWindow.setTitle("Trivia Maze");
+        myMazeWindow.setSize(windowSizeWidth,windowSizeHeight);
+        myMazeWindow.setLocationRelativeTo(null);
 
         // Create menu bar
-        menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
         // Create menu
-        startMenu = new JMenu("Start");
-        helpMenu = new JMenu("Help");
+        JMenu startMenu = new JMenu("Start");
+        JMenu helpMenu = new JMenu("Help");
         // Create menu items
-        newGame = new JMenuItem("New");
-        saveGame = new JMenuItem("Save");
-        exitGame = new JMenuItem("Exit");
-        rules = new JMenuItem("Rules");
-        controls = new JMenuItem("Controls");
-        credits = new JMenuItem("Credits");
+        myNewGame = new JMenuItem("New");
+        mySaveGame = new JMenuItem("Save");
+        myExitGame = new JMenuItem("Exit");
+        myRules = new JMenuItem("Rules");
+        myControls = new JMenuItem("Controls");
+        myCredits = new JMenuItem("Credits");
         // Create buttons
 //        playButton = new JButton("Play");
 
@@ -54,29 +77,29 @@ public class BuildUI implements ActionListener {
         menuBar.add(startMenu);
         menuBar.add(helpMenu);
         // Add menu items to start menu
-        startMenu.add(newGame);
-        startMenu.add(saveGame);
-        startMenu.add(exitGame);
+        startMenu.add(myNewGame);
+        startMenu.add(mySaveGame);
+        startMenu.add(myExitGame);
         // Add menu items to help menu
-        helpMenu.add(rules);
-        helpMenu.add(controls);
-        helpMenu.add(credits);
+        helpMenu.add(myRules);
+        helpMenu.add(myControls);
+        helpMenu.add(myCredits);
 
 
         // Add everything to frame
-        mazeWindow.getContentPane().add(BorderLayout.NORTH, menuBar);
+        myMazeWindow.getContentPane().add(BorderLayout.NORTH, menuBar);
 //        mazeWindow.getContentPane().add(playButton);
 
         // Add action listeners
-        newGame.addActionListener(this);
-        saveGame.addActionListener(this);
-        exitGame.addActionListener(this);
-        rules.addActionListener(this);
-        controls.addActionListener(this);
-        credits.addActionListener(this);
+        myNewGame.addActionListener(this);
+        mySaveGame.addActionListener(this);
+        myExitGame.addActionListener(this);
+        myRules.addActionListener(this);
+        myControls.addActionListener(this);
+        myCredits.addActionListener(this);
 
         // show frame
-        mazeWindow.setVisible(true);
+        myMazeWindow.setVisible(true);
 
     }
 
@@ -86,33 +109,31 @@ public class BuildUI implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == newGame) {
+        if (e.getSource() == myNewGame) {
             buildMazeUI();
-        } else if (e.getSource() == saveGame) {
-            JOptionPane.showMessageDialog(mazeWindow,"Operation not implemented");
-        } else if (e.getSource() == exitGame) {
+        } else if (e.getSource() == mySaveGame) {
+            JOptionPane.showMessageDialog(myMazeWindow,"Operation not implemented");
+        } else if (e.getSource() == myExitGame) {
             System.exit(0);
-        } else if (e.getSource() == rules) {
-            JOptionPane.showMessageDialog(mazeWindow,gameRules());
-        } else if (e.getSource() == controls) {
-            JOptionPane.showMessageDialog(mazeWindow,gameControls());
-        } else if (e.getSource() == credits) {
-            JOptionPane.showMessageDialog(mazeWindow, gameCredits());
+        } else if (e.getSource() == myRules) {
+            JOptionPane.showMessageDialog(myMazeWindow,gameRules());
+        } else if (e.getSource() == myControls) {
+            JOptionPane.showMessageDialog(myMazeWindow,gameControls());
+        } else if (e.getSource() == myCredits) {
+            JOptionPane.showMessageDialog(myMazeWindow, gameCredits());
         }
     }
 
     /**
      * Builds the Trivia Maze UI
      */
-    public void buildMazeUI() {
-        if (maze == null) {
-            maze = TMPanel.getTriviaMaze();
-            mazeWindow.add(maze);
-            mazeWindow.pack();
-            mazeWindow.setLocationRelativeTo(null);
-            mazeWindow.setVisible(true);
-            TriviaMazeController.instance.startNewGame();
-        }
+    private void buildMazeUI() {
+        TMPanel maze = TMPanel.getTriviaMaze();
+        myMazeWindow.add(maze);
+        myMazeWindow.pack();
+        myMazeWindow.setLocationRelativeTo(null);
+        myMazeWindow.setVisible(true);
+        TriviaMazeController.instance.startNewGame();
     }
 
     /**

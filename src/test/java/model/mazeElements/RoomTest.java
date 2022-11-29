@@ -2,9 +2,6 @@ package model.mazeElements;
 
 import model.items.Item;
 import model.items.ItemQuestionChange;
-import model.mazeElements.Door;
-import model.mazeElements.Room;
-import model.mazeElements.TriviaMaze;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,24 +14,24 @@ class RoomTest {
     @Test()
     @DisplayName("Room: Create Room, out of bounds throws exception")
     void testCreateDoorOutBounds() {
-        var maze = new TriviaMaze(5, 5, "test_questions.db");
+        new TriviaMaze(5, 5, "test_questions.db");
         assertThrows(IllegalArgumentException.class,
-                () -> new Room(5, 3, maze), "X too large");
+                () -> new Room(5, 3), "X too large");
 
         assertThrows(IllegalArgumentException.class,
-                () -> new Room(2, 5, maze), "Y too large");
+                () -> new Room(2, 5), "Y too large");
 
         assertThrows(IllegalArgumentException.class,
-                () -> new Room(5, 5, maze), "X, Y too large");
+                () -> new Room(5, 5), "X, Y too large");
 
         assertThrows(IllegalArgumentException.class,
-                () -> new Room(-1, 3, maze), "X too small");
+                () -> new Room(-1, 3), "X too small");
 
         assertThrows(IllegalArgumentException.class,
-                () -> new Room(-1, 5, maze), "Y too small");
+                () -> new Room(-1, 5), "Y too small");
 
         assertThrows(IllegalArgumentException.class,
-                () -> new Room(-1, -2, maze), "X, Y too small");
+                () -> new Room(-1, -2), "X, Y too small");
     }
 
     @Test
