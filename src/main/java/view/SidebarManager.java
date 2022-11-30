@@ -1,21 +1,44 @@
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
+
 package view;
+
+import java.awt.*;
+
+import javax.swing.*;
 
 import model.mazeElements.*;
 
-import javax.swing.*;
-import java.awt.*;
-
+/**
+ * Class that sets up and manages the sidebar.
+ *
+ * @author Kyler Robison
+ */
 public class SidebarManager {
 
+    /**
+     * Constant for the width of the sidebar panel.
+     */
     public static final int WIDTH = 200;
 
+    /**
+     * Singleton instance of the class.
+     */
     private static SidebarManager instance;
-
+    /**
+     * Panel of the sidebar.
+     */
     private JPanel myPanel;
 
 
     private SidebarManager() {}
 
+    /**
+     * @return a reference to the singleton instance of the class.
+     */
     public static SidebarManager getInstance() {
         if(instance == null) {
             instance = new SidebarManager();
@@ -23,6 +46,9 @@ public class SidebarManager {
         return instance;
     }
 
+    /**
+     * Wipes and updates the sidebar to have the interactivity required for the current room.
+     */
     public void updateForCurrentRoom() {
         myPanel.removeAll();
 
@@ -75,6 +101,9 @@ public class SidebarManager {
         myPanel.repaint();
     }
 
+    /**
+     * @return an initialized sidebar panel.
+     */
     JPanel getPanel() {
         myPanel = new JPanel();
         myPanel.setMaximumSize(new Dimension(WIDTH, TMPanel.GAME_SIZE));

@@ -12,10 +12,7 @@ import java.util.Objects;
 
 import javax.imageio.ImageIO;
 
-import model.mazeElements.Door;
-import model.mazeElements.DoorStates;
-import model.mazeElements.Room;
-import model.mazeElements.TriviaMaze;
+import model.mazeElements.*;
 import view.TMPanel;
 
 /**
@@ -90,12 +87,13 @@ public class TileManager {
         for(int i = 0; i < bound; i++) {
             for(int j = 0; j < bound; j++) {
                 room = TriviaMaze.getInstance().getRoom(i, j);
-                int doorNum = 0;
+                int doorDirection = DoorDirections.WEST.ordinal();
+                //Starts with west, increment moves direction clockwise
                 for(Door d : room.getDoors()) {
                     if(theDoor == d) {
-                        return findDoorTile(i, j, doorNum);
+                        return findDoorTile(i, j, doorDirection);
                     }
-                    doorNum++;
+                    doorDirection++;
                 }
 
             }
@@ -103,13 +101,24 @@ public class TileManager {
         throw new RuntimeException("Unable to find door");
     }
 
+    /**
+     * Updates the tile for a door object on the game board, given that
+     * the new state of the door has already been set. Incorrect behavior
+     * will occur if state hasn't been set: doors with the state "CLOSED"
+     * will be replaced with a wall.
+     * @param theDoor the door object.
+     */
     public void updateDoorTile(final Door theDoor) {
         int[] coord = findTilePosOfDoor(theDoor);
         int x = coord[0];
         int y = coord[1];
+        //Needs an update to be foolproof
         myMapData[y][x] = theDoor.getState() == DoorStates.OPENED ? 0 : 1;
     }
 
+    /**
+     * @return the map data matrix.
+     */
     public int[][] getMapData() {
         return myMapData;
     }

@@ -208,7 +208,7 @@ public class PlayerController {
 
         // stores tile player is wanting to advance to
         int tileNum = TileManager.getInstance().getMapData()[mapRow][mapCol];
-        //returns true is tile is collidable and player cannot advance to it
+        //returns true if tile is collidable and player cannot advance to it
         return TileManager.getInstance().getTile(tileNum).isCollidable();
 
     }

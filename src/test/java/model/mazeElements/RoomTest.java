@@ -14,7 +14,7 @@ class RoomTest {
     @Test()
     @DisplayName("Room: Create Room, out of bounds throws exception")
     void testCreateDoorOutBounds() {
-        new TriviaMaze(5, 5, "test_questions.db");
+        new TriviaMaze(5, 5, "CS_Trivia_Questions.db");
         assertThrows(IllegalArgumentException.class,
                 () -> new Room(5, 3), "X too large");
 
@@ -37,7 +37,7 @@ class RoomTest {
     @Test
     @DisplayName("Room: correct x and y positions")
     void testGetXandY() {
-        var maze = new TriviaMaze(1, 1, "test_questions.db");
+        var maze = new TriviaMaze(1, 1, "CS_Trivia_Questions.db");
         var room = maze.getRoom(0, 0);
         assertEquals(room.getX(), 0, "Wrong X value");
         assertEquals(room.getY(), 0, "Wrong Y value");
@@ -46,7 +46,7 @@ class RoomTest {
     @Test
     @DisplayName("Room: add item when empty")
     void testAddItemWhenEmpty() {
-        var maze = new TriviaMaze(1, 1, "test_questions.db");
+        var maze = new TriviaMaze(1, 1, "CS_Trivia_Questions.db");
         var room = maze.getRoom(0, 0);
         assertNull(room.getItem(), "New room object already had item");
         assertTrue(room.addItem(new ItemQuestionChange("", "", "")),
@@ -57,7 +57,7 @@ class RoomTest {
     @Test
     @DisplayName("Room: add item when not empty, keeps existing item")
     void testAddItemWhenNotEmpty() {
-        var maze = new TriviaMaze(1, 1, "test_questions.db");
+        var maze = new TriviaMaze(1, 1, "CS_Trivia_Questions.db");
         var room = maze.getRoom(0, 0);
         Item item = new ItemQuestionChange("", "", "");
         assertNull(room.getItem(), "Room not empty");
@@ -71,7 +71,7 @@ class RoomTest {
     @Test
     @DisplayName("Room: Take item when exists")
     void testTakeItemWhenExists() {
-        var maze = new TriviaMaze(1, 1, "test_questions.db");
+        var maze = new TriviaMaze(1, 1, "CS_Trivia_Questions.db");
         var room = maze.getRoom(0, 0);
         assertNull(room.getItem(), "Room not empty");
         var item = new ItemQuestionChange("", "", "");
@@ -83,7 +83,7 @@ class RoomTest {
     @Test
     @DisplayName("Room: Take item when doesn't exist")
     void testTakeItemWhenNotExists() {
-        var maze = new TriviaMaze(1, 1, "test_questions.db");
+        var maze = new TriviaMaze(1, 1, "CS_Trivia_Questions.db");
         var room = maze.getRoom(0, 0);
         assertNull(room.getItem(), "Room not empty");
         assertNull(room.takeItem(), "Empty room didn't return null");
@@ -93,7 +93,7 @@ class RoomTest {
     @Test
     @DisplayName("Room: Create doors, correct count in 5x5 maze")
     void testSetDoorsCount() {
-        var maze = new TriviaMaze(5, 5, "test_questions.db");
+        var maze = new TriviaMaze(5, 5, "CS_Trivia_Questions.db");
         //5x5 maze should have 40 doors
         assertEquals(40, maze.getAllDoors().size());
     }
@@ -101,7 +101,7 @@ class RoomTest {
     @Test
     @DisplayName("Room: Create doors, correct count in 4x4 maze")
     void testSetDoorsCount2() {
-        var maze = new TriviaMaze(4, 4, "test_questions.db");
+        var maze = new TriviaMaze(4, 4, "CS_Trivia_Questions.db");
         //4x4 maze should have 24 doors
         assertEquals(24, maze.getAllDoors().size());
     }
@@ -109,7 +109,7 @@ class RoomTest {
     @Test
     @DisplayName("Room: Create doors, no duplicates")
     void testSetDoorsAllUnique() {
-        var maze = new TriviaMaze(5, 5, "test_questions.db");
+        var maze = new TriviaMaze(5, 5, "CS_Trivia_Questions.db");
 
         //Test for the test: uncommenting following line will add a duplicate room and fail test
         //maze.addDoor(maze.getRoom(1,1).getDoors().get(2));

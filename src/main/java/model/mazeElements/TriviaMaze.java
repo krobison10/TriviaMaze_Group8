@@ -11,6 +11,7 @@ import model.questions.QuestionBank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * The main driver class for the model package. Represents the main maze and contains
@@ -100,13 +101,19 @@ public class TriviaMaze {
         return myDoors;
     }
 
+    /**
+     * Searches for a door based on its question object.
+     * @param theQuestion the question to search with.
+     * @return a reference to the door object.
+     * @throws NoSuchElementException if the door containing the given question is not found.
+     */
     public Door getDoor(final Question theQuestion) {
         for(Door d : myDoors) {
             if(d.getQuestion() == theQuestion) {
                 return d;
             }
         }
-        return null;
+        throw new NoSuchElementException("Door with given question not found");
     }
 
     /**
@@ -206,7 +213,7 @@ public class TriviaMaze {
         Recall that 0 through three retrieves the doors starting with west through south
         going clockwise, so to go counter-clockwise starting with south door, need to
         decrement from 3 */
-        int adjX, adjY, doorDir = 3;
+        int adjX, adjY, doorDir = DoorDirections.SOUTH.ordinal();
         for(int[] adj : adjacencies) {
             adjX = theX + adj[0];
             adjY = theY + adj[1];

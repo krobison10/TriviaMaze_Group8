@@ -138,23 +138,23 @@ public class Room {
 
         if(myPosX - 1 >= 0) {
             //Get door from room to the west that current room would share
-            var adjacent = maze.getRoom(myPosX - 1, myPosY).getDoors().get(2);
-            result.set(0, (adjacent == null ? maze.addDoor(new Door()) : adjacent));
+            var adjacent = maze.getRoom(myPosX - 1, myPosY).getDoors().get(DoorDirections.EAST.ordinal());
+            result.set(DoorDirections.WEST.ordinal(), (adjacent == null ? maze.addDoor(new Door()) : adjacent));
         }
         if(myPosY - 1 >= 0) {
             //Get door from room to the north that current room would share
-            var adjacent = maze.getRoom(myPosX, myPosY - 1).getDoors().get(3);
-            result.set(1, (adjacent == null ? maze.addDoor(new Door()) : adjacent));
+            var adjacent = maze.getRoom(myPosX, myPosY - 1).getDoors().get(DoorDirections.SOUTH.ordinal());
+            result.set(DoorDirections.NORTH.ordinal(), (adjacent == null ? maze.addDoor(new Door()) : adjacent));
         }
         if(myPosX + 1 < maze.getWidth()) {
             //Get door from room to the east that current room would share
-            var adjacent = maze.getRoom(myPosX + 1, myPosY).getDoors().get(0);
-            result.set(2, (adjacent == null ? maze.addDoor(new Door()) : adjacent));
+            var adjacent = maze.getRoom(myPosX + 1, myPosY).getDoors().get(DoorDirections.WEST.ordinal());
+            result.set(DoorDirections.EAST.ordinal(), (adjacent == null ? maze.addDoor(new Door()) : adjacent));
         }
         if(myPosY + 1 < maze.getHeight()) {
-            //Get door from room to the north that current room would share
-            var adjacent = maze.getRoom(myPosX, myPosY + 1).getDoors().get(1);
-            result.set(3, (adjacent == null ? maze.addDoor(new Door()) : adjacent));
+            //Get door from room to the south that current room would share
+            var adjacent = maze.getRoom(myPosX, myPosY + 1).getDoors().get(DoorDirections.NORTH.ordinal());
+            result.set(DoorDirections.SOUTH.ordinal(), (adjacent == null ? maze.addDoor(new Door()) : adjacent));
         }
         return result;
     }
