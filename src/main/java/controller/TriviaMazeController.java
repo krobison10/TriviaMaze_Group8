@@ -8,13 +8,10 @@ package controller;
 
 import model.mazeElements.*;
 import model.questions.Question;
-import model.questions.QuestionFA;
-import model.questions.QuestionMC;
-import model.questions.QuestionSelection;
-import model.tiles.Tile;
 import model.tiles.TileManager;
 import view.BuildUI;
 import view.SidebarManager;
+import view.TMPanel;
 
 import javax.swing.*;
 
@@ -33,7 +30,7 @@ public class TriviaMazeController {
      * Initializes and starts the game.
      */
     private TriviaMazeController() {
-        new TriviaMaze(5, 5, "CS_trivia_questions.db");
+
         BuildUI.getInstance().buildFrame();
     }
 
@@ -51,6 +48,7 @@ public class TriviaMazeController {
      * Creates a Game object and starts the process.
      */
     public void startNewGame() {
+        new TriviaMaze(5, 5, "CS_trivia_questions.db");
         Game game = new Game();
         game.start();
     }
@@ -68,11 +66,9 @@ public class TriviaMazeController {
         SidebarManager.getInstance().updateForCurrentRoom();
 
         if(!TriviaMaze.getInstance().existsPathToExit()) {
-            JOptionPane.showMessageDialog(null, "Game over :(");
+            JOptionPane.showMessageDialog(TMPanel.getTriviaMaze(), "Game over :(");
         }
     }
-
-
 
     void enteredNewRoom() {
         SidebarManager.getInstance().updateForCurrentRoom();
@@ -82,14 +78,7 @@ public class TriviaMazeController {
         boolean newRoom = theRoom != Player.getInstance().getCurrentRoom();
         if(newRoom) {
             Player.getInstance().setCurrentRoom(theRoom);
-            if(theRoom != null) {
-                System.out.println("New not null room");
-            }
         }
         return newRoom;
-    }
-
-    private void updateDoorTile() {
-
     }
 }

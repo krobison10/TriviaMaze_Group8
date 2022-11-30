@@ -230,11 +230,9 @@ public class PlayerController {
     /**
      * Does some math to compute which room of the maze the player is in using their location.
      */
-    private synchronized void updateCurrentRoom() {
+    private void updateCurrentRoom() {
         int tileX = Player.getInstance().getPlayerLocationX() / TMPanel.TILE_SIZE;
         int tileY = Player.getInstance().getPlayerLocationY() / TMPanel.TILE_SIZE;
-
-        System.out.println(tileX + " " + tileY);
 
         int roomX = tileX % 6 == 0 ? -1 : (int) Math.ceil(tileX / 6f);
         int roomY = tileY % 6 == 0 ? -1 : (int) Math.ceil(tileY / 6f);

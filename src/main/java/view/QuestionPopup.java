@@ -74,7 +74,7 @@ public class QuestionPopup {
      */
     public void promptQuestion() {
         Object[] options = {"Submit", "Close"};
-        int result = JOptionPane.showOptionDialog(BuildUI.getInstance().myMazeWindow, buildWindow(), "Question",
+        int result = JOptionPane.showOptionDialog(TMPanel.getTriviaMaze(), buildWindow(), "Question",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[0]);
 
         if(result == 0) {

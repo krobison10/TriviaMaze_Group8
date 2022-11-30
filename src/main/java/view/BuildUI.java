@@ -27,7 +27,7 @@ public class BuildUI implements ActionListener {
     /**
      *
      */
-    public JFrame myMazeWindow;
+    private JFrame myMazeWindow;
     /**
      *
      */
