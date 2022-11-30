@@ -195,8 +195,8 @@ public class PlayerController {
         int xLocation = Player.getInstance().getPlayerLocationX();
         int yLocation = Player.getInstance().getPlayerLocationY();
         // uses player location x,y to find which tile in the maze player is on
-        int mapRow = yLocation / 24;
-        int mapCol = xLocation / 24;
+        int mapRow = yLocation / TMPanel.TILE_SIZE;
+        int mapCol = xLocation / TMPanel.TILE_SIZE;
 
         // prepares to check tiles to be advanced to
         switch (dir) {
