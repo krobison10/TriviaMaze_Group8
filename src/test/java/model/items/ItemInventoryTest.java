@@ -101,14 +101,14 @@ class ItemInventoryTest {
         myInventory.addItem(ruler);
         myInventory.addItem(eraser);
         myInventory.addItem(pencil);
-        assertEquals("change question", myInventory.useItem(1),
+        assertEquals(myInventory.getItem(0), myInventory.useItem("change question"),
                 "Ruler should be used and the type of item is question change.");
     }
 
     @Test()
     @DisplayName("Use Item when Inventory is empty.")
     void useItemInEmptyInventory() {
-        assertEquals("", myInventory.useItem(1),
+        assertEquals(null, myInventory.useItem("change question"),
                 "No item is used because Inventory is empty.");
     }
 }

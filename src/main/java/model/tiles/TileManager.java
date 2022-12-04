@@ -138,7 +138,7 @@ public class TileManager {
     private void loadMap() {
         new MapGenerator();
         try
-        (FileReader fr = new FileReader("../TriviaMaze_Group8/src/main/resources/maps/randommap.txt")) {
+        (FileReader fr = new FileReader("../TriviaMaze_Group8/src/main/resources/maps/map2.txt")) {
 
             int nt = TMPanel.NUM_TILES;
             myMapData = new int[nt][nt];
@@ -170,12 +170,6 @@ public class TileManager {
             myTiles[2] = new Tile(ImageIO.read(Objects.requireNonNull(
                     getClass().getResourceAsStream("/tiles/door.png"))), true);
             myTiles[3] = new Tile(ImageIO.read(Objects.requireNonNull
-                    (getClass().getResourceAsStream("/tiles/ruler.png"))), false);
-            myTiles[4] = new Tile(ImageIO.read(Objects.requireNonNull
-                    (getClass().getResourceAsStream("/tiles/eraser.png"))), false);
-            myTiles[5] = new Tile(ImageIO.read(Objects.requireNonNull
-                    (getClass().getResourceAsStream("/tiles/pencil.png"))), false);
-            myTiles[6] = new Tile(ImageIO.read(Objects.requireNonNull
                     (getClass().getResourceAsStream("/tiles/gold.png"))), false);
 
         }

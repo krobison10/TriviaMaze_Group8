@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class QuestionFA extends Question {
     /**
-     *
+     * Answer of the question
      */
     private final String myAnswer;
 
@@ -39,23 +39,28 @@ public class QuestionFA extends Question {
 
     /**
      * Display the hint with some letters from the answer
+     *
+     * @return String with hint content
      */
-    public void displayHint(){
+    public String displayHint(){
         String answer = myAnswer;
-        int lastIndex = answer.length() - 1;
+        int lastIndex = answer.length() - 1;;
         Random random = new Random();
-        int randomNumber = random.nextInt(lastIndex);
-
+        int randomNumber;
         String hint = "";
 
-        for(int i = 0; i <= lastIndex; i++){
-            if(i == randomNumber){
+        if(lastIndex > 0) {
+            randomNumber = random.nextInt(lastIndex);
+        } else {
+            randomNumber = 0;
+        }
+        for(int i = 0; i <= lastIndex; i++) {
+            if (i == randomNumber || i == 0 || i == lastIndex) {
                 hint = hint + answer.charAt(i);
             } else {
                 hint += "-";
             }
         }
-        System.out.println(getPrompt());
-        System.out.println(hint);
+        return hint;
     }
 }

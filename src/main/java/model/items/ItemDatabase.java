@@ -35,7 +35,7 @@ public class ItemDatabase {
     /**
      * Constructor to create an Array List of item database
      */
-    ItemDatabase() {
+    public ItemDatabase() {
         myItemList = createItemList();
     }
 
@@ -52,7 +52,7 @@ public class ItemDatabase {
      * @param thePosition the index.
      * @return the Item object
      */
-    Item getItem(final int thePosition) {
+    public Item getItem(final int thePosition) {
         return myItemList.get(thePosition);
     }
 
@@ -60,9 +60,9 @@ public class ItemDatabase {
      * Gets a random item from the list.
      * @return the randomly selected Item.
      */
-    Item getRandomItem() {
+    public Item getRandomItem() {
         Random random = new Random();
-        return getItem(random.nextInt(0, myItemList.size()));
+        return getItem(random.nextInt(1, myItemList.size()));
     }
 
     /**
