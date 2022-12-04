@@ -6,6 +6,9 @@
 
 package model.mazeElements;
 
+import model.items.Item;
+import model.items.ItemDatabase;
+import model.items.ItemInventory;
 import model.questions.Question;
 import model.questions.QuestionBank;
 
@@ -43,7 +46,13 @@ public class TriviaMaze {
      * The questionBank object for the instance of the TriviaMaze. Builds and
      * contains all the Questions for the maze.
      */
-    private final QuestionBank myQuestionBank;
+    public final QuestionBank myQuestionBank;
+
+    /**
+     * The ItemInventory object for the instance of the TriviaMaze. Builds and
+     * contains all the item for the inventory.
+     */
+    private final ItemInventory myInventory;
 
     /**
      * Constructs and initializes the underlying implementation of the
@@ -61,6 +70,8 @@ public class TriviaMaze {
         myDoors = new ArrayList<>();
         myQuestionBank = new QuestionBank("../TriviaMaze_group8/databases/" + theDBName);
         myRooms = createRooms();
+        myInventory = new ItemInventory();
+        createInventory();
         initializeRooms();
     }
 
@@ -238,5 +249,39 @@ public class TriviaMaze {
             doorDir--;
         }
         return false;
+    }
+
+    /**
+     * Return a list of item in the inventory
+     * @return inventory
+     */
+    private void createInventory() {
+        int maxPencil = 3;
+        int maxEraser = 3;
+        int maxInventory = 6;
+
+        // Ensure the maximum number of items in the inventory within the limit
+        // There are no more pencils or erasers than the limit.
+        while(maxInventory > 0){
+            Item newItem = new ItemDatabase().getRandomItem();
+            if(newItem.getItemName().equalsIgnoreCase("pencil") && maxPencil > 0) {
+                myInventory.addItem(newItem);
+                maxPencil--;
+                maxInventory--;
+            } else if(newItem.getItemName().equalsIgnoreCase("eraser") && maxEraser > 0) {
+                myInventory.addItem(newItem);
+                maxEraser--;
+                maxInventory--;
+            }
+            System.out.println(newItem.getItemName());
+        }
+    }
+
+    /**
+     * Return a list of item in the inventory
+     * @return inventory
+     */
+    public ItemInventory inventory() {
+        return myInventory;
     }
 }

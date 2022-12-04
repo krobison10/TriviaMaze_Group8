@@ -16,9 +16,14 @@ import java.util.ArrayList;
 public class ItemInventory {
 
     /**
-     *
+     * A list of item in the inventory
      */
     private final ArrayList<Item> myInventory;
+
+    /**
+     * A list of item in the inventory
+     */
+    private final int MAX_INVENTORY = 6;
 
     /**
      * Constructor that create an empty inventory for player
@@ -40,7 +45,7 @@ public class ItemInventory {
      * @param theItemObject that added to the inventory
      */
     public void addItem(final Item theItemObject){
-        if(myInventory == null || myInventory.size() < 3 ){
+        if(myInventory == null || myInventory.size() < MAX_INVENTORY ){
             myInventory.add(theItemObject);
         }
         else {
@@ -92,21 +97,45 @@ public class ItemInventory {
      * When the user uses this item, this class return a string of item's function
      * so the question will be changed based on the function of this item.
      * Item is removed from the inventory
-     * @param theItemIndex index of the item in the inventory
-     * @return type of the item that is used.
+     * @param itemType type of the item in the inventory
+     * @return item that is used.
      */
-    public String useItem(final int theItemIndex) {
-        if(theItemIndex > 0 && theItemIndex <= myInventory.size()){
-            Item selectedItem = myInventory.get(theItemIndex - 1);
-            System.out.println("You use item " + selectedItem.getItemName() +
-                    "Description: " + selectedItem.getItemDescription() +
-                    " Type: " + selectedItem.getItemType());
-            String typeOfUsedItem = selectedItem.getItemType();
-            removeItem(selectedItem);
-            return typeOfUsedItem;
+    public Item useItem(final String itemType) {
+        Item selectedItem = null;
+        if(containItem(itemType)){
+            for(int i = 0; i < myInventory.size(); i++){
+                if(myInventory.get(i).getItemType().equalsIgnoreCase(itemType)){
+                    selectedItem = myInventory.get(i);
+                    removeItem(selectedItem);
+                    break;
+                }
+            }
+            return selectedItem;
         } else {
-            System.out.println("Cannot find item. Please type a correct position number.");
-            return "";
+            return null;
         }
+    }
+
+    /**
+     * Return an index of an item
+     * @param itemIndex index of the item
+     * @return item at a specific index
+     */
+    public Item getItem(int itemIndex) {
+        return myInventory.get(itemIndex);
+    }
+
+    /**
+     * Check whether if inventory contains a specific type
+     * @param itemType type of the item
+     * @return true if item exists in the inventory
+     */
+    public boolean containItem(String itemType) {
+        for(int i = 0; i < myInventory.size(); i++){
+            if(myInventory.get(i).getItemType().equalsIgnoreCase(itemType)){
+                return true;
+            }
+        }
+        return false;
     }
 }

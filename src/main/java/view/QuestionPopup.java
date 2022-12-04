@@ -105,7 +105,7 @@ public class QuestionPopup {
      */
     private JPanel buildWindow() {
         JPanel window = new JPanel();
-        window.setPreferredSize(new Dimension(COMPONENT_WIDTH, 300));
+        window.setPreferredSize(new Dimension(COMPONENT_WIDTH, 400));
 
         //Use embedded html and css to enable text wrapping in the JLabel
         String text = myQuestion.getPrompt();
@@ -124,6 +124,10 @@ public class QuestionPopup {
             myType = 2;
             addInputField(window);
         }
+
+        //Call the class ItemUsage to add Get Help Button
+        new ItemUsage().addGetHelpButton(window, myQuestion);
+
         return window;
     }
 
