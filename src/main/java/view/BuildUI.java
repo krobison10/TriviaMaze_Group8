@@ -32,7 +32,7 @@ public class BuildUI implements ActionListener {
      *
      */
     private JMenuItem myNewGame, mySaveGame, myExitGame, myRules, myControls, myCredits;
-//    private JButton playButton;
+    private JButton myPlayButton;
 
 
     private BuildUI() {}
@@ -77,7 +77,8 @@ public class BuildUI implements ActionListener {
         myControls = new JMenuItem("Controls");
         myCredits = new JMenuItem("Credits");
         // Create buttons
-//        playButton = new JButton("Play");
+        Icon icon = new ImageIcon("../TriviaMaze_Group8/src/main/resources/icons/playImage.png");
+        myPlayButton = new JButton(icon);
 
         // Add menu to menubar
         menuBar.add(startMenu);
@@ -94,7 +95,7 @@ public class BuildUI implements ActionListener {
 
         // Add everything to frame
         myMazeWindow.getContentPane().add(BorderLayout.NORTH, menuBar);
-//        mazeWindow.getContentPane().add(playButton);
+        myMazeWindow.getContentPane().add(myPlayButton);
 
         // Add action listeners
         myNewGame.addActionListener(this);
@@ -103,6 +104,7 @@ public class BuildUI implements ActionListener {
         myRules.addActionListener(this);
         myControls.addActionListener(this);
         myCredits.addActionListener(this);
+        myPlayButton.addActionListener(this);
 
         // show frame
         myMazeWindow.setVisible(true);
@@ -115,8 +117,9 @@ public class BuildUI implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == myNewGame) {
+        if (e.getSource() == myNewGame || e.getSource() == myPlayButton) {
             myNewGame.setEnabled(false);
+            myPlayButton.setVisible(false);
             buildMazeUI();
         } else if (e.getSource() == mySaveGame) {
             JOptionPane.showMessageDialog(myMazeWindow,"Operation not implemented");
@@ -166,8 +169,7 @@ public class BuildUI implements ActionListener {
 
         return """
                 This is a 5x5 grid maze.
-                To enter another room, interact with a locked door.
-                Once a door is interacted with, a trivia question will display.
+                To enter another room, select a trivia question from the right to answer.
                 Answering the question correctly will unlock the door.
                 Answering the question incorrectly will lock it permanently.
                 You must reach the final room to complete the maze.
@@ -191,7 +193,7 @@ public class BuildUI implements ActionListener {
     private String gameControls() {
         return """
                 Use arrows or WASD to move left, right up, or down.
-                Press 'E' to interact with the environment.
+                Click on Trivia questions on the right of the game.
                 """;
     }
 }
