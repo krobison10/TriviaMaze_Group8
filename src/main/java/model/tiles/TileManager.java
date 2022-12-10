@@ -56,6 +56,14 @@ public class TileManager {
     }
 
     /**
+     * Resets the instance by setting the field to null.
+     * Next time getInstance() is called, a new instance will be created.
+     */
+    public static void resetInstance() {
+        instance = null;
+    }
+
+    /**
      * Finds the tile position in the map data of a door given a room coordinate and door number.
      * Door numbers go from 0 to 3 clockwise starting with the east door ending with the south door.
      * @param roomX X coordinate number of room (0 based).

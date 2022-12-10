@@ -32,7 +32,7 @@ public class PlayerController {
     private static BufferedImage up1, up2, down1, down2, left1, left2, right1, right2,
             neutralUp, neutralDown, neutralLeft, neutralRight;
     /**
-     * Singleton.
+     * Singleton instance.
      */
     private static PlayerController instance;
     /**
@@ -76,6 +76,14 @@ public class PlayerController {
             instance = new PlayerController();
         }
         return instance;
+    }
+
+    /**
+     * Resets the instance by setting the field to null.
+     * Next time getInstance() is called, a new instance will be created.
+     */
+    public static void resetInstance() {
+        instance = null;
     }
 
     /**

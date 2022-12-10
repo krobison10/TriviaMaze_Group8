@@ -12,6 +12,7 @@ import model.mazeElements.*;
 import model.questions.Question;
 import model.tiles.TileManager;
 import view.BuildUI;
+import view.GraphicDrawer;
 import view.SidebarManager;
 import view.TMPanel;
 
@@ -31,7 +32,7 @@ public class TriviaMazeController {
      */
     private TriviaMazeController() {
 
-        BuildUI.getInstance().buildFrame();
+        start();
     }
 
     /**
@@ -49,8 +50,28 @@ public class TriviaMazeController {
      */
     public void startNewGame() {
         new TriviaMaze(5, 5, "CS_trivia_questions.db");
-        Game game = new Game();
-        game.start();
+        Game.getInstance().start();
+    }
+
+    /**
+     * Fresh restarts the whole game.
+     */
+    public void restart() {
+        //Kill the main window
+        BuildUI.getInstance().window().dispose();
+
+        //Wipe old instances of singletons in no specific order
+        Game.resetInstance();
+        Player.resetInstance();
+        TileManager.resetInstance();
+        GraphicDrawer.resetInstance();
+        SidebarManager.resetInstance();
+        BuildUI.resetInstance();
+        TMPanel.resetInstance();
+        PlayerController.resetInstance();
+
+        //Call start to go back through the game initialization
+        start();
     }
 
     /**
@@ -100,5 +121,12 @@ public class TriviaMazeController {
             Player.getInstance().setCurrentRoom(theRoom);
         }
         return newRoom;
+    }
+
+    /**
+     * Starts the game by building the starting window.
+     */
+    private void start() {
+        BuildUI.getInstance().buildFrame();
     }
 }

@@ -45,9 +45,6 @@ public class TMPanel extends JPanel{
      * Properties of trivia maze
      */
     private TMPanel() {
-        //Create singleton instance
-        new GraphicDrawer();
-
         keys = new KeyInput();
 
         this.setPreferredSize(new Dimension(GAME_SIZE, GAME_SIZE));
@@ -70,6 +67,14 @@ public class TMPanel extends JPanel{
     }
 
     /**
+     * Resets the instance by setting the field to null.
+     * Next time getInstance() is called, a new instance will be created.
+     */
+    public static void resetInstance() {
+        triviaMazeInstance = null;
+    }
+
+    /**
      * Executes updates for each frame.
      */
     public void frameUpdate() {
@@ -87,8 +92,8 @@ public class TMPanel extends JPanel{
         // Casts graphics to 2D graphics for more functionality
         Graphics2D g2 = (Graphics2D) g;
 
-        GraphicDrawer.instance.drawTiles(g2);
-        GraphicDrawer.instance.drawPlayer(g2);
+        GraphicDrawer.getInstance().drawTiles(g2);
+        GraphicDrawer.getInstance().drawPlayer(g2);
 
         g2.dispose();
     }

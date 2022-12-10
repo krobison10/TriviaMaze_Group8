@@ -48,6 +48,14 @@ public class BuildUI implements ActionListener {
     }
 
     /**
+     * Resets the instance by setting the field to null.
+     * Next time getInstance() is called, a new instance will be created.
+     */
+    public static void resetInstance() {
+        instance = null;
+    }
+
+    /**
      *
      */
     public void buildFrame() {
@@ -71,7 +79,9 @@ public class BuildUI implements ActionListener {
         JMenu helpMenu = new JMenu("Help");
         // Create menu items
         myNewGame = new JMenuItem("New");
+        myNewGame.setEnabled(false);
         mySaveGame = new JMenuItem("Save");
+        mySaveGame.setEnabled(false);
         myExitGame = new JMenuItem("Exit");
         myRules = new JMenuItem("Rules");
         myControls = new JMenuItem("Controls");
@@ -117,9 +127,12 @@ public class BuildUI implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == myNewGame || e.getSource() == myPlayButton) {
-            myNewGame.setEnabled(false);
+        if(e.getSource() == myNewGame ) {
+            TriviaMazeController.getInstance().restart();
+        } else if (e.getSource() == myPlayButton) {
             myPlayButton.setVisible(false);
+            myNewGame.setEnabled(true);
+            mySaveGame.setEnabled(true);
             buildMazeUI();
         } else if (e.getSource() == mySaveGame) {
             JOptionPane.showMessageDialog(myMazeWindow,"Operation not implemented");
@@ -159,6 +172,13 @@ public class BuildUI implements ActionListener {
         myMazeWindow.add(new JButton("Click me!"));
         TriviaMazeController.getInstance().startNewGame();
         SidebarManager.getInstance().updateForCurrentRoom();
+    }
+
+    /**
+     * @return The main window JFrame.
+     */
+    public JFrame window() {
+        return myMazeWindow;
     }
 
     /**

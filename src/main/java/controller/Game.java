@@ -14,7 +14,10 @@ import view.TMPanel;
  * @author AJ Garica, Refactored by Kyler Robison
  */
 public class Game implements Runnable {
-
+    /**
+     * Singleton instance of Game.
+     */
+    private static Game instance;
     /**
      * Framerate of the game.
      */
@@ -28,6 +31,36 @@ public class Game implements Runnable {
      */
     private Thread gameThread;
 
+    private Game() {}
+
+    /**
+     * @return the singleton instance of Game. Creates a new one if one does not yet exist.
+     */
+    public static Game getInstance() {
+        if(instance == null) {
+            instance = new Game();
+        }
+        return instance;
+    }
+
+    /**
+     * Resets the instance by setting the field to null.
+     * Next time getInstance() is called, a new instance will be created.
+     * Also kills the currently running thread.
+     */
+    public static void resetInstance() {
+        if(instance != null) {
+            instance.kill();
+        }
+        instance = null;
+    }
+
+    /**
+     * Kills the currently running Thread.
+     */
+    private void kill() {
+        gameThread = null;
+    }
 
     /**
      * Called to begin the game. Creates a new thread and starts this process in it.

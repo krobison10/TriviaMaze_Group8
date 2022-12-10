@@ -47,6 +47,14 @@ public class SidebarManager {
     }
 
     /**
+     * Resets the instance by setting the field to null.
+     * Next time getInstance() is called, a new instance will be created.
+     */
+    public static void resetInstance() {
+        instance = null;
+    }
+
+    /**
      * Wipes and updates the sidebar to have the interactivity required for the current room.
      */
     public void updateForCurrentRoom() {

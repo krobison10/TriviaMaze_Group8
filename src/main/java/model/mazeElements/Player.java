@@ -59,6 +59,14 @@ public class Player {
     }
 
     /**
+     * Resets the instance by setting the field to null.
+     * Next time getInstance() is called, a new instance will be created.
+     */
+    public static void resetInstance() {
+        instance = null;
+    }
+
+    /**
      * @return the player's location on the X axis.
      */
     public int getPlayerLocationX() {

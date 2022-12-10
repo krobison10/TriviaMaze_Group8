@@ -17,17 +17,31 @@ import model.tiles.TileManager;
  *
  * @author Kyler Robison
  */
-class GraphicDrawer {
+public class GraphicDrawer {
     /**
      * Singleton instance.
      */
     public static GraphicDrawer instance;
 
+
+    private GraphicDrawer() {}
+
     /**
-     * Initializes singleton instance.
+     * @return the singleton instance. Creates a new one if one does not yet exist.
      */
-    GraphicDrawer() {
-        instance = this;
+    public static GraphicDrawer getInstance() {
+        if(instance == null) {
+            instance = new GraphicDrawer();
+        }
+        return instance;
+    }
+
+    /**
+     * Resets the instance by setting the field to null.
+     * Next time getInstance() is called, a new instance will be created.
+     */
+    public static void resetInstance() {
+        instance = null;
     }
 
     /**
