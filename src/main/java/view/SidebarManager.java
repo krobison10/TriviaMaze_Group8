@@ -24,6 +24,8 @@ public class SidebarManager {
      */
     public static final int WIDTH = 200;
 
+    public static final Color COLOR = new Color(97, 95, 94);
+
     /**
      * Singleton instance of the class.
      */
@@ -119,7 +121,7 @@ public class SidebarManager {
         myPanel.setMaximumSize(new Dimension(WIDTH, TMPanel.GAME_SIZE));
         myPanel.setMinimumSize(new Dimension(WIDTH, TMPanel.GAME_SIZE));
         myPanel.setPreferredSize(new Dimension(WIDTH, TMPanel.GAME_SIZE));
-        myPanel.setBackground(Color.GRAY);
+        myPanel.setBackground(COLOR);
 
         return myPanel;
     }

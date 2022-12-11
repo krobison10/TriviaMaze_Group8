@@ -10,6 +10,7 @@ import java.awt.*;
 
 import controller.PlayerController;
 import model.mazeElements.TriviaMaze;
+import model.tiles.Tiles;
 
 /**
  * Draws graphics to the game panel.
@@ -54,6 +55,8 @@ public class GraphicDrawer {
         {
             for(int row = 0; row < bound; row++)
             {
+                theG2.drawImage(TriviaMaze.getInstance().tileManager().getTile(Tiles.FLOOR.ordinal()).image(),
+                        col * ts, row * ts, ts, ts, null);
                 tileNum = TriviaMaze.getInstance().tileManager().getMapData()[row][col];
                 theG2.drawImage(TriviaMaze.getInstance().tileManager().getTile(tileNum).image(),
                         col * ts, row * ts, ts, ts, null);

@@ -39,13 +39,13 @@ public class InventoryUI {
         JPanel inventoryWindow = new JPanel();
         inventoryWindow.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         inventoryWindow.setLayout(new BorderLayout());
-        inventoryWindow.setBackground(Color.GRAY);
+        inventoryWindow.setBackground(SidebarManager.COLOR);
         theSidebar.add(inventoryWindow);
 
         // Inventory panel inside Inventory Window and contains label and inventory
         JPanel inventoryPanel = new JPanel(new BorderLayout());
         inventoryPanel.setPreferredSize(new Dimension(WIDTH, PANEL_HEIGHT));
-        inventoryPanel.setBackground(Color.GRAY);
+        inventoryPanel.setBackground(SidebarManager.COLOR);
         inventoryWindow.add(inventoryPanel, BorderLayout.SOUTH);
 
         // Inventory label inside Inventory Panel

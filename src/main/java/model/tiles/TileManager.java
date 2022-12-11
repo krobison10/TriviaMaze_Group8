@@ -63,7 +63,7 @@ public class TileManager implements Serializable {
      * @return tile position in the map of the door.
      * @throws RuntimeException if the door cannot be found.
      */
-    public static int[] findTilePosOfDoor(final Door theDoor) {
+    private static int[] findTilePosOfDoor(final Door theDoor) {
         Room room;
         int bound = TriviaMaze.getInstance().getHeight();
 
@@ -97,7 +97,7 @@ public class TileManager implements Serializable {
         int y = coord[1];
         //Needs an update to be foolproof
         myMapData[y][x] = theDoor.getState() == DoorStates.OPENED ?
-                                Tiles.FLOOR.ordinal() : Tiles.DOOR_BLOCKED.ordinal();
+                Tiles.FLOOR.ordinal() : Tiles.DOOR_BLOCKED.ordinal();
     }
 
     /**
@@ -120,9 +120,8 @@ public class TileManager implements Serializable {
      * Loads the map data in from a file and stores it in the array "myMapData".
      */
     private void loadMap() {
-        new MapGenerator();
         try
-        (FileReader fr = new FileReader("../TriviaMaze_Group8/src/main/resources/maps/map2.txt")) {
+        (FileReader fr = new FileReader("../TriviaMaze_Group8/src/main/resources/maps/map.txt")) {
 
             int nt = TMPanel.NUM_TILES;
             myMapData = new int[nt][nt];
