@@ -6,17 +6,16 @@
 
 package controller;
 
+import java.io.*;
+
 import javax.swing.*;
 
 import model.mazeElements.*;
 import model.questions.Question;
-import model.tiles.TileManager;
 import view.BuildUI;
 import view.GraphicDrawer;
 import view.SidebarManager;
 import view.TMPanel;
-
-import java.io.*;
 
 /**
  * Main controller class that handles initialization of game and central functions.
@@ -33,7 +32,6 @@ public class TriviaMazeController {
      * Initializes and starts the game.
      */
     private TriviaMazeController() {
-
         start();
     }
 
@@ -49,6 +47,7 @@ public class TriviaMazeController {
 
     /**
      * Creates a Game object and starts the process.
+     * @param fromSave indicates whether the game is fresh or from a save.
      */
     public void startNewGame(final boolean fromSave) {
         if(!fromSave) {
@@ -67,7 +66,6 @@ public class TriviaMazeController {
         //Wipe old instances of singletons in no specific order
         Game.resetInstance();
         Player.resetInstance();
-        TileManager.resetInstance();
         GraphicDrawer.resetInstance();
         SidebarManager.resetInstance();
         BuildUI.resetInstance();
@@ -78,6 +76,11 @@ public class TriviaMazeController {
         start();
     }
 
+    /**
+     * Saves the game to the selected file.
+     * @param theFilePath the file to save to.
+     * @return true if the save was successful, false otherwise.
+     */
     public boolean save(final String theFilePath) {
         boolean successful = false;
         try (FileOutputStream fout = new FileOutputStream(theFilePath)) {
@@ -94,11 +97,16 @@ public class TriviaMazeController {
         return successful;
     }
 
+    /**
+     * Loads the game from the selected file.
+     * @param theFilePath the file to load from.
+     * @return true if the load was successful, false otherwise.
+     */
     public boolean load(final String theFilePath) {
         boolean successful = false;
         try(FileInputStream fin = new FileInputStream(theFilePath)) {
             ObjectInputStream in = new ObjectInputStream(fin);
-            TriviaMaze.deserialize((TriviaMaze) in.readObject());
+            TriviaMaze.setInstance((TriviaMaze) in.readObject());
             successful = true;
         }
         catch (Exception e) {
@@ -116,20 +124,18 @@ public class TriviaMazeController {
      * @param theQuestion the Question the user is answering.
      * @param theAnswer the answer that the user submitted.
      */
-    public void processAnswerAttempt(final Question theQuestion, final String theAnswer ) {
-        String correctAnswer = Question.getAnswerString(theQuestion);
+    public void processAnswerAttempt(final Question theQuestion, final String theAnswer) {
+        String correctAnswer = theQuestion.getAnswer();
         Door door = TriviaMaze.getInstance().getDoor(theQuestion);
-        if(correctAnswer.equalsIgnoreCase(theAnswer.trim())) {
-            door.setState(DoorStates.OPENED);
-        }
-        else {
-            door.setState(DoorStates.BLOCKED);
-        }
-        TriviaMaze.getInstance().tm.updateDoorTile(door);
+        door.setState(correctAnswer.equalsIgnoreCase(theAnswer.trim()) ? DoorStates.OPENED : DoorStates.BLOCKED);
+
+        TriviaMaze.getInstance().tileManager().updateDoorTile(door);
+        //Refresh sidebar
         SidebarManager.getInstance().updateForCurrentRoom();
 
+        //Check if the game is still winnable
         if(!TriviaMaze.getInstance().existsPathToExit()) {
-            JOptionPane.showMessageDialog(TMPanel.getTriviaMaze(), "Game over :(");
+            JOptionPane.showMessageDialog(TMPanel.getInstance(), "Game over :(");
         }
     }
 

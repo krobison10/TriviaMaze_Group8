@@ -19,24 +19,10 @@ public abstract class Question implements Serializable {
      */
     private String myPrompt;
 
-
     /**
-     * Returns the answer string of any type of question object.
-     * @param theQuestion the Question object.
-     * @return the answer string.
+     * @return the answer for the question.
      */
-    public static String getAnswerString(final Question theQuestion) {
-        String answer;
-        if(theQuestion instanceof QuestionSelection) {
-            var q = (QuestionSelection) theQuestion;
-            answer = q.getOptions()[q.getAnswerPosition()];
-        }
-        else {
-            var q = (QuestionFA) theQuestion;
-            answer = q.getAnswer();
-        }
-        return answer;
-    }
+    public abstract String getAnswer();
 
     /**
      * Get the prompt of the question

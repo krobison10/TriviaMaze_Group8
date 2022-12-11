@@ -59,6 +59,7 @@ public class SidebarManager {
      */
     public void updateForCurrentRoom() {
         myPanel.removeAll();
+        InventoryUI.drawInventory(myPanel);
 
         //Stores the directions of the doors
         String[] directions = {"West", "North", "East", "South"};
@@ -105,9 +106,6 @@ public class SidebarManager {
             }
             i++;
         }
-
-        // Call the class InventoryUI to add inventory image
-        new InventoryUI().inventoryImage(myPanel);
 
         myPanel.revalidate();
         myPanel.repaint();

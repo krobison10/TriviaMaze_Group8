@@ -80,7 +80,7 @@ public class Game implements Runnable {
         double nextDrawTime = Math.abs(System.nanoTime() + interval);
 
         while (gameThread != null) {
-            TMPanel.getTriviaMaze().frameUpdate();
+            TMPanel.getInstance().frameUpdate();
             PlayerController.getInstance().frameUpdate();
 
             // delays the key press listener

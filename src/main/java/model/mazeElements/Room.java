@@ -46,8 +46,9 @@ public class Room implements Serializable {
      * @param theY represents the Y position in the maze.
      */
     Room(final int theX, final int theY) {
-        if(theX < 0 || theY < 0 || theX >= TriviaMaze.getInstance().getWidth() || theY >= TriviaMaze.getInstance().getHeight()) {
-            throw new IllegalArgumentException("Position out of bounds");
+        if(theX < 0 || theY < 0 || theX >= TriviaMaze.getInstance().getWidth()
+                || theY >= TriviaMaze.getInstance().getHeight()) {
+            throw new IllegalArgumentException("Attempted to create out of bounds room");
         }
         myPosX = theX;
         myPosY = theY;
@@ -83,15 +84,6 @@ public class Room implements Serializable {
      */
     public int getY() {
         return myPosY;
-    }
-
-    /**
-     * @return a String representation of the room for testing purposes.
-     */
-    @Override
-    @Deprecated
-    public String toString() {
-        return "Room: X=" + myPosX + ", Y=" + myPosY + ", Item: " + myItem + "\nDoors: " + myDoors;
     }
 
     /**

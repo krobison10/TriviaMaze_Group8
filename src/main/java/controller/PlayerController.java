@@ -61,7 +61,7 @@ public class PlayerController {
      * Initializes player object.
      */
     private PlayerController() {
-        myKeys = TMPanel.getTriviaMaze().getKeys();
+        myKeys = TMPanel.getInstance().getKeys();
         initPlayer();
         loadSprites();
         updateCurrentRoom();
@@ -214,9 +214,9 @@ public class PlayerController {
         }
 
         // stores tile player is wanting to advance to
-        int tileNum = TriviaMaze.getInstance().tm.getMapData()[mapRow][mapCol];
+        int tileNum = TriviaMaze.getInstance().tileManager().getMapData()[mapRow][mapCol];
         //returns true if tile is collidable and player cannot advance to it
-        return TriviaMaze.getInstance().tm.getTile(tileNum).isCollidable();
+        return TriviaMaze.getInstance().tileManager().getTile(tileNum).isCollidable();
 
     }
 

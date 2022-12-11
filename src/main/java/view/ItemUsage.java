@@ -84,6 +84,7 @@ public class ItemUsage {
             } else if (!getHint){
                 getHelp();
             }
+            SidebarManager.getInstance().updateForCurrentRoom();
             theWindow.revalidate();
             theWindow.repaint();
         });

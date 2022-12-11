@@ -22,6 +22,13 @@ public abstract class QuestionSelection extends Question {
     private int myAnswerPosition;
 
     /**
+     * @return the answer of the question.
+     */
+    public String getAnswer() {
+        return myOptions[myAnswerPosition];
+    }
+
+    /**
      * Get the index of the correct answer
      * @return the int number of index
      */

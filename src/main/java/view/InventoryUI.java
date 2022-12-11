@@ -21,7 +21,7 @@ public class InventoryUI {
     /**
      * Constant for the height of the inventory window.
      */
-    public static final int HEIGHT = 400;
+    public static final int HEIGHT = 170;
 
     /**
      * Constant for the height of the inventory panel.
@@ -31,7 +31,7 @@ public class InventoryUI {
     /**
      * Draw an inventory image
      */
-    void inventoryImage(JPanel theSidebar){
+    static void drawInventory(JPanel theSidebar){
 
         ItemInventory myInventory = TriviaMaze.getInstance().inventory();
 
@@ -74,7 +74,7 @@ public class InventoryUI {
 
                 // Read png file, resize the image, and add image to icon.
                 BufferedImage iconImage = ImageIO.read
-                        (Objects.requireNonNull(getClass().getResourceAsStream(itemImagePath)));
+                        (Objects.requireNonNull(InventoryUI.class.getResourceAsStream(itemImagePath)));
                 Image newImage = iconImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
                 itemIcon.setImage(newImage);
 

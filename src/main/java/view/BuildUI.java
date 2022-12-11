@@ -32,6 +32,9 @@ public class BuildUI implements ActionListener {
      *
      */
     private JMenuItem myNewGame, mySaveGame, myLoadGame, myExitGame, myRules, myControls, myCredits;
+    /**
+     *
+     */
     private JButton myPlayButton;
 
 
@@ -62,7 +65,7 @@ public class BuildUI implements ActionListener {
 
         // initial welcome screen size
         final int windowSizeWidth = 300;
-        final int windowSizeHeight = 300;
+        final int windowSizeHeight = 350;
 
         // create JFrame
         myMazeWindow = new JFrame();
@@ -149,6 +152,13 @@ public class BuildUI implements ActionListener {
         }
     }
 
+    /**
+     * @return The main window JFrame.
+     */
+    public JFrame window() {
+        return myMazeWindow;
+    }
+
     private void tryLoad() {
         JFileChooser chooser = new JFileChooser();
         //chooser.set
@@ -178,14 +188,6 @@ public class BuildUI implements ActionListener {
         }
     }
 
-    public void play(final boolean fromSave) {
-        myPlayButton.setVisible(false);
-        myNewGame.setEnabled(true);
-        mySaveGame.setEnabled(true);
-        myLoadGame.setEnabled(false);
-        buildMazeUI(fromSave);
-    }
-
     /**
      * Builds the Trivia Maze UI
      */
@@ -196,7 +198,7 @@ public class BuildUI implements ActionListener {
         mainPane.setBorder(null);
         mainPane.setDividerSize(0);
 
-        TMPanel maze = TMPanel.getTriviaMaze();
+        TMPanel maze = TMPanel.getInstance();
         JPanel ui = SidebarManager.getInstance().getPanel();
 
         mainPane.setLeftComponent(maze);
@@ -214,10 +216,15 @@ public class BuildUI implements ActionListener {
     }
 
     /**
-     * @return The main window JFrame.
+     * Begins the actual game.
+     * @param fromSave indicates whether starting fresh or from a save.
      */
-    public JFrame window() {
-        return myMazeWindow;
+    private void play(final boolean fromSave) {
+        myPlayButton.setVisible(false);
+        myNewGame.setEnabled(true);
+        mySaveGame.setEnabled(true);
+        myLoadGame.setEnabled(false);
+        buildMazeUI(fromSave);
     }
 
     /**

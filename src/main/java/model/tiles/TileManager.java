@@ -21,10 +21,6 @@ import view.TMPanel;
  */
 public class TileManager implements Serializable {
     /**
-     * Singleton instance.
-     */
-    private static TileManager instance;
-    /**
      * Contains the types of tiles.
      */
     private transient Tile[] myTiles;
@@ -38,27 +34,8 @@ public class TileManager implements Serializable {
      * Constructs and initializes the TileManager.
      */
     public TileManager() {
-        instance = this;
         loadMap();
         loadTileSprites();
-    }
-
-    /**
-     * @return a reference to the singleton instance.
-     */
-    private static TileManager getInstance() {
-        if(instance == null) {
-            instance = new TileManager();
-        }
-        return instance;
-    }
-
-    /**
-     * Resets the instance by setting the field to null.
-     * Next time getInstance() is called, a new instance will be created.
-     */
-    public static void resetInstance() {
-        instance = null;
     }
 
     /**
@@ -186,6 +163,9 @@ public class TileManager implements Serializable {
         }
     }
 
+    /**
+     * Loads tile sprites manually (they are not serializable).
+     */
     @Serial
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();

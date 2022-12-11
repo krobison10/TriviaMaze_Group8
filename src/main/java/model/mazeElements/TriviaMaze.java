@@ -6,17 +6,17 @@
 
 package model.mazeElements;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+
 import model.items.Item;
 import model.items.ItemDatabase;
 import model.items.ItemInventory;
 import model.questions.Question;
 import model.questions.QuestionBank;
 import model.tiles.TileManager;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * The main driver class for the model package. Represents the main maze and contains
@@ -48,15 +48,16 @@ public class TriviaMaze implements Serializable {
      * The questionBank object for the instance of the TriviaMaze. Builds and
      * contains all the Questions for the maze.
      */
-    public final QuestionBank myQuestionBank;
-
+    private final QuestionBank myQuestionBank;
     /**
      * The ItemInventory object for the instance of the TriviaMaze. Builds and
      * contains all the item for the inventory.
      */
     private final ItemInventory myInventory;
-
-    public final TileManager tm = new TileManager();
+    /**
+     * Reference to the tile manager, lives here for easy serialization
+     */
+    private final TileManager tm = new TileManager();
 
     /**
      * Constructs and initializes the underlying implementation of the
@@ -69,6 +70,9 @@ public class TriviaMaze implements Serializable {
      */
     public TriviaMaze(final int theWidth, final int theHeight, final String theDBName) {
         instance = this;
+        if(theWidth != 5 || theHeight != 5) {
+            throw new IllegalArgumentException("Invalid maze size");
+        }
         myWidth = theWidth;
         myHeight = theHeight;
         myDoors = new ArrayList<>();
@@ -90,7 +94,11 @@ public class TriviaMaze implements Serializable {
         return instance;
     }
 
-    public static void deserialize(final TriviaMaze theInstance) {
+    /**
+     * Sets the singleton instance, only meant for use when deserializing data.
+     * @param theInstance the new instance.
+     */
+    public static void setInstance(final TriviaMaze theInstance) {
         instance = theInstance;
     }
 
@@ -147,6 +155,20 @@ public class TriviaMaze implements Serializable {
      */
     public int getHeight() {
         return myHeight;
+    }
+
+    /**
+     * @return an object containing the inventory items.
+     */
+    public ItemInventory inventory() {
+        return myInventory;
+    }
+
+    /**
+     * @return the tile manager.
+     */
+    public TileManager tileManager() {
+        return tm;
     }
 
     /**
@@ -224,44 +246,40 @@ public class TriviaMaze implements Serializable {
 
         Room curRoom = getRoom(theX, theY);
 
-        //Stores the sets of values needed to be added to x and y to find x and y of
-        //neighboring rooms in the order: south, east, north, then west.
+        /* Stores the sets of values needed to be added to x and y to find x and y of
+         * neighboring rooms in the order: south, east, north, then west. */
         int[][] adjacencies = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
-        /* doorDir stores the integer needed to receive the current door from the current room.
-        Recall that 0 through three retrieves the doors starting with west through south
-        going clockwise, so to go counter-clockwise starting with south door, need to
-        decrement from 3 */
+        // doorDir stores the integer needed to receive the current door from the current room.
         int adjX, adjY, doorDir = DoorDirections.SOUTH.ordinal();
         for(int[] adj : adjacencies) {
             adjX = theX + adj[0];
             adjY = theY + adj[1];
-            //If room exists in the direction, and it doesn't already have a path to entrance,
-            //and door isn't blocked, then traverse in that direction
+            /* If room exists in the direction, and it doesn't already have a path to entrance,
+             * and door isn't blocked, then traverse in that direction */
             if(getRoom(adjX, adjY) != null
                     && !theSubs[adjY][adjX]
                     && curRoom.getDoors().get(doorDir).getState() != DoorStates.BLOCKED) {
 
-                //Mark the matrix of subproblems to state that the room has a valid
-                //path to the entrance
+                /* Mark the matrix of sub problems to state that the room has a valid
+                 * path to the entrance */
                 theSubs[adjY][adjX] = true;
 
-                //Recursive call to current adjacent room, returns true if the resulting path
-                //from there is valid
+                /* Recursive call to current adjacent room, returns true if the resulting path
+                 * from there is valid */
                 if(pathExistsHelper(adjY, adjX, theSubs)) return true;
 
             }
-            //If current direction was a failure, recursion will unwind, decrement door direction
-            //meaning that the algorithm will attempt to search in this next direction in the next
-            //iteration.
+            /* If current direction was a failure, recursion will unwind, decrement door direction
+             * meaning that the algorithm will attempt to search in this next direction in the next
+             * iteration. */
             doorDir--;
         }
         return false;
     }
 
     /**
-     * Return a list of item in the inventory
-     * @return inventory
+     * Fills the inventory
      */
     private void createInventory() {
         int maxPencil = 3;
@@ -281,15 +299,6 @@ public class TriviaMaze implements Serializable {
                 maxEraser--;
                 maxInventory--;
             }
-            System.out.println(newItem.getItemName());
         }
-    }
-
-    /**
-     * Return a list of item in the inventory
-     * @return inventory
-     */
-    public ItemInventory inventory() {
-        return myInventory;
     }
 }

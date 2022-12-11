@@ -55,11 +55,10 @@ public class TMPanel extends JPanel{
     }
 
     /**
-     * Returns a new TriviaMazeUI if one has not yet been instantiated.
+     * @return a new TriviaMazeUI if one has not yet been instantiated.
      * (semi-singleton)
-     * @return
      */
-    public static TMPanel getTriviaMaze() {
+    public static TMPanel getInstance() {
         if (triviaMazeInstance == null) {
             triviaMazeInstance = new TMPanel();
         }
@@ -98,6 +97,9 @@ public class TMPanel extends JPanel{
         g2.dispose();
     }
 
+    /**
+     * @return the KeyInput.
+     */
     public KeyInput getKeys() {
         return keys;
     }
