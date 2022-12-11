@@ -23,8 +23,14 @@ public class SidebarManager {
      * Constant for the width of the sidebar panel.
      */
     public static final int WIDTH = 200;
-
+    /**
+     * Background color of sidebar.
+     */
     public static final Color COLOR = new Color(97, 95, 94);
+    /**
+     * Text color for text in the sidebar.
+     */
+    public static final Color TEXT_COLOR = new Color(31, 30, 30);
 
     /**
      * Singleton instance of the class.
@@ -84,8 +90,10 @@ public class SidebarManager {
             if(d != null && d.getState() == DoorStates.CLOSED) {
 
                 //Create and add label
-                JLabel label = new JLabel(directions[i] + " door");
+                String contents = String.format("<html><strong>%s door</strong><html>", directions[i]);
+                JLabel label = new JLabel(contents);
                 label.setPreferredSize(new Dimension(WIDTH, 25));
+                label.setForeground(TEXT_COLOR);
                 label.setHorizontalAlignment(SwingConstants.CENTER);
 
                 myPanel.add(label);

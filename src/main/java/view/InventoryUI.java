@@ -50,6 +50,10 @@ public class InventoryUI {
 
         // Inventory label inside Inventory Panel
         JLabel inventoryLabel = new JLabel("Inventory");
+        inventoryLabel.setForeground(SidebarManager.TEXT_COLOR);
+        Font f = inventoryLabel.getFont();
+        inventoryLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
+
         inventoryLabel.setHorizontalAlignment(SwingConstants.CENTER);
         inventoryPanel.add(inventoryLabel, BorderLayout.NORTH);
 

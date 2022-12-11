@@ -146,7 +146,7 @@ public class TileManager implements Serializable {
      */
     private void loadTileSprites() {
         try {
-            myTiles = new Tile[7];
+            myTiles = new Tile[5];
 
             myTiles[Tiles.FLOOR.ordinal()] = new Tile(ImageIO.read(Objects.requireNonNull
                     (getClass().getResourceAsStream("/tiles/floor.png"))), false);
