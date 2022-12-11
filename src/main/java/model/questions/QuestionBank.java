@@ -6,6 +6,7 @@
 
 package model.questions;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import org.sqlite.SQLiteDataSource;
  *
  * @author Kyler Robison
  */
-public class QuestionBank {
+public class QuestionBank implements Serializable {
     /**
      * The list of Question objects sourced from the database.
      */

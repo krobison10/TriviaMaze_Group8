@@ -6,12 +6,14 @@
 
 package model.items;
 
+import java.io.Serializable;
+
 /**
  * Item abstract class
  *
  * @author Minh Le
  */
-public abstract class Item {
+public abstract class Item implements Serializable {
     /**
      *
      */

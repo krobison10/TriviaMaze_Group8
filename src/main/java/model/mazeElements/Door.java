@@ -8,6 +8,8 @@ package model.mazeElements;
 
 import model.questions.Question;
 
+import java.io.Serializable;
+
 /**
  * Represents a door in the maze. Is a bridge between rooms. All doors contain a question and a
  * state that determines how the door will behave. Certain rooms will share a door object when they
@@ -15,7 +17,7 @@ import model.questions.Question;
  *
  * @author Kyler Robison
  */
-public class Door {
+public class Door implements Serializable {
     /**
      * Represents the question that the door contains
      */

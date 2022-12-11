@@ -6,12 +6,14 @@
 
 package model.questions;
 
+import java.io.Serializable;
+
 /**
  * Abstract class for Question
  *
  * @author Minh Le
  */
-public abstract class Question {
+public abstract class Question implements Serializable {
     /**
      *
      */

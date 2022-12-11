@@ -6,6 +6,7 @@
 
 package model.items;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ import org.sqlite.SQLiteDataSource;
  *
  * @author Minh Le
  */
-public class ItemDatabase {
+public class ItemDatabase implements Serializable {
 
     /**
      * The list of Item initialized from the database.

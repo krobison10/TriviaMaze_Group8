@@ -6,6 +6,7 @@
 
 package model.items;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Minh Le
  */
-public class ItemInventory {
+public class ItemInventory implements Serializable {
 
     /**
      * A list of item in the inventory

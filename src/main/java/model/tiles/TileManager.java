@@ -6,8 +6,7 @@
 
 package model.tiles;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Objects;
 
 import javax.imageio.ImageIO;
@@ -20,7 +19,7 @@ import view.TMPanel;
  *
  * @author Kyler Robison
  */
-public class TileManager {
+public class TileManager implements Serializable {
     /**
      * Singleton instance.
      */
@@ -28,7 +27,7 @@ public class TileManager {
     /**
      * Contains the types of tiles.
      */
-    private final Tile[] myTiles;
+    private transient Tile[] myTiles;
     /**
      * Contains the numbers which represent types of tiles, read in from a file.
      */
@@ -38,9 +37,8 @@ public class TileManager {
     /**
      * Constructs and initializes the TileManager.
      */
-    private TileManager() {
+    public TileManager() {
         instance = this;
-        myTiles = new Tile[7];
         loadMap();
         loadTileSprites();
     }
@@ -48,7 +46,7 @@ public class TileManager {
     /**
      * @return a reference to the singleton instance.
      */
-    public static TileManager getInstance() {
+    private static TileManager getInstance() {
         if(instance == null) {
             instance = new TileManager();
         }
@@ -171,6 +169,8 @@ public class TileManager {
      */
     private void loadTileSprites() {
         try {
+            myTiles = new Tile[7];
+
             myTiles[0] = new Tile();//Empty tile for 0
 
             myTiles[1] = new Tile(ImageIO.read(Objects.requireNonNull
@@ -184,5 +184,11 @@ public class TileManager {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Serial
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        loadTileSprites();
     }
 }

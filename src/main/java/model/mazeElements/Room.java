@@ -6,6 +6,7 @@
 
 package model.mazeElements;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,7 @@ import model.items.Item;
  *
  * @author Kyler Robison
  */
-public class Room {
+public class Room implements Serializable {
     /**
      * Represents the position of the room within the maze
      */

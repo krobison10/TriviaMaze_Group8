@@ -16,7 +16,6 @@ import javax.imageio.ImageIO;
 import model.mazeElements.Player;
 import model.mazeElements.Room;
 import model.mazeElements.TriviaMaze;
-import model.tiles.TileManager;
 import view.TMPanel;
 
 /**
@@ -215,9 +214,9 @@ public class PlayerController {
         }
 
         // stores tile player is wanting to advance to
-        int tileNum = TileManager.getInstance().getMapData()[mapRow][mapCol];
+        int tileNum = TriviaMaze.getInstance().tm.getMapData()[mapRow][mapCol];
         //returns true if tile is collidable and player cannot advance to it
-        return TileManager.getInstance().getTile(tileNum).isCollidable();
+        return TriviaMaze.getInstance().tm.getTile(tileNum).isCollidable();
 
     }
 

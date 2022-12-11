@@ -10,6 +10,7 @@ import java.awt.*;
 
 import controller.PlayerController;
 import model.mazeElements.Player;
+import model.mazeElements.TriviaMaze;
 import model.tiles.TileManager;
 
 /**
@@ -55,9 +56,9 @@ public class GraphicDrawer {
         {
             for(int row = 0; row < bound; row++)
             {
-                tileNum = TileManager.getInstance().getMapData()[row][col];
+                tileNum = TriviaMaze.getInstance().tm.getMapData()[row][col];
                 if(tileNum != 0) {
-                    theG2.drawImage(TileManager.getInstance().getTile(tileNum).image(),
+                    theG2.drawImage(TriviaMaze.getInstance().tm.getTile(tileNum).image(),
                             col * ts, row * ts, ts, ts, null);
                 }
             }

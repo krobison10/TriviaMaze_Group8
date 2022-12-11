@@ -11,7 +11,9 @@ import model.items.ItemDatabase;
 import model.items.ItemInventory;
 import model.questions.Question;
 import model.questions.QuestionBank;
+import model.tiles.TileManager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -23,7 +25,7 @@ import java.util.NoSuchElementException;
  *
  * @author Kyler Robison
  */
-public class TriviaMaze {
+public class TriviaMaze implements Serializable {
     /**
      * Singleton instance.
      */
@@ -53,6 +55,8 @@ public class TriviaMaze {
      * contains all the item for the inventory.
      */
     private final ItemInventory myInventory;
+
+    public final TileManager tm = new TileManager();
 
     /**
      * Constructs and initializes the underlying implementation of the
@@ -84,6 +88,10 @@ public class TriviaMaze {
             throw new RuntimeException("Attempted to get new instance of singleton without arguments");
         }
         return instance;
+    }
+
+    public static void deserialize(final TriviaMaze theInstance) {
+        instance = theInstance;
     }
 
     /**

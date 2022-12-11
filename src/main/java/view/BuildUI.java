@@ -31,7 +31,7 @@ public class BuildUI implements ActionListener {
     /**
      *
      */
-    private JMenuItem myNewGame, mySaveGame, myExitGame, myRules, myControls, myCredits;
+    private JMenuItem myNewGame, mySaveGame, myLoadGame, myExitGame, myRules, myControls, myCredits;
     private JButton myPlayButton;
 
 
@@ -82,6 +82,7 @@ public class BuildUI implements ActionListener {
         myNewGame.setEnabled(false);
         mySaveGame = new JMenuItem("Save");
         mySaveGame.setEnabled(false);
+        myLoadGame = new JMenuItem("Load");
         myExitGame = new JMenuItem("Exit");
         myRules = new JMenuItem("Rules");
         myControls = new JMenuItem("Controls");
@@ -96,6 +97,7 @@ public class BuildUI implements ActionListener {
         // Add menu items to start menu
         startMenu.add(myNewGame);
         startMenu.add(mySaveGame);
+        startMenu.add(myLoadGame);
         startMenu.add(myExitGame);
         // Add menu items to help menu
         helpMenu.add(myRules);
@@ -110,6 +112,7 @@ public class BuildUI implements ActionListener {
         // Add action listeners
         myNewGame.addActionListener(this);
         mySaveGame.addActionListener(this);
+        myLoadGame.addActionListener(this);
         myExitGame.addActionListener(this);
         myRules.addActionListener(this);
         myControls.addActionListener(this);
@@ -127,15 +130,14 @@ public class BuildUI implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == myNewGame ) {
+        if (e.getSource() == myNewGame) {
             TriviaMazeController.getInstance().restart();
         } else if (e.getSource() == myPlayButton) {
-            myPlayButton.setVisible(false);
-            myNewGame.setEnabled(true);
-            mySaveGame.setEnabled(true);
-            buildMazeUI();
+            play(false);
         } else if (e.getSource() == mySaveGame) {
-            JOptionPane.showMessageDialog(myMazeWindow,"Operation not implemented");
+            trySave();
+        } else if(e.getSource() == myLoadGame) {
+            tryLoad();
         } else if (e.getSource() == myExitGame) {
             System.exit(0);
         } else if (e.getSource() == myRules) {
@@ -147,10 +149,47 @@ public class BuildUI implements ActionListener {
         }
     }
 
+    private void tryLoad() {
+        JFileChooser chooser = new JFileChooser();
+        //chooser.set
+        int confirm = chooser.showOpenDialog(myMazeWindow);
+        if(confirm == JFileChooser.APPROVE_OPTION) {
+            String filePath = chooser.getSelectedFile().getPath();
+            if(TriviaMazeController.getInstance().load(filePath)) {
+                play(true);
+            }
+            else {
+                JOptionPane.showMessageDialog(myMazeWindow, "Load Failed");
+            }
+        }
+    }
+
+    private void trySave() {
+        JFileChooser chooser = new JFileChooser();
+        int confirm = chooser.showSaveDialog(myMazeWindow);
+        if(confirm == JFileChooser.APPROVE_OPTION) {
+            String filePath = chooser.getSelectedFile().getPath();
+            if(TriviaMazeController.getInstance().save(filePath)) {
+                JOptionPane.showMessageDialog(myMazeWindow, "Save Successful");
+            }
+            else {
+                JOptionPane.showMessageDialog(myMazeWindow, "Save Failed");
+            }
+        }
+    }
+
+    public void play(final boolean fromSave) {
+        myPlayButton.setVisible(false);
+        myNewGame.setEnabled(true);
+        mySaveGame.setEnabled(true);
+        myLoadGame.setEnabled(false);
+        buildMazeUI(fromSave);
+    }
+
     /**
      * Builds the Trivia Maze UI
      */
-    private void buildMazeUI() {
+    private void buildMazeUI(final boolean fromSave) {
         //For some reason the default layout manager on splitpane blocks printlns,
         //if you set its layout manager to null it breaks the layout but printlns work again
         JSplitPane mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
@@ -170,7 +209,7 @@ public class BuildUI implements ActionListener {
         myMazeWindow.setLocationRelativeTo(null);
         myMazeWindow.setVisible(true);
         myMazeWindow.add(new JButton("Click me!"));
-        TriviaMazeController.getInstance().startNewGame();
+        TriviaMazeController.getInstance().startNewGame(fromSave);
         SidebarManager.getInstance().updateForCurrentRoom();
     }
 

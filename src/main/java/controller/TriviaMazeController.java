@@ -16,6 +16,8 @@ import view.GraphicDrawer;
 import view.SidebarManager;
 import view.TMPanel;
 
+import java.io.*;
+
 /**
  * Main controller class that handles initialization of game and central functions.
  *
@@ -48,8 +50,10 @@ public class TriviaMazeController {
     /**
      * Creates a Game object and starts the process.
      */
-    public void startNewGame() {
-        new TriviaMaze(5, 5, "CS_trivia_questions.db");
+    public void startNewGame(final boolean fromSave) {
+        if(!fromSave) {
+            new TriviaMaze(5, 5, "CS_trivia_questions.db");
+        }
         Game.getInstance().start();
     }
 
@@ -74,6 +78,35 @@ public class TriviaMazeController {
         start();
     }
 
+    public boolean save(final String theFilePath) {
+        boolean successful = false;
+        try (FileOutputStream fout = new FileOutputStream(theFilePath)) {
+            ObjectOutputStream out = new ObjectOutputStream(fout);
+            out.writeObject(TriviaMaze.getInstance());
+            out.flush();
+            out.close();
+
+            successful = true;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return successful;
+    }
+
+    public boolean load(final String theFilePath) {
+        boolean successful = false;
+        try(FileInputStream fin = new FileInputStream(theFilePath)) {
+            ObjectInputStream in = new ObjectInputStream(fin);
+            TriviaMaze.deserialize((TriviaMaze) in.readObject());
+            successful = true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return successful;
+    }
+
     /**
      * Processes the answer attempt and executes necessary side effects.
      * Makes a call to TileManager to update the door tile. Updates the
@@ -92,7 +125,7 @@ public class TriviaMazeController {
         else {
             door.setState(DoorStates.BLOCKED);
         }
-        TileManager.getInstance().updateDoorTile(door);
+        TriviaMaze.getInstance().tm.updateDoorTile(door);
         SidebarManager.getInstance().updateForCurrentRoom();
 
         if(!TriviaMaze.getInstance().existsPathToExit()) {

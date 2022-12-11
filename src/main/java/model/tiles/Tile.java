@@ -7,13 +7,14 @@
 package model.tiles;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  * Represents a tile on the game board.
  *
  * @author Kyler Robison
  */
-public class Tile {
+public class Tile implements Serializable {
     /**
      * The image for the tile.
      */
