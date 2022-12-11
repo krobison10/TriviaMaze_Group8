@@ -6,6 +6,8 @@
 
 package model.mazeElements;
 
+import java.io.Serializable;
+
 import view.TMPanel;
 
 /**
@@ -13,7 +15,7 @@ import view.TMPanel;
  *
  * @author Kyler Robison & AJ Garcia
  */
-public class Player {
+public class Player implements Serializable {
 
     /**
      * Max coordinate of player for bound if collision fails.
@@ -23,10 +25,6 @@ public class Player {
      * Min coordinate of player for bound if collision fails.
      */
     private static final int COORDINATE_MIN = TMPanel.TILE_SIZE;
-    /**
-     * Singleton instance.
-     */
-    private static Player instance;
     /**
      * The coordinates of the player in the maze.
      */
@@ -44,39 +42,23 @@ public class Player {
     /**
      * Constructs a player object.
      */
-    private Player() {
+    Player() {
         currentRoom = TriviaMaze.getInstance().getRoom(0,0);
-    }
-
-    /**
-     * @return a reference to the singleton instance of the Player object.
-     */
-    public static Player getInstance() {
-        if(instance == null) {
-            instance = new Player();
-        }
-        return instance;
-    }
-
-    /**
-     * Resets the instance by setting the field to null.
-     * Next time getInstance() is called, a new instance will be created.
-     */
-    public static void resetInstance() {
-        instance = null;
+        myLocationX = myLocationY = TMPanel.TILE_SIZE * 3;
+        mySpeed = TMPanel.TILE_SIZE;
     }
 
     /**
      * @return the player's location on the X axis.
      */
-    public int getPlayerLocationX() {
+    public int locationX() {
         return myLocationX;
     }
 
     /**
      * @return the player's location on the Y axis.
      */
-    public int getPlayerLocationY() {
+    public int locationY() {
         return myLocationY;
     }
 
@@ -86,8 +68,8 @@ public class Player {
      * @param theChangeX the change in the X value.
      */
     public void setLocationX(final int theChangeX) {
-        if (getPlayerLocationX() + theChangeX <= COORDINATE_MAX
-                && getPlayerLocationX() + theChangeX >= COORDINATE_MIN) {
+        if (locationX() + theChangeX <= COORDINATE_MAX
+                && locationX() + theChangeX >= COORDINATE_MIN) {
             myLocationX += theChangeX;
         }
     }
@@ -98,8 +80,8 @@ public class Player {
      * @param theChangeY the change in the Y value.
      */
     public void setLocationY(final int theChangeY) {
-        if (getPlayerLocationY() + theChangeY <= COORDINATE_MAX
-            && getPlayerLocationY() + theChangeY >= COORDINATE_MIN) {
+        if (locationY() + theChangeY <= COORDINATE_MAX
+            && locationY() + theChangeY >= COORDINATE_MIN) {
             myLocationY += theChangeY;
         }
     }
@@ -109,14 +91,6 @@ public class Player {
      */
     public int getSpeed() {
         return mySpeed;
-    }
-
-    /**
-     * Sets the speed value of the player.
-     * @param theSpeed the new speed.
-     */
-    public void setSpeed(final int theSpeed) {
-        mySpeed = theSpeed;
     }
 
     /**

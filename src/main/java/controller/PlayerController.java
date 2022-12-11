@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import model.mazeElements.Player;
 import model.mazeElements.Room;
 import model.mazeElements.TriviaMaze;
+import model.tiles.Tiles;
 import view.TMPanel;
 
 /**
@@ -50,7 +51,6 @@ public class PlayerController {
      * The old direction of the player.
      */
     public String myDirectionMemory;
-
     /**
      *
      */
@@ -199,8 +199,8 @@ public class PlayerController {
     private boolean isTileCollidable(final String dir) {
 
         // stores player location x and y
-        int xLocation = Player.getInstance().getPlayerLocationX();
-        int yLocation = Player.getInstance().getPlayerLocationY();
+        int xLocation = TriviaMaze.getInstance().player().locationX();
+        int yLocation = TriviaMaze.getInstance().player().locationY();
         // uses player location x,y to find which tile in the maze player is on
         int mapRow = yLocation / TMPanel.TILE_SIZE;
         int mapCol = xLocation / TMPanel.TILE_SIZE;
@@ -215,6 +215,10 @@ public class PlayerController {
 
         // stores tile player is wanting to advance to
         int tileNum = TriviaMaze.getInstance().tileManager().getMapData()[mapRow][mapCol];
+
+        if(tileNum == Tiles.GOLD.ordinal()) {
+            TriviaMazeController.getInstance().gameWon();
+        }
         //returns true if tile is collidable and player cannot advance to it
         return TriviaMaze.getInstance().tileManager().getTile(tileNum).isCollidable();
 
@@ -225,11 +229,12 @@ public class PlayerController {
      */
     private void movePlayer() {
         if (!isTileCollidable(myDirection)) {
+                Player p = TriviaMaze.getInstance().player();
             switch (myDirection) {
-                case "up" -> Player.getInstance().setLocationY(-Player.getInstance().getSpeed());
-                case "down" -> Player.getInstance().setLocationY(Player.getInstance().getSpeed());
-                case "left" -> Player.getInstance().setLocationX(-Player.getInstance().getSpeed());
-                case "right" -> Player.getInstance().setLocationX(Player.getInstance().getSpeed());
+                case "up" -> p.setLocationY(-p.getSpeed());
+                case "down" -> p.setLocationY(p.getSpeed());
+                case "left" -> p.setLocationX(-p.getSpeed());
+                case "right" -> p.setLocationX(p.getSpeed());
             }
         }
     }
@@ -238,8 +243,8 @@ public class PlayerController {
      * Does some math to compute which room of the maze the player is in using their location.
      */
     private void updateCurrentRoom() {
-        int tileX = Player.getInstance().getPlayerLocationX() / TMPanel.TILE_SIZE;
-        int tileY = Player.getInstance().getPlayerLocationY() / TMPanel.TILE_SIZE;
+        int tileX = TriviaMaze.getInstance().player().locationX() / TMPanel.TILE_SIZE;
+        int tileY = TriviaMaze.getInstance().player().locationY() / TMPanel.TILE_SIZE;
 
         int roomX = tileX % 6 == 0 ? -1 : (int) Math.ceil(tileX / 6f);
         int roomY = tileY % 6 == 0 ? -1 : (int) Math.ceil(tileY / 6f);
@@ -254,9 +259,6 @@ public class PlayerController {
      * Sets default values for the player.
      */
     private void initPlayer() {
-        Player.getInstance().setLocationY(3 * TMPanel.TILE_SIZE);
-        Player.getInstance().setLocationX(3 * TMPanel.TILE_SIZE);
-        Player.getInstance().setSpeed(TMPanel.TILE_SIZE);
         myDirection = "neutral";
         myDirectionMemory = "neutral";
         myKeys.setNeutral(true);

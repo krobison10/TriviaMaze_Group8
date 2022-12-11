@@ -96,7 +96,8 @@ public class TileManager implements Serializable {
         int x = coord[0];
         int y = coord[1];
         //Needs an update to be foolproof
-        myMapData[y][x] = theDoor.getState() == DoorStates.OPENED ? 0 : 1;
+        myMapData[y][x] = theDoor.getState() == DoorStates.OPENED ?
+                                Tiles.FLOOR.ordinal() : Tiles.DOOR_BLOCKED.ordinal();
     }
 
     /**
@@ -148,13 +149,15 @@ public class TileManager implements Serializable {
         try {
             myTiles = new Tile[7];
 
-            myTiles[0] = new Tile();//Empty tile for 0
-
-            myTiles[1] = new Tile(ImageIO.read(Objects.requireNonNull
+            myTiles[Tiles.FLOOR.ordinal()] = new Tile(ImageIO.read(Objects.requireNonNull
+                    (getClass().getResourceAsStream("/tiles/floor.png"))), false);
+            myTiles[Tiles.WALL.ordinal()] = new Tile(ImageIO.read(Objects.requireNonNull
                     (getClass().getResourceAsStream("/tiles/wall.png"))), true);
-            myTiles[2] = new Tile(ImageIO.read(Objects.requireNonNull(
+            myTiles[Tiles.DOOR.ordinal()] = new Tile(ImageIO.read(Objects.requireNonNull(
                     getClass().getResourceAsStream("/tiles/door.png"))), true);
-            myTiles[3] = new Tile(ImageIO.read(Objects.requireNonNull
+            myTiles[Tiles.DOOR_BLOCKED.ordinal()] = new Tile(ImageIO.read(Objects.requireNonNull(
+                    getClass().getResourceAsStream("/tiles/door-blocked.png"))), true);
+            myTiles[Tiles.GOLD.ordinal()] = new Tile(ImageIO.read(Objects.requireNonNull
                     (getClass().getResourceAsStream("/tiles/gold.png"))), false);
 
         }

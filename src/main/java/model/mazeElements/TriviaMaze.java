@@ -31,6 +31,11 @@ public class TriviaMaze implements Serializable {
      */
     private static TriviaMaze instance;
     /**
+     * Represents the width and height of the maze in terms of rooms.
+     * For example: "5 rooms wide, 5 rooms tall"
+     */
+    private final int myWidth, myHeight;
+    /**
      * Stores all the rooms that the maze contains.
      */
     private final Room[][] myRooms;
@@ -40,10 +45,9 @@ public class TriviaMaze implements Serializable {
      */
     private final List<Door> myDoors;
     /**
-     * Represents the width and height of the maze in terms of rooms.
-     * For example: "5 rooms wide, 5 rooms tall"
+     * Player in the maze.
      */
-    private final int myWidth, myHeight;
+    private final Player myPlayer;
     /**
      * The questionBank object for the instance of the TriviaMaze. Builds and
      * contains all the Questions for the maze.
@@ -79,6 +83,7 @@ public class TriviaMaze implements Serializable {
         myQuestionBank = new QuestionBank("../TriviaMaze_group8/databases/" + theDBName);
         myRooms = createRooms();
         myInventory = new ItemInventory();
+        myPlayer = new Player();
         createInventory();
         initializeRooms();
     }
@@ -155,6 +160,13 @@ public class TriviaMaze implements Serializable {
      */
     public int getHeight() {
         return myHeight;
+    }
+
+    /**
+     * @return the Player object.
+     */
+    public Player player() {
+        return myPlayer;
     }
 
     /**

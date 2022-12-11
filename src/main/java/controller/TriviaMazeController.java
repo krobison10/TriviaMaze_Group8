@@ -65,7 +65,6 @@ public class TriviaMazeController {
 
         //Wipe old instances of singletons in no specific order
         Game.resetInstance();
-        Player.resetInstance();
         GraphicDrawer.resetInstance();
         SidebarManager.resetInstance();
         BuildUI.resetInstance();
@@ -135,7 +134,7 @@ public class TriviaMazeController {
 
         //Check if the game is still winnable
         if(!TriviaMaze.getInstance().existsPathToExit()) {
-            JOptionPane.showMessageDialog(TMPanel.getInstance(), "Game over :(");
+            gameLost();
         }
     }
 
@@ -147,6 +146,22 @@ public class TriviaMazeController {
     }
 
     /**
+     * Shows a message dialogue and then restarts the game.
+     */
+    void gameWon() {
+        JOptionPane.showMessageDialog(BuildUI.getInstance().window(), "You Win!");
+        restart();
+    }
+
+    /**
+     * Shows a message dialogue and then restarts the game.
+     */
+    void gameLost() {
+        JOptionPane.showMessageDialog(TMPanel.getInstance(), "Game over :(");
+        restart();
+    }
+
+    /**
      * Checks if the player is in a new room by comparing the new room passed into this
      * method with the room object currently stored in the player. If the room is new,
      * updates the players room object.
@@ -155,9 +170,9 @@ public class TriviaMazeController {
      * @return True if the room is a new room, false otherwise.
      */
     boolean playerInNewRoom(final Room theRoom) {
-        boolean newRoom = theRoom != Player.getInstance().getCurrentRoom();
+        boolean newRoom = theRoom != TriviaMaze.getInstance().player().getCurrentRoom();
         if(newRoom) {
-            Player.getInstance().setCurrentRoom(theRoom);
+            TriviaMaze.getInstance().player().setCurrentRoom(theRoom);
         }
         return newRoom;
     }

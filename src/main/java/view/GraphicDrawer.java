@@ -9,7 +9,6 @@ package view;
 import java.awt.*;
 
 import controller.PlayerController;
-import model.mazeElements.Player;
 import model.mazeElements.TriviaMaze;
 
 /**
@@ -56,10 +55,8 @@ public class GraphicDrawer {
             for(int row = 0; row < bound; row++)
             {
                 tileNum = TriviaMaze.getInstance().tileManager().getMapData()[row][col];
-                if(tileNum != 0) {
-                    theG2.drawImage(TriviaMaze.getInstance().tileManager().getTile(tileNum).image(),
-                            col * ts, row * ts, ts, ts, null);
-                }
+                theG2.drawImage(TriviaMaze.getInstance().tileManager().getTile(tileNum).image(),
+                        col * ts, row * ts, ts, ts, null);
             }
         }
     }
@@ -70,7 +67,7 @@ public class GraphicDrawer {
      */
     void drawPlayer(final Graphics2D theG2) {
         //Possible pro-MVC refactor, move the drawme function into this class
-        PlayerController.getInstance().drawMe
-                (theG2, Player.getInstance().getPlayerLocationX(), Player.getInstance().getPlayerLocationY());
+        PlayerController.getInstance().drawMe(theG2, TriviaMaze.getInstance().player().locationX(),
+                TriviaMaze.getInstance().player().locationY());
     }
 }
