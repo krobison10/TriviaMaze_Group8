@@ -291,12 +291,12 @@ public class TriviaMaze implements Serializable {
     }
 
     /**
-     * Fills the inventory
+     * Create a new inventory with random number of items
      */
     private void createInventory() {
-        int maxPencil = 3;
-        int maxEraser = 3;
-        int maxInventory = 6;
+        int maxInventory = myInventory.getMaxInventory();
+        int maxPencil = maxInventory/2;
+        int maxEraser = maxInventory/2;
 
         // Ensure the maximum number of items in the inventory within the limit
         // There are no more pencils or erasers than the limit.

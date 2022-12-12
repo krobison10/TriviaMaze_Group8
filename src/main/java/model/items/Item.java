@@ -15,15 +15,15 @@ import java.io.Serializable;
  */
 public abstract class Item implements Serializable {
     /**
-     *
+     * Name of the item
      */
     private String myItemName;
     /**
-     *
+     * Description of the item
      */
     private String myItemDescription;
     /**
-     *
+     * Type of the item
      */
     private String myItemType;
 

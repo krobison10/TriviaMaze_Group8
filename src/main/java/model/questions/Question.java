@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 public abstract class Question implements Serializable {
     /**
-     *
+     * Prompt of the question
      */
     private String myPrompt;
 
