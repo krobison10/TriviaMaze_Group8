@@ -8,6 +8,9 @@ package controller;
 
 import java.io.*;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 import model.mazeElements.*;
@@ -27,11 +30,18 @@ public class TriviaMazeController {
      * Singleton variable.
      */
     private static TriviaMazeController instance;
+    /**
+     * Indicates whether sounds should be played or not
+     */
+    private boolean soundsEnabled;
 
     /**
      * Initializes and starts the game.
      */
     private TriviaMazeController() {
+        instance = this;
+        //Initial value for whether sounds will be played
+        soundsEnabled = false;
         start();
     }
 
@@ -126,7 +136,14 @@ public class TriviaMazeController {
     public void processAnswerAttempt(final Question theQuestion, final String theAnswer) {
         String correctAnswer = theQuestion.getAnswer();
         Door door = TriviaMaze.getInstance().getDoor(theQuestion);
-        door.setState(correctAnswer.equalsIgnoreCase(theAnswer.trim()) ? DoorStates.OPENED : DoorStates.BLOCKED);
+        if(correctAnswer.equalsIgnoreCase(theAnswer.trim())) {
+            door.setState(DoorStates.OPENED);
+            playSound(Sounds.DING);
+        }
+        else {
+            door.setState(DoorStates.BLOCKED);
+            playSound(Sounds.BUZZ);
+        }
 
         TriviaMaze.getInstance().tileManager().updateDoorTile(door);
         //Refresh sidebar
@@ -136,6 +153,21 @@ public class TriviaMazeController {
         if(!TriviaMaze.getInstance().existsPathToExit()) {
             gameLost();
         }
+    }
+
+    /**
+     * @return true if sounds are enabled, false otherwise.
+     */
+    public boolean soundsEnabled() {
+        return soundsEnabled;
+    }
+
+    /**
+     * Sets the condition for whether the class will play sounds or not.
+     * @param theCondition the new value.
+     */
+    public void setSoundsEnabled(final boolean theCondition) {
+        soundsEnabled = theCondition;
     }
 
     /**
@@ -149,6 +181,7 @@ public class TriviaMazeController {
      * Shows a message dialogue and then restarts the game.
      */
     void gameWon() {
+        playSound(Sounds.WINNER);
         JOptionPane.showMessageDialog(BuildUI.getInstance().window(), "You Win!");
         restart();
     }
@@ -182,5 +215,35 @@ public class TriviaMazeController {
      */
     private void start() {
         BuildUI.getInstance().buildFrame();
+    }
+
+    /**
+     * Plays a sound in a separate thread to not block the flow of program execution.
+     * @param theSound the sound to be played.
+     */
+    private void playSound(final Sounds theSound) {
+        if(soundsEnabled) {
+            Thread task = new Thread(() -> {
+                try {
+                    String filename = theSound.name().toLowerCase() + ".wav";
+                    AudioInputStream aInputStream = AudioSystem.getAudioInputStream(new File
+                            ("../TriviaMaze_Group8/src/main/resources/sounds/" + filename));
+
+                    Clip sound = AudioSystem.getClip();
+                    sound.open(aInputStream);
+                    sound.start();
+
+                    Thread.sleep(2000);
+
+                    sound.stop();
+                    sound.close();
+                    aInputStream.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            task.start();
+        }
     }
 }

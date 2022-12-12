@@ -31,7 +31,7 @@ public class BuildUI implements ActionListener {
     /**
      *
      */
-    private JMenuItem myNewGame, mySaveGame, myLoadGame, myExitGame, myRules, myControls, myCredits;
+    private JMenuItem myNewGame, mySaveGame, myLoadGame, myExitGame, mySound, myRules, myControls, myCredits;
     /**
      *
      */
@@ -81,6 +81,8 @@ public class BuildUI implements ActionListener {
         JMenu startMenu = new JMenu("Start");
         JMenu helpMenu = new JMenu("Help");
         // Create menu items
+        String text = TriviaMazeController.getInstance().soundsEnabled() ? "Enabled" : "Disabled";
+        mySound = new JMenuItem("Sounds: " + text);
         myNewGame = new JMenuItem("New");
         myNewGame.setEnabled(false);
         mySaveGame = new JMenuItem("Save");
@@ -96,8 +98,10 @@ public class BuildUI implements ActionListener {
 
         // Add menu to menubar
         menuBar.add(startMenu);
+        menuBar.add(mySound);
         menuBar.add(helpMenu);
         // Add menu items to start menu
+        startMenu.add(mySound);
         startMenu.add(myNewGame);
         startMenu.add(mySaveGame);
         startMenu.add(myLoadGame);
@@ -113,6 +117,7 @@ public class BuildUI implements ActionListener {
         myMazeWindow.getContentPane().add(myPlayButton);
 
         // Add action listeners
+        mySound.addActionListener(this);
         myNewGame.addActionListener(this);
         mySaveGame.addActionListener(this);
         myLoadGame.addActionListener(this);
@@ -133,7 +138,13 @@ public class BuildUI implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == myNewGame) {
+        if(e.getSource() == mySound) {
+            var tmc = TriviaMazeController.getInstance();
+            tmc.setSoundsEnabled(!tmc.soundsEnabled());
+            String text = tmc.soundsEnabled() ? "Enabled" : "Disabled";
+            mySound.setText("Sounds: " + text);
+        }
+        else if (e.getSource() == myNewGame) {
             TriviaMazeController.getInstance().restart();
         } else if (e.getSource() == myPlayButton) {
             play(false);
