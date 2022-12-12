@@ -13,11 +13,11 @@ package model.questions;
  */
 public abstract class QuestionSelection extends Question {
     /**
-     *
+     * A String Array of options for the question
      */
     private String[] myOptions;
     /**
-     *
+     * Index number of a correct option
      */
     private int myAnswerPosition;
 

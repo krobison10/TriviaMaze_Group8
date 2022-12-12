@@ -139,4 +139,12 @@ public class ItemInventory implements Serializable {
         }
         return false;
     }
+
+    /**
+     * Maximum number of items in the inventory
+     * @return maximum number of items in the inventory
+     */
+    public int getMaxInventory() {
+        return MAX_INVENTORY;
+    }
 }
