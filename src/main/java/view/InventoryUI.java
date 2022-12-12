@@ -21,12 +21,12 @@ public class InventoryUI {
     /**
      * Constant for the height of the inventory window.
      */
-    public static final int HEIGHT = 170;
+    public static final int HEIGHT = 150;
 
     /**
      * Constant for the height of the inventory panel.
      */
-    public static final int PANEL_HEIGHT = 150;
+    public static final int PANEL_HEIGHT = 130;
 
     /**
      * Draw an inventory image
@@ -79,7 +79,7 @@ public class InventoryUI {
                 // Read png file, resize the image, and add image to icon.
                 BufferedImage iconImage = ImageIO.read
                         (Objects.requireNonNull(InventoryUI.class.getResourceAsStream(itemImagePath)));
-                Image newImage = iconImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                Image newImage = iconImage.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
                 itemIcon.setImage(newImage);
 
                 // Add item icon
