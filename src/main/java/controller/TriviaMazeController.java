@@ -15,6 +15,7 @@ import javax.swing.*;
 
 import model.mazeElements.*;
 import model.questions.Question;
+import org.apache.commons.io.FilenameUtils;
 import view.BuildUI;
 import view.GraphicDrawer;
 import view.SidebarManager;
@@ -55,6 +56,14 @@ public class TriviaMazeController {
         return instance;
     }
 
+    private static File validateFilename(final File theFile) {
+        var file = theFile;
+        if (!FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("mze")) {
+            file = new File(theFile.getParentFile(),
+                    FilenameUtils.getBaseName(theFile.getName())+".mze");
+        }
+        return file;
+    }
     /**
      * Creates a Game object and starts the process.
      * @param fromSave indicates whether the game is fresh or from a save.
@@ -87,12 +96,13 @@ public class TriviaMazeController {
 
     /**
      * Saves the game to the selected file.
-     * @param theFilePath the file to save to.
+     * @param theFile the file to save to.
      * @return true if the save was successful, false otherwise.
      */
-    public boolean save(final String theFilePath) {
+    public boolean save(final File theFile) {
         boolean successful = false;
-        try (FileOutputStream fout = new FileOutputStream(theFilePath)) {
+        File file = validateFilename(theFile);
+        try (FileOutputStream fout = new FileOutputStream(file.getPath())) {
             ObjectOutputStream out = new ObjectOutputStream(fout);
             out.writeObject(TriviaMaze.getInstance());
             out.flush();

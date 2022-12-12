@@ -9,8 +9,11 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
 import controller.TriviaMazeController;
 
@@ -79,6 +82,7 @@ public class BuildUI implements ActionListener {
         JMenuBar menuBar = new JMenuBar();
         // Create menu
         JMenu startMenu = new JMenu("Start");
+        JMenu soundMenu = new JMenu("Sound");
         JMenu helpMenu = new JMenu("Help");
         // Create menu items
         String text = TriviaMazeController.getInstance().soundsEnabled() ? "Enabled" : "Disabled";
@@ -98,14 +102,15 @@ public class BuildUI implements ActionListener {
 
         // Add menu to menubar
         menuBar.add(startMenu);
-        menuBar.add(mySound);
+        menuBar.add(soundMenu);
         menuBar.add(helpMenu);
         // Add menu items to start menu
-        startMenu.add(mySound);
         startMenu.add(myNewGame);
         startMenu.add(mySaveGame);
         startMenu.add(myLoadGame);
         startMenu.add(myExitGame);
+        //Add menu items to sound menu
+        soundMenu.add(mySound);
         // Add menu items to help menu
         helpMenu.add(myRules);
         helpMenu.add(myControls);
@@ -172,7 +177,10 @@ public class BuildUI implements ActionListener {
 
     private void tryLoad() {
         JFileChooser chooser = new JFileChooser();
-        //chooser.set
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.mze","mze");
+        chooser.setFileFilter(filter);
+        chooser.setAcceptAllFileFilterUsed(false);
+
         int confirm = chooser.showOpenDialog(myMazeWindow);
         if(confirm == JFileChooser.APPROVE_OPTION) {
             String filePath = chooser.getSelectedFile().getPath();
@@ -187,10 +195,15 @@ public class BuildUI implements ActionListener {
 
     private void trySave() {
         JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.mze","mze");
+        chooser.setFileFilter(filter);
+        chooser.setAcceptAllFileFilterUsed(false);
+
         int confirm = chooser.showSaveDialog(myMazeWindow);
+        chooser.setAcceptAllFileFilterUsed(false);
         if(confirm == JFileChooser.APPROVE_OPTION) {
-            String filePath = chooser.getSelectedFile().getPath();
-            if(TriviaMazeController.getInstance().save(filePath)) {
+            File file = chooser.getSelectedFile();
+            if(TriviaMazeController.getInstance().save(file)) {
                 JOptionPane.showMessageDialog(myMazeWindow, "Save Successful");
             }
             else {
@@ -249,9 +262,9 @@ public class BuildUI implements ActionListener {
                 To enter another room, select a trivia question from the right to answer.
                 Answering the question correctly will unlock the door.
                 Answering the question incorrectly will lock it permanently.
-                You must reach the final room to complete the maze.
-                The game ends when the final room is reached or there is no path to the exit,
-                due to permanently locked doors";
+                You must collect the golden coin in the final room to exit the maze.
+                The game ends when the coin is obtained or there is no path to the exit,
+                due to permanently locked doors".
                 """;
     }
 
