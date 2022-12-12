@@ -88,7 +88,7 @@ public class ItemDatabase implements Serializable {
         String query = "SELECT * FROM itemdatabase";
 
         try ( Connection conn = ds.getConnection();
-              Statement stmt = conn.createStatement(); ) {
+              Statement stmt = conn.createStatement()) {
 
             ResultSet rs = stmt.executeQuery(query);
 

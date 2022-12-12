@@ -45,9 +45,14 @@ class ItemInventoryTest {
         myInventory.addItem(ruler);
         myInventory.addItem(eraser);
         myInventory.addItem(pencil);
+
         myInventory.addItem(ruler);
-        assertEquals(3, myInventory.inventorySize(),
-                "Inventory should has 3 items because it is impossible to add more item to a full inventory.");
+        myInventory.addItem(eraser);
+        myInventory.addItem(pencil);
+
+        myInventory.addItem(ruler);
+        assertEquals(6, myInventory.inventorySize(),
+                "Inventory should has 6 items because it is impossible to add more item to a full inventory.");
     }
 
     @Test()

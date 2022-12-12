@@ -231,10 +231,10 @@ public class PlayerController {
         if (!isTileCollidable(myDirection)) {
                 Player p = TriviaMaze.getInstance().player();
             switch (myDirection) {
-                case "up" -> p.setLocationY(-p.getSpeed());
-                case "down" -> p.setLocationY(p.getSpeed());
-                case "left" -> p.setLocationX(-p.getSpeed());
-                case "right" -> p.setLocationX(p.getSpeed());
+                case "up" -> p.changeY(-p.getSpeed());
+                case "down" -> p.changeY(p.getSpeed());
+                case "left" -> p.changeX(-p.getSpeed());
+                case "right" -> p.changeX(p.getSpeed());
             }
         }
     }

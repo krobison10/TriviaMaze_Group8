@@ -65,14 +65,4 @@ public class Door implements Serializable {
         myState = theState;
         return myState;
     }
-
-    /**
-     * Changes the question contained by the door.
-     * @param theQuestion the new question.
-     * @return the updated question.
-     */
-    Question setQuestion(final Question theQuestion) {
-        myQuestion = theQuestion;
-        return myQuestion;
-    }
 }

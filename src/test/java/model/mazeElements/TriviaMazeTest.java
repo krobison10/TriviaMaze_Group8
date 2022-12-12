@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TriviaMazeTest {
 
     @Test
-    @DisplayName("Maze: retreiving out of bounds room returns null")
+    @DisplayName("Maze: retrieving out of bounds room returns null")
     void getRoomOutOfBounds() {
         var maze = new TriviaMaze(2, 2, "CS_trivia_questions.db");
         assertNull(maze.getRoom(-1, 1), "X out of bounds, too small");

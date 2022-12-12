@@ -87,6 +87,7 @@ public class Game implements Runnable {
             try {
                 double remainingDrawTime = Math.abs(nextDrawTime - System.nanoTime());
                 remainingDrawTime = remainingDrawTime / 1000000;
+                //noinspection BusyWait
                 Thread.sleep((long)remainingDrawTime);
                 nextDrawTime += interval * SPEED_MULTIPLIER;
             } catch (InterruptedException e) {

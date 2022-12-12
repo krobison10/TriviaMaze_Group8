@@ -30,6 +30,9 @@ public class Tile implements Serializable {
      * @param isCollidable whether the tile will be collidable or not.
      */
     public Tile(final BufferedImage theImage, final boolean isCollidable) {
+        if(theImage == null) {
+            throw new IllegalArgumentException("Tile: image cannot be null");
+        }
         collidable = isCollidable;
         myImage = theImage;
     }

@@ -26,7 +26,7 @@ class QuestionBankTest {
     @Test
     @DisplayName("QuestionBank: read question objects from database")
     void initializeQuestions() throws Exception {
-        List<Question> questions = (List<Question>)
+        @SuppressWarnings("unchecked") List<Question> questions = (List<Question>)
                 initializeQuestions.invoke(qb, "../TriviaMaze_group8/databases/test_questions.db");
         assertEquals(3, questions.size());
     }

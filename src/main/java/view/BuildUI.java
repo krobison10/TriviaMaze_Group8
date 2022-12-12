@@ -13,7 +13,6 @@ import java.io.File;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileSystemView;
 
 import controller.TriviaMazeController;
 
@@ -255,6 +254,7 @@ public class BuildUI implements ActionListener {
      * Displays the game rules when selected from the menu bar
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     private String gameRules() {
 
         return """
@@ -272,6 +272,7 @@ public class BuildUI implements ActionListener {
      * Displays the game credits when selected from the menu bar.
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     private String gameCredits() {
         return "Created by Kyler Robison, AJ Garcia, and Minh Le.";
     }
@@ -280,6 +281,7 @@ public class BuildUI implements ActionListener {
      * Shows the game controls when selected from the menu bar.
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     private String gameControls() {
         return """
                 Use arrows or WASD to move left, right up, or down.

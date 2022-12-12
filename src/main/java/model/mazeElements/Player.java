@@ -36,7 +36,7 @@ public class Player implements Serializable {
     /**
      * The speed of the player.
      */
-    private int mySpeed;
+    private final int mySpeed;
 
 
     /**
@@ -67,7 +67,7 @@ public class Player implements Serializable {
      * Also ensures player image does not leave game window.
      * @param theChangeX the change in the X value.
      */
-    public void setLocationX(final int theChangeX) {
+    public void changeX(final int theChangeX) {
         if (locationX() + theChangeX <= COORDINATE_MAX
                 && locationX() + theChangeX >= COORDINATE_MIN) {
             myLocationX += theChangeX;
@@ -79,7 +79,7 @@ public class Player implements Serializable {
      * Also ensures player image does not leave game window.
      * @param theChangeY the change in the Y value.
      */
-    public void setLocationY(final int theChangeY) {
+    public void changeY(final int theChangeY) {
         if (locationY() + theChangeY <= COORDINATE_MAX
             && locationY() + theChangeY >= COORDINATE_MIN) {
             myLocationY += theChangeY;

@@ -61,7 +61,7 @@ public class TriviaMaze implements Serializable {
     /**
      * Reference to the tile manager, lives here for easy serialization
      */
-    private final TileManager tm = new TileManager();
+    private final TileManager myTileManager;
 
     /**
      * Constructs and initializes the underlying implementation of the
@@ -74,7 +74,7 @@ public class TriviaMaze implements Serializable {
      */
     public TriviaMaze(final int theWidth, final int theHeight, final String theDBName) {
         instance = this;
-        if(theWidth != 5 || theHeight != 5) {
+        if(theWidth < 2 || theHeight < 2) {
             throw new IllegalArgumentException("Invalid maze size");
         }
         myWidth = theWidth;
@@ -84,6 +84,7 @@ public class TriviaMaze implements Serializable {
         myRooms = createRooms();
         myInventory = new ItemInventory();
         myPlayer = new Player();
+        myTileManager = new TileManager();
         createInventory();
         initializeRooms();
     }
@@ -180,7 +181,7 @@ public class TriviaMaze implements Serializable {
      * @return the tile manager.
      */
     public TileManager tileManager() {
-        return tm;
+        return myTileManager;
     }
 
     /**

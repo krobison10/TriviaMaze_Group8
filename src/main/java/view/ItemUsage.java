@@ -139,7 +139,7 @@ public class ItemUsage {
                 }
                 else {
                     freeAnswerHint(hintBox);
-                    System.out.println("Answer : " + ((QuestionFA) myQuestion).getAnswer());
+                    System.out.println("Answer : " + myQuestion.getAnswer());
                 }
 
             } else {
@@ -178,11 +178,7 @@ public class ItemUsage {
             if(s != null){
                 JLabel b = new JLabel(s);
 
-                if(s.equalsIgnoreCase(correctOption) || s.equalsIgnoreCase(otherOption)){
-                    b.setEnabled(true);
-                } else {
-                    b.setEnabled(false);
-                }
+                b.setEnabled(s.equalsIgnoreCase(correctOption) || s.equalsIgnoreCase(otherOption));
                 theWindow.add(b);
             }
         }

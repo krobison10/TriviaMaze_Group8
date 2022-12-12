@@ -4,5 +4,5 @@ public enum DoorDirections {
     WEST,
     NORTH,
     EAST,
-    SOUTH;
+    SOUTH
 }

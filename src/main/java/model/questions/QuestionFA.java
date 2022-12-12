@@ -44,7 +44,7 @@ public class QuestionFA extends Question {
      */
     public String displayHint(){
         String answer = myAnswer;
-        int lastIndex = answer.length() - 1;;
+        int lastIndex = answer.length() - 1;
         Random random = new Random();
         int randomNumber;
         String hint = "";
