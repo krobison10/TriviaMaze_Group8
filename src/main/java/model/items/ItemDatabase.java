@@ -20,7 +20,7 @@ import org.sqlite.SQLiteDataSource;
 /**
  * Item database
  *
- * @author Minh Le
+ * @author Minh Le & Kyler Robison
  */
 public class ItemDatabase implements Serializable {
 
@@ -29,7 +29,7 @@ public class ItemDatabase implements Serializable {
      */
     private final List<Item> myItemList;
     /**
-     *
+     * Current number of the item list
      */
     private int mySize;
 
@@ -41,8 +41,8 @@ public class ItemDatabase implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Get the number of the items in the item list
+     * @return number of the items in the item list
      */
     public int getMySize() {
         return mySize;
@@ -67,8 +67,8 @@ public class ItemDatabase implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Create a list of the items from the database
+     * @return an item list
      */
     private List<Item> createItemList(){
         List<Item> itemList = new ArrayList<>();
