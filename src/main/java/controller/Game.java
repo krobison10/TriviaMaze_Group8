@@ -31,6 +31,9 @@ public class Game implements Runnable {
      */
     private Thread gameThread;
 
+    /**
+     * Empty constructor
+     */
     private Game() {}
 
     /**
@@ -53,13 +56,6 @@ public class Game implements Runnable {
             instance.kill();
         }
         instance = null;
-    }
-
-    /**
-     * Kills the currently running Thread.
-     */
-    private void kill() {
-        gameThread = null;
     }
 
     /**
@@ -94,5 +90,12 @@ public class Game implements Runnable {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Kills the currently running Thread.
+     */
+    private void kill() {
+        gameThread = null;
     }
 }

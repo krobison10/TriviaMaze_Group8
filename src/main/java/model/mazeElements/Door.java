@@ -21,7 +21,7 @@ public class Door implements Serializable {
     /**
      * Represents the question that the door contains
      */
-    private Question myQuestion;
+    private final Question myQuestion;
     /**
      * Represents the state of the door. A door can be closed, meaning that
      * the user has not yet correctly answered the question, nor incorrectly, and
@@ -58,11 +58,10 @@ public class Door implements Serializable {
 
     /**
      * updates the state of the door to whatever is passed in.
+     *
      * @param theState the new state of the door.
-     * @return the updated state.
      */
-    public DoorStates setState(final DoorStates theState) {
+    public void setState(final DoorStates theState) {
         myState = theState;
-        return myState;
     }
 }

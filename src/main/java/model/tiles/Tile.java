@@ -38,14 +38,6 @@ public class Tile implements Serializable {
     }
 
     /**
-     * Creates an invisible tile.
-     */
-    public Tile() {
-        collidable = false;
-        myImage = null;
-    }
-
-    /**
      * @return the image of the Tile.
      */
     public BufferedImage image() {

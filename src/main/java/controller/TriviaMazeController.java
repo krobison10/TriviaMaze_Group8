@@ -17,7 +17,6 @@ import model.mazeElements.*;
 import model.questions.Question;
 import org.apache.commons.io.FilenameUtils;
 import view.BuildUI;
-import view.GraphicDrawer;
 import view.SidebarManager;
 import view.TMPanel;
 
@@ -64,6 +63,7 @@ public class TriviaMazeController {
         }
         return file;
     }
+
     /**
      * Creates a Game object and starts the process.
      * @param fromSave indicates whether the game is fresh or from a save.
@@ -84,8 +84,6 @@ public class TriviaMazeController {
 
         //Wipe old instances of singletons in no specific order
         Game.resetInstance();
-        GraphicDrawer.resetInstance();
-        SidebarManager.resetInstance();
         BuildUI.resetInstance();
         TMPanel.resetInstance();
         PlayerController.resetInstance();
@@ -233,7 +231,7 @@ public class TriviaMazeController {
      */
     private void playSound(final Sounds theSound) {
         if(soundsEnabled) {
-            Thread task = new Thread(() -> {
+            new Thread(() -> {
                 try {
                     String filename = theSound.name().toLowerCase() + ".wav";
                     AudioInputStream aInputStream = AudioSystem.getAudioInputStream(new File
@@ -252,8 +250,7 @@ public class TriviaMazeController {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            });
-            task.start();
+            }).start();
         }
     }
 }

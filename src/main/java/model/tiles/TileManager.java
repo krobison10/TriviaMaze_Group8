@@ -108,7 +108,7 @@ public class TileManager implements Serializable {
     }
 
     /**
-     * Gets a tile at a given location in the array of tiles.
+     * Gets a Tile at a given location in the array of tiles.
      * @param theIndex the index of the tile in the array.
      * @return the Tile object at that position.
      */
