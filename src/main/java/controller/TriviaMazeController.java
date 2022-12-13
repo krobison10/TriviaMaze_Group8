@@ -55,6 +55,11 @@ public class TriviaMazeController {
         return instance;
     }
 
+    /**
+     * Ensures that the file conforms to the naming of save files for the trivia maze.
+     * @param theFile the file to be checked.
+     * @return a correctly named file.
+     */
     private static File validateFilename(final File theFile) {
         var file = theFile;
         if (!FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("mze")) {
