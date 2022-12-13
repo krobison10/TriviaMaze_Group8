@@ -18,47 +18,47 @@ class PlayerTest {
     @Test
     @DisplayName("Player: get location X")
     void locationX() {
-        assertEquals(TMPanel.TILE_SIZE * 3, player.locationX(), "start location X incorrect");
+        assertEquals(TMPanel.TILE_SIZE * 3, player.getMyLocationX(), "start location X incorrect");
     }
 
     @Test
     @DisplayName("Player: get location Y")
     void locationY() {
-        assertEquals(TMPanel.TILE_SIZE * 3, player.locationY(), "start location Y incorrect");
+        assertEquals(TMPanel.TILE_SIZE * 3, player.getMyLocationY(), "start location Y incorrect");
     }
 
     @Test
     @DisplayName("Player: change X location")
     void changeX() {
-        int old = player.locationX();
-        player.changeX(TMPanel.TILE_SIZE);
-        assertEquals(old + TMPanel.TILE_SIZE, player.locationX());
+        int old = player.getMyLocationX();
+        player.setMyLocationX(TMPanel.TILE_SIZE);
+        assertEquals(old + TMPanel.TILE_SIZE, player.getMyLocationX());
     }
 
     @Test
     @DisplayName("Player: change X location")
     void changeY() {
-        int old = player.locationY();
-        player.changeY(TMPanel.TILE_SIZE);
-        assertEquals(old + TMPanel.TILE_SIZE, player.locationY());
+        int old = player.getMyLocationY();
+        player.setMyLocationY(TMPanel.TILE_SIZE);
+        assertEquals(old + TMPanel.TILE_SIZE, player.getMyLocationY());
     }
 
     @Test
     void getSpeed() {
-        assertEquals(TMPanel.TILE_SIZE, player.getSpeed(), "unexpected speed value");
+        assertEquals(TMPanel.TILE_SIZE, player.getMySpeed(), "unexpected speed value");
     }
 
     @Test
     void getCurrentRoom() {
         Room expected = TriviaMaze.getInstance().getRoom(0, 0);
-        player.setCurrentRoom(expected);
-        assertEquals(expected, player.getCurrentRoom());
+        player.setMyCurrentRoom(expected);
+        assertEquals(expected, player.getMyCurrentRoom());
     }
 
     @Test
     void setCurrentRoom() {
         Room room = TriviaMaze.getInstance().getRoom(1, 1);
-        player.setCurrentRoom(room);
-        assertEquals(room, player.getCurrentRoom(), "wrong room set");
+        player.setMyCurrentRoom(room);
+        assertEquals(room, player.getMyCurrentRoom(), "wrong room set");
     }
 }

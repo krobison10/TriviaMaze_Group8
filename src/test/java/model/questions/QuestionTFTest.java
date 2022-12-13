@@ -37,8 +37,8 @@ class QuestionTFTest {
     @Test
     @DisplayName("Test to get answer")
     void testGetAnswer() {
-        assertEquals("Canada",myQuestionTF.getAnswer(),
-                "The answer should be Canada.");
+        assertEquals("True",myQuestionTF.getAnswer(),
+                "The answer should be True.");
     }
 
     /**
