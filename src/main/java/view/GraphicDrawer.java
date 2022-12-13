@@ -44,7 +44,7 @@ public class GraphicDrawer {
      * @param theG2 the graphics.
      */
     public static void drawPlayer(final Graphics2D theG2) {
-        PlayerController.getInstance().drawMe(theG2, TriviaMaze.getInstance().player().locationX(),
-                TriviaMaze.getInstance().player().locationY());
+        PlayerController.getMyInstance().drawMe(theG2, TriviaMaze.getInstance().player().getMyLocationX(),
+                TriviaMaze.getInstance().player().getMyLocationY());
     }
 }

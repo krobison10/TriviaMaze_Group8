@@ -25,17 +25,17 @@ public class BuildUI implements ActionListener {
     /**
      * Singleton instance.
      */
-    private static BuildUI instance;
+    private static BuildUI myInstance;
     /**
-     *
+     * Frame
      */
     private JFrame myMazeWindow;
     /**
-     *
+     * Menu items
      */
     private JMenuItem myNewGame, mySaveGame, myLoadGame, myExitGame, mySound, myRules, myControls, myCredits;
     /**
-     *
+     * Buttons
      */
     private JButton myPlayButton;
 
@@ -45,11 +45,11 @@ public class BuildUI implements ActionListener {
     /**
      * Returns a reference to the singleton instance.
      */
-    public static BuildUI getInstance() {
-        if(instance == null) {
-            instance = new BuildUI();
+    public static BuildUI getMyInstance() {
+        if(myInstance == null) {
+            myInstance = new BuildUI();
         }
-        return instance;
+        return myInstance;
     }
 
     /**
@@ -57,11 +57,12 @@ public class BuildUI implements ActionListener {
      * Next time getInstance() is called, a new instance will be created.
      */
     public static void resetInstance() {
-        instance = null;
+        myInstance = null;
     }
 
     /**
-     *
+     * Creates the intro window to the game.
+     * Builds menu, menu items, buttons, and action listeners for the menu items.
      */
     public void buildFrame() {
 
@@ -86,14 +87,14 @@ public class BuildUI implements ActionListener {
         // Create menu items
         String text = TriviaMazeController.getInstance().soundsEnabled() ? "Enabled" : "Disabled";
         mySound = new JMenuItem("Sounds: " + text);
-        myNewGame = new JMenuItem("New");
+        myNewGame = new JMenuItem("New Game");
         myNewGame.setEnabled(false);
-        mySaveGame = new JMenuItem("Save");
+        mySaveGame = new JMenuItem("Save Game");
         mySaveGame.setEnabled(false);
-        myLoadGame = new JMenuItem("Load");
+        myLoadGame = new JMenuItem("Load Game");
         myExitGame = new JMenuItem("Exit");
-        myRules = new JMenuItem("Rules");
-        myControls = new JMenuItem("Controls");
+        myRules = new JMenuItem("Game Rules");
+        myControls = new JMenuItem("Game Controls");
         myCredits = new JMenuItem("Credits");
         // Create buttons
         Icon icon = new ImageIcon("../TriviaMaze_Group8/src/main/resources/icons/playImage.png");
@@ -174,6 +175,9 @@ public class BuildUI implements ActionListener {
         return myMazeWindow;
     }
 
+    /**
+     * Loads saved game state.
+     */
     private void tryLoad() {
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.mze","mze");
@@ -192,6 +196,9 @@ public class BuildUI implements ActionListener {
         }
     }
 
+    /**
+     * Saves game state.
+     */
     private void trySave() {
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.mze","mze");
@@ -259,12 +266,16 @@ public class BuildUI implements ActionListener {
 
         return """
                 This is a 5x5 grid maze.
+                
                 To enter another room, select a trivia question from the right to answer.
                 Answering the question correctly will unlock the door.
                 Answering the question incorrectly will lock it permanently.
+                
                 You must collect the golden coin in the final room to exit the maze.
                 The game ends when the coin is obtained or there is no path to the exit,
-                due to permanently locked doors".
+                due to permanently locked doors.
+                
+                A limited number of hints are available on any non true/false question.
                 """;
     }
 
@@ -284,8 +295,13 @@ public class BuildUI implements ActionListener {
     @SuppressWarnings("SameReturnValue")
     private String gameControls() {
         return """
-                Use arrows or WASD to move left, right up, or down.
+                Use arrows or WASD to move left, right, up, or down.
                 Click on Trivia questions on the right of the game.
+                
+                To save a game, click Start -> Save -> save as .mze file.
+                To load a game, click Start -> Load -> find the .mze file to load.
+                
+                Game sounds can be enabled/disabled through Sound menu.
                 """;
     }
 }

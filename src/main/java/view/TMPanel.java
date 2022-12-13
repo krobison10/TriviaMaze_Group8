@@ -40,7 +40,6 @@ public class TMPanel extends JPanel{
      */
     private final KeyInput keys;
 
-
     /**
      * Properties of trivia maze
      */
@@ -84,12 +83,12 @@ public class TMPanel extends JPanel{
     /**
      * Called using repaint()
      * Draws models to the UI
-     * @param g the <code>Graphics</code> object to protect
+     * @param theG the <code>Graphics</code> object to protect
      */
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paintComponent(Graphics theG) {
+        super.paintComponent(theG);
         // Casts graphics to 2D graphics for more functionality
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) theG;
 
         GraphicDrawer.drawTiles(g2);
         GraphicDrawer.drawPlayer(g2);

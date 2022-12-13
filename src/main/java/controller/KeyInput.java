@@ -19,7 +19,7 @@ public class KeyInput implements KeyListener {
     /**
      * Directions for the player.
      */
-    private boolean up, down, left, right, neutral;
+    private boolean myUp, myDown, myLeft, myRight, myNeutral;
 
 
     /**
@@ -36,19 +36,19 @@ public class KeyInput implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        neutral = false;
+        myNeutral = false;
 
         if(key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
-            up = true;
+            myUp = true;
         }
         if(key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
-            left = true;
+            myLeft = true;
         }
         if(key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
-            down = true;
+            myDown = true;
         }
         if(key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
-            right = true;
+            myRight = true;
         }
     }
 
@@ -59,62 +59,62 @@ public class KeyInput implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        neutral = true;
+        myNeutral = true;
 
         if(key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
-            up = false;
+            myUp = false;
         }
         if(key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
-            left = false;
+            myLeft = false;
         }
         if(key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
-            down = false;
+            myDown = false;
         }
         if(key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
-            right = false;
+            myRight = false;
         }
     }
 
     /**
      * @return true if the player direction is up.
      */
-    public boolean up() {
-        return up;
+    public boolean getMyUp() {
+        return myUp;
     }
 
     /**
      * @return true if the player direction is down.
      */
-    public boolean down() {
-        return down;
+    public boolean getMyDown() {
+        return myDown;
     }
 
     /**
      * @return true if the player direction is left.
      */
-    public boolean left() {
-        return left;
+    public boolean getMyLeft() {
+        return myLeft;
     }
 
     /**
      * @return true if the player direction is right.
      */
-    public boolean right() {
-        return right;
+    public boolean getMyRight() {
+        return myRight;
     }
 
     /**
      * @return true if the player direction is neutral.
      */
-    public boolean neutral() {
-        return neutral;
+    public boolean getMyNeutral() {
+        return myNeutral;
     }
 
     /**
      * Sets the neutral state of the KeyInput.
      * @param theNeutral the new state.
      */
-    public void setNeutral(final boolean theNeutral) {
-        neutral = theNeutral;
+    public void setMyNeutral(final boolean theNeutral) {
+        myNeutral = theNeutral;
     }
 }
