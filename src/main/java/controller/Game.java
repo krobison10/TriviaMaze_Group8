@@ -17,7 +17,7 @@ public class Game implements Runnable {
     /**
      * Singleton instance of Game.
      */
-    private static Game instance;
+    private static Game myInstance;
     /**
      * Framerate of the game.
      */
@@ -29,7 +29,7 @@ public class Game implements Runnable {
     /**
      * Thread object that executes the game.
      */
-    private Thread gameThread;
+    private Thread myGameThread;
 
     /**
      * Empty constructor
@@ -39,11 +39,11 @@ public class Game implements Runnable {
     /**
      * @return the singleton instance of Game. Creates a new one if one does not yet exist.
      */
-    public static Game getInstance() {
-        if(instance == null) {
-            instance = new Game();
+    public static Game getMyInstance() {
+        if(myInstance == null) {
+            myInstance = new Game();
         }
-        return instance;
+        return myInstance;
     }
 
     /**
@@ -52,18 +52,18 @@ public class Game implements Runnable {
      * Also kills the currently running thread.
      */
     public static void resetInstance() {
-        if(instance != null) {
-            instance.kill();
+        if(myInstance != null) {
+            myInstance.kill();
         }
-        instance = null;
+        myInstance = null;
     }
 
     /**
      * Called to begin the game. Creates a new thread and starts this process in it.
      */
     public void start() {
-        gameThread = new Thread(this);
-        gameThread.start();
+        myGameThread = new Thread(this);
+        myGameThread.start();
     }
 
     /**
@@ -75,9 +75,9 @@ public class Game implements Runnable {
         double interval = 1000000000D / FPS;
         double nextDrawTime = Math.abs(System.nanoTime() + interval);
 
-        while (gameThread != null) {
+        while (myGameThread != null) {
             TMPanel.getInstance().frameUpdate();
-            PlayerController.getInstance().frameUpdate();
+            PlayerController.getMyInstance().frameUpdate();
 
             // delays the key press listener
             try {
@@ -96,6 +96,6 @@ public class Game implements Runnable {
      * Kills the currently running Thread.
      */
     private void kill() {
-        gameThread = null;
+        myGameThread = null;
     }
 }

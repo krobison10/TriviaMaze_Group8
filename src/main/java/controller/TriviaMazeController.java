@@ -72,7 +72,7 @@ public class TriviaMazeController {
         if(!fromSave) {
             new TriviaMaze(5, 5, "CS_trivia_questions.db");
         }
-        Game.getInstance().start();
+        Game.getMyInstance().start();
     }
 
     /**
@@ -80,7 +80,7 @@ public class TriviaMazeController {
      */
     public void restart() {
         //Kill the main window
-        BuildUI.getInstance().window().dispose();
+        BuildUI.getMyInstance().window().dispose();
 
         //Wipe old instances of singletons in no specific order
         Game.resetInstance();
@@ -190,7 +190,7 @@ public class TriviaMazeController {
      */
     void gameWon() {
         playSound(Sounds.WINNER);
-        JOptionPane.showMessageDialog(BuildUI.getInstance().window(), "You Win!");
+        JOptionPane.showMessageDialog(BuildUI.getMyInstance().window(), "You Win!");
         restart();
     }
 
@@ -211,9 +211,9 @@ public class TriviaMazeController {
      * @return True if the room is a new room, false otherwise.
      */
     boolean playerInNewRoom(final Room theRoom) {
-        boolean newRoom = theRoom != TriviaMaze.getInstance().player().getCurrentRoom();
+        boolean newRoom = theRoom != TriviaMaze.getInstance().player().getMyCurrentRoom();
         if(newRoom) {
-            TriviaMaze.getInstance().player().setCurrentRoom(theRoom);
+            TriviaMaze.getInstance().player().setMyCurrentRoom(theRoom);
         }
         return newRoom;
     }
@@ -222,7 +222,7 @@ public class TriviaMazeController {
      * Starts the game by building the starting window.
      */
     private void start() {
-        BuildUI.getInstance().buildFrame();
+        BuildUI.getMyInstance().buildFrame();
     }
 
     /**

@@ -14,7 +14,7 @@ import controller.TriviaMazeController;
  * @author Kyler Robison
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] theArgs) {
         TriviaMazeController.getInstance();
     }
 }

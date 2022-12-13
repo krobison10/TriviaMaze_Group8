@@ -64,7 +64,7 @@ public class SidebarManager {
         //Stores the directions of the doors
         String[] directions = {"West", "North", "East", "South"};
 
-        Room r = TriviaMaze.getInstance().player().getCurrentRoom();
+        Room r = TriviaMaze.getInstance().player().getMyCurrentRoom();
         if(r == null) {
             myPanel.revalidate();
             myPanel.repaint();

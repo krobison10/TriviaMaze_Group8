@@ -32,7 +32,7 @@ public class Player implements Serializable {
     /**
      * Reference to the current room that the player is in.
      */
-    private Room currentRoom;
+    private Room myCurrentRoom;
     /**
      * The speed of the player.
      */
@@ -43,7 +43,7 @@ public class Player implements Serializable {
      * Constructs a player object.
      */
     Player() {
-        currentRoom = TriviaMaze.getInstance().getRoom(0,0);
+        myCurrentRoom = TriviaMaze.getInstance().getRoom(0,0);
         myLocationX = myLocationY = TMPanel.TILE_SIZE * 3;
         mySpeed = TMPanel.TILE_SIZE;
     }
@@ -51,14 +51,14 @@ public class Player implements Serializable {
     /**
      * @return the player's location on the X axis.
      */
-    public int locationX() {
+    public int getMyLocationX() {
         return myLocationX;
     }
 
     /**
      * @return the player's location on the Y axis.
      */
-    public int locationY() {
+    public int getMyLocationY() {
         return myLocationY;
     }
 
@@ -67,9 +67,9 @@ public class Player implements Serializable {
      * Also ensures player image does not leave game window.
      * @param theChangeX the change in the X value.
      */
-    public void changeX(final int theChangeX) {
-        if (locationX() + theChangeX <= COORDINATE_MAX
-                && locationX() + theChangeX >= COORDINATE_MIN) {
+    public void setMyLocationX(final int theChangeX) {
+        if (getMyLocationX() + theChangeX <= COORDINATE_MAX
+                && getMyLocationX() + theChangeX >= COORDINATE_MIN) {
             myLocationX += theChangeX;
         }
     }
@@ -79,9 +79,9 @@ public class Player implements Serializable {
      * Also ensures player image does not leave game window.
      * @param theChangeY the change in the Y value.
      */
-    public void changeY(final int theChangeY) {
-        if (locationY() + theChangeY <= COORDINATE_MAX
-            && locationY() + theChangeY >= COORDINATE_MIN) {
+    public void setMyLocationY(final int theChangeY) {
+        if (getMyLocationY() + theChangeY <= COORDINATE_MAX
+            && getMyLocationY() + theChangeY >= COORDINATE_MIN) {
             myLocationY += theChangeY;
         }
     }
@@ -89,22 +89,22 @@ public class Player implements Serializable {
     /**
      * @return the speed value of the player object.
      */
-    public int getSpeed() {
+    public int getMySpeed() {
         return mySpeed;
     }
 
     /**
      * @return a reference to the room that contains the player.
      */
-    public Room getCurrentRoom() {
-        return currentRoom;
+    public Room getMyCurrentRoom() {
+        return myCurrentRoom;
     }
 
     /**
      * Updates the current room of the player
      * @param theCurrentRoom the new room.
      */
-    public void setCurrentRoom(final Room theCurrentRoom) {
-        currentRoom = theCurrentRoom;
+    public void setMyCurrentRoom(final Room theCurrentRoom) {
+        myCurrentRoom = theCurrentRoom;
     }
 }
