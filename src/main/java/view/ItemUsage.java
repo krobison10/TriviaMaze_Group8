@@ -110,7 +110,9 @@ public class ItemUsage {
         while(!getHint){
             getHint = true;
 
-            if(myQuestion instanceof QuestionSelection){
+            // For multiple choice question type with 4 options
+            if(myQuestion instanceof QuestionSelection
+                    && ((QuestionSelection) myQuestion).getOptions().length == 4){
                     itemType = "option removal";
                 }
 
@@ -135,11 +137,9 @@ public class ItemUsage {
                 // Add hint
                 if(myQuestion instanceof QuestionSelection) {
                     multipleChoiceHint(hintBox);
-                    System.out.println("Index " + ((QuestionSelection) myQuestion).getAnswerPosition());
                 }
                 else {
                     freeAnswerHint(hintBox);
-                    System.out.println("Answer : " + myQuestion.getAnswer());
                 }
 
             } else {
