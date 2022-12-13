@@ -10,6 +10,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
+ * CLASS DESCRIPTION HERE
+ *
  * @author AJ Garcia
  */
 public class KeyInput implements KeyListener {

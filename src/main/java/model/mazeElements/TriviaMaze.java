@@ -121,13 +121,6 @@ public class TriviaMaze implements Serializable {
     }
 
     /**
-     * @return a reference to the 2d array of room objects.
-     */
-    public Room[][] getAllRooms() {
-        return myRooms;
-    }
-
-    /**
      * @return a list that contains all the doors in the entire maze.
      */
     public List<Door> getAllDoors() {
@@ -231,13 +224,12 @@ public class TriviaMaze implements Serializable {
      * their initialize method. This method cannot be called
      * before createRooms is called.
      */
-    private Room[][] initializeRooms() {
+    private void initializeRooms() {
         for(int i = 0; i < myHeight; i++) {
             for(int j = 0; j < myWidth; j++) {
                 myRooms[i][j].initializeDoors();
             }
         }
-        return myRooms;
     }
 
     /**
@@ -293,6 +285,8 @@ public class TriviaMaze implements Serializable {
 
     /**
      * Create a new inventory with random number of items
+     *
+     * @author Minh Le
      */
     private void createInventory() {
         int maxInventory = myInventory.getMaxInventory();

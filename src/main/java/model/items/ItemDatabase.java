@@ -20,7 +20,7 @@ import org.sqlite.SQLiteDataSource;
 /**
  * Item database
  *
- * @author Minh Le & Kyler Robison
+ * @author Minh Le
  */
 public class ItemDatabase implements Serializable {
 

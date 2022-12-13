@@ -91,8 +91,8 @@ public class TMPanel extends JPanel{
         // Casts graphics to 2D graphics for more functionality
         Graphics2D g2 = (Graphics2D) g;
 
-        GraphicDrawer.getInstance().drawTiles(g2);
-        GraphicDrawer.getInstance().drawPlayer(g2);
+        GraphicDrawer.drawTiles(g2);
+        GraphicDrawer.drawPlayer(g2);
 
         g2.dispose();
     }

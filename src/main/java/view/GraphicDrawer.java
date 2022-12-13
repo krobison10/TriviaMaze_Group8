@@ -18,37 +18,12 @@ import model.tiles.Tiles;
  * @author Kyler Robison
  */
 public class GraphicDrawer {
-    /**
-     * Singleton instance.
-     */
-    public static GraphicDrawer instance;
-
-
-    private GraphicDrawer() {}
-
-    /**
-     * @return the singleton instance. Creates a new one if one does not yet exist.
-     */
-    public static GraphicDrawer getInstance() {
-        if(instance == null) {
-            instance = new GraphicDrawer();
-        }
-        return instance;
-    }
-
-    /**
-     * Resets the instance by setting the field to null.
-     * Next time getInstance() is called, a new instance will be created.
-     */
-    public static void resetInstance() {
-        instance = null;
-    }
 
     /**
      * Draws stationary tiles to the game board.
      * @param theG2 the graphics.
      */
-    void drawTiles(final Graphics2D theG2) {
+    public static void drawTiles(final Graphics2D theG2) {
         int tileNum, bound = TMPanel.NUM_TILES, ts = TMPanel.TILE_SIZE;
 
         for(int col = 0; col < bound; col++)
@@ -68,8 +43,7 @@ public class GraphicDrawer {
      * Draws player using new location.
      * @param theG2 the graphics.
      */
-    void drawPlayer(final Graphics2D theG2) {
-        //Possible pro-MVC refactor, move the drawme function into this class
+    public static void drawPlayer(final Graphics2D theG2) {
         PlayerController.getInstance().drawMe(theG2, TriviaMaze.getInstance().player().locationX(),
                 TriviaMaze.getInstance().player().locationY());
     }
