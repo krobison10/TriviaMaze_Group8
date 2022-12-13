@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit test for ItemDatabase class
+ * @author Minh Le
  */
 class ItemDatabaseTest {
 
