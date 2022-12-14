@@ -228,13 +228,21 @@ public class PlayerController {
      * Updates player location after checking if move is legal (collidable)
      */
     private void movePlayer() {
+        Player p = TriviaMaze.getInstance().player();
         if (!isTileCollidable(myDirection)) {
-                Player p = TriviaMaze.getInstance().player();
             switch (myDirection) {
                 case "up" -> p.setMyLocationY(-p.getMySpeed());
                 case "down" -> p.setMyLocationY(p.getMySpeed());
                 case "left" -> p.setMyLocationX(-p.getMySpeed());
                 case "right" -> p.setMyLocationX(p.getMySpeed());
+            }
+        // used to go through walls within the maze.
+        } else if (myKeys.getMyCheat()) {
+            switch (myDirection) {
+                case "up" -> p.setMyLocationY(-p.getMySpeed() * 2);
+                case "down" -> p.setMyLocationY(p.getMySpeed() * 2);
+                case "left" -> p.setMyLocationX(-p.getMySpeed() * 2);
+                case "right" -> p.setMyLocationX(p.getMySpeed() * 2);
             }
         }
     }
