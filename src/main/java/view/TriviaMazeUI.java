@@ -21,11 +21,11 @@ import controller.TriviaMazeController;
  *
  * @author AJ Garcia
  */
-public class BuildUI implements ActionListener {
+public class TriviaMazeUI implements ActionListener {
     /**
      * Singleton instance.
      */
-    private static BuildUI myInstance;
+    private static TriviaMazeUI myInstance;
     /**
      * Frame
      */
@@ -40,14 +40,14 @@ public class BuildUI implements ActionListener {
     private JButton myPlayButton;
 
 
-    private BuildUI() {}
+    private TriviaMazeUI() {}
 
     /**
      * Returns a reference to the singleton instance.
      */
-    public static BuildUI getMyInstance() {
+    public static TriviaMazeUI getMyInstance() {
         if(myInstance == null) {
-            myInstance = new BuildUI();
+            myInstance = new TriviaMazeUI();
         }
         return myInstance;
     }

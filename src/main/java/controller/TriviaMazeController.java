@@ -16,7 +16,7 @@ import javax.swing.*;
 import model.mazeElements.*;
 import model.questions.Question;
 import org.apache.commons.io.FilenameUtils;
-import view.BuildUI;
+import view.TriviaMazeUI;
 import view.SidebarManager;
 import view.TMPanel;
 
@@ -40,7 +40,6 @@ public class TriviaMazeController {
      */
     private TriviaMazeController() {
         instance = this;
-        //Initial value for whether sounds will be played
         soundsEnabled = false;
         start();
     }
@@ -85,11 +84,11 @@ public class TriviaMazeController {
      */
     public void restart() {
         //Kill the main window
-        BuildUI.getMyInstance().window().dispose();
+        TriviaMazeUI.getMyInstance().window().dispose();
 
         //Wipe old instances of singletons in no specific order
         Game.resetInstance();
-        BuildUI.resetInstance();
+        TriviaMazeUI.resetInstance();
         TMPanel.resetInstance();
         PlayerController.resetInstance();
 
@@ -105,7 +104,7 @@ public class TriviaMazeController {
     public boolean save(final File theFile) {
         boolean successful = false;
         File file = validateFilename(theFile);
-        try (FileOutputStream fout = new FileOutputStream(file.getPath())) {
+        try(FileOutputStream fout = new FileOutputStream(file.getPath())) {
             ObjectOutputStream out = new ObjectOutputStream(fout);
             out.writeObject(TriviaMaze.getInstance());
             out.flush();
@@ -195,7 +194,7 @@ public class TriviaMazeController {
      */
     void gameWon() {
         playSound(Sounds.WINNER);
-        JOptionPane.showMessageDialog(BuildUI.getMyInstance().window(), "You Win!");
+        JOptionPane.showMessageDialog(TriviaMazeUI.getMyInstance().window(), "You Win!");
         restart();
     }
 
@@ -227,7 +226,7 @@ public class TriviaMazeController {
      * Starts the game by building the starting window.
      */
     private void start() {
-        BuildUI.getMyInstance().buildFrame();
+        TriviaMazeUI.getMyInstance().buildFrame();
     }
 
     /**
