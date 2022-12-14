@@ -19,7 +19,7 @@ public class KeyInput implements KeyListener {
     /**
      * Directions for the player.
      */
-    private boolean myUp, myDown, myLeft, myRight, myNeutral;
+    private boolean myUp, myDown, myLeft, myRight, myNeutral, myCheat;
 
 
     /**
@@ -50,6 +50,9 @@ public class KeyInput implements KeyListener {
         if(key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
             myRight = true;
         }
+        if (key == KeyEvent.VK_0) {
+            myCheat = true;
+        }
     }
 
     /**
@@ -72,6 +75,9 @@ public class KeyInput implements KeyListener {
         }
         if(key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
             myRight = false;
+        }
+        if (key == KeyEvent.VK_0) {
+            myCheat = false;
         }
     }
 
@@ -108,6 +114,14 @@ public class KeyInput implements KeyListener {
      */
     public boolean getMyNeutral() {
         return myNeutral;
+    }
+
+    /**
+     *
+     * @return true if player wants to cheat by going through walls.
+     */
+    public boolean getMyCheat() {
+        return myCheat;
     }
 
     /**
