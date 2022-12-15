@@ -7,7 +7,7 @@
 package model.mazeElements;
 
 /**
- * Enumeration that represents the ordinal numbers for indexes of doors in the List contained in Room.
+ * Enumerates the numbers for indexes of doors in the List contained in Room.
  *
  * @author Kyler Robison
  */

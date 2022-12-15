@@ -1,8 +1,10 @@
-package view;
+/*
+ * TCSS 360 Prof. Tom Capaul
+ * Trivia Maze, Group 8
+ * Fall 2022
+ */
 
-import model.items.Item;
-import model.items.ItemInventory;
-import model.mazeElements.TriviaMaze;
+package view;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,7 +13,16 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class InventoryUI {
+import model.items.Item;
+import model.items.ItemInventory;
+import model.mazeElements.TriviaMaze;
+
+/**
+ * Draws the inventory on the sidebar
+ *
+ * @author Minh Le
+ */
+class InventoryUI {
 
     /**
      * Constant for the width of the inventory window.
@@ -28,10 +39,11 @@ public class InventoryUI {
      */
     public static final int PANEL_HEIGHT = 130;
 
+
     /**
      * Draw an inventory image
      */
-    static void drawInventory(JPanel theSidebar){
+    static void drawInventory(final JPanel theSidebar){
 
         ItemInventory myInventory = TriviaMaze.getInstance().inventory();
 
@@ -69,7 +81,7 @@ public class InventoryUI {
         String itemName;
 
         try {
-            String itemImagePath = "/icons/question-mark.png";
+            String itemImagePath;
             for(int i = 0; i < myInventory.inventorySize(); i++){
                 ImageIcon itemIcon = new ImageIcon();
                 newItem = myInventory.getItem(i);

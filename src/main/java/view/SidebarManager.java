@@ -31,7 +31,6 @@ public class SidebarManager {
      * Text color for text in the sidebar.
      */
     public static final Color TEXT_COLOR = new Color(31, 30, 30);
-
     /**
      * Singleton instance of the class.
      */
@@ -57,14 +56,14 @@ public class SidebarManager {
     /**
      * Wipes and updates the sidebar to have the interactivity required for the current room.
      */
-    public void updateForCurrentRoom() {
+    public void update() {
         myPanel.removeAll();
         InventoryUI.drawInventory(myPanel);
 
         //Stores the directions of the doors
         String[] directions = {"West", "North", "East", "South"};
 
-        Room r = TriviaMaze.getInstance().player().getMyCurrentRoom();
+        Room r = TriviaMaze.getInstance().player().getCurrentRoom();
         if(r == null) {
             myPanel.revalidate();
             myPanel.repaint();

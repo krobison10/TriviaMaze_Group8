@@ -7,17 +7,17 @@
 package model.items;
 
 /**
- * Item that eliminate two wrong answer from multiple choice question
+ * Item that eliminates two wrong answers from multiple choice questions
  *
  * @author Minh Le
  */
 public class ItemOptionRemoval extends Item {
 
     /**
-     * Constructor to create item to remove 2 wrong answers
-     * @param theItemName name of the item to be created
-     * @param theItemDescription description of the item to be created
-     * @param theItemType type of the item to be created
+     * Constructor to create item to remove 2 wrong answers.
+     * @param theItemName name of the item to be created.
+     * @param theItemDescription description of the item to be created.
+     * @param theItemType type of the item to be created.
      */
     public ItemOptionRemoval(final String theItemName, final String theItemDescription, final String theItemType) {
         super.setItemName(theItemName);

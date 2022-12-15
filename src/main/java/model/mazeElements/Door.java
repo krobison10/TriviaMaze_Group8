@@ -57,8 +57,7 @@ public class Door implements Serializable {
     }
 
     /**
-     * updates the state of the door to whatever is passed in.
-     *
+     * Updates the state of the door to whatever is passed in.
      * @param theState the new state of the door.
      */
     public void setState(final DoorStates theState) {

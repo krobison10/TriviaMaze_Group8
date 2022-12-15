@@ -22,7 +22,7 @@ public class Tile implements Serializable {
     /**
      * Whether the tile is collidable or not.
      */
-    private final boolean collidable;
+    private final boolean myCollidable;
 
     /**
      * Constructs a new Tile.
@@ -33,7 +33,7 @@ public class Tile implements Serializable {
         if(theImage == null) {
             throw new IllegalArgumentException("Tile: image cannot be null");
         }
-        collidable = isCollidable;
+        myCollidable = isCollidable;
         myImage = theImage;
     }
 
@@ -48,6 +48,6 @@ public class Tile implements Serializable {
      * @return true if the player should collide with the tile, false otherwise.
      */
     public boolean isCollidable() {
-        return collidable;
+        return myCollidable;
     }
 }

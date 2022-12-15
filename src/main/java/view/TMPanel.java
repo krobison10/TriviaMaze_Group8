@@ -10,10 +10,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import controller.KeyInput;
-
 /**
- *
+ * The panel of the game board.
  *
  * @author AJ Garcia
  */
@@ -34,22 +32,16 @@ public class TMPanel extends JPanel{
     /**
      * Singleton maze instance used later to prevent multiple games from running
      */
-    private static TMPanel triviaMazeInstance = null;
-    /**
-     *
-     */
-    private final KeyInput keys;
+    private static TMPanel instance = null;
+
 
     /**
      * Properties of trivia maze
      */
     private TMPanel() {
-        keys = new KeyInput();
-
         this.setPreferredSize(new Dimension(GAME_SIZE, GAME_SIZE));
         this.setBackground(Color.gray);
         this.setDoubleBuffered(true);
-        this.addKeyListener(keys);
         this.setFocusable(true);
     }
 
@@ -58,10 +50,10 @@ public class TMPanel extends JPanel{
      * (semi-singleton)
      */
     public static TMPanel getInstance() {
-        if (triviaMazeInstance == null) {
-            triviaMazeInstance = new TMPanel();
+        if (instance == null) {
+            instance = new TMPanel();
         }
-        return triviaMazeInstance;
+        return instance;
     }
 
     /**
@@ -69,13 +61,13 @@ public class TMPanel extends JPanel{
      * Next time getInstance() is called, a new instance will be created.
      */
     public static void resetInstance() {
-        triviaMazeInstance = null;
+        instance = null;
     }
 
     /**
      * Executes updates for each frame.
      */
-    public void frameUpdate() {
+    public void update() {
         requestFocus(); // need this to keep key listener working
         repaint();
     }
@@ -85,7 +77,7 @@ public class TMPanel extends JPanel{
      * Draws models to the UI
      * @param theG the <code>Graphics</code> object to protect
      */
-    public void paintComponent(Graphics theG) {
+    public void paintComponent(final Graphics theG) {
         super.paintComponent(theG);
         // Casts graphics to 2D graphics for more functionality
         Graphics2D g2 = (Graphics2D) theG;
@@ -94,12 +86,5 @@ public class TMPanel extends JPanel{
         GraphicDrawer.drawPlayer(g2);
 
         g2.dispose();
-    }
-
-    /**
-     * @return the KeyInput.
-     */
-    public KeyInput getKeys() {
-        return keys;
     }
 }

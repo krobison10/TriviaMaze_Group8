@@ -289,7 +289,7 @@ public class TriviaMaze implements Serializable {
      * @author Minh Le
      */
     private void createInventory() {
-        int maxInventory = myInventory.getMaxInventory();
+        int maxInventory = ItemInventory.MAX_INVENTORY;
         int maxPencil = maxInventory/2;
         int maxEraser = maxInventory/2;
 

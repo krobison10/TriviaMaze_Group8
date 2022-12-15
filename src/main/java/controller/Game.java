@@ -13,11 +13,11 @@ import view.TMPanel;
  *
  * @author AJ Garica, Refactored by Kyler Robison
  */
-public class Game implements Runnable {
+class Game implements Runnable {
     /**
      * Singleton instance of Game.
      */
-    private static Game myInstance;
+    private static Game instance;
     /**
      * Framerate of the game.
      */
@@ -31,19 +31,20 @@ public class Game implements Runnable {
      */
     private Thread myGameThread;
 
+
     /**
-     * Empty constructor
+     * Empty constructor to be private for singleton
      */
     private Game() {}
 
     /**
      * @return the singleton instance of Game. Creates a new one if one does not yet exist.
      */
-    public static Game getMyInstance() {
-        if(myInstance == null) {
-            myInstance = new Game();
+    public static Game getInstance() {
+        if(instance == null) {
+            instance = new Game();
         }
-        return myInstance;
+        return instance;
     }
 
     /**
@@ -52,10 +53,10 @@ public class Game implements Runnable {
      * Also kills the currently running thread.
      */
     public static void resetInstance() {
-        if(myInstance != null) {
-            myInstance.kill();
+        if(instance != null) {
+            instance.kill();
         }
-        myInstance = null;
+        instance = null;
     }
 
     /**
@@ -76,8 +77,8 @@ public class Game implements Runnable {
         double nextDrawTime = Math.abs(System.nanoTime() + interval);
 
         while (myGameThread != null) {
-            TMPanel.getInstance().frameUpdate();
-            PlayerController.getMyInstance().frameUpdate();
+            TMPanel.getInstance().update();
+            PlayerController.getInstance().frameUpdate();
 
             // delays the key press listener
             try {

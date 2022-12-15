@@ -7,7 +7,7 @@
 package controller;
 
 /**
- * Enumeration to represent the different sound that the program can play.
+ * Enumerates the different sounds that the program can play.
  *
  * @author Kyler Robison
  */

@@ -7,11 +7,11 @@
 package model.items;
 
 /**
- * Item that change question
+ * Item that changes the question. Not currently in use in the game.
  *
  * @author Minh Le
  */
-public class ItemQuestionChange extends Item{
+public class ItemQuestionChange extends Item {
     /**
      * Constructor to create item that change question
      * @param theItemName name of the item to be created

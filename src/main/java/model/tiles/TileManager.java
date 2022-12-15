@@ -87,7 +87,7 @@ public class TileManager implements Serializable {
     /**
      * Updates the tile for a door object on the game board, given that
      * the new state of the door has already been set. Incorrect behavior
-     * will occur if state hasn't been set: doors with the state "CLOSED"
+     * will occur if state hasn't been set properly: doors with the state "CLOSED"
      * will be replaced with a wall.
      * @param theDoor the door object.
      */
@@ -95,7 +95,6 @@ public class TileManager implements Serializable {
         int[] coord = findTilePosOfDoor(theDoor);
         int x = coord[0];
         int y = coord[1];
-        //Needs an update to be foolproof
         myMapData[y][x] = theDoor.getState() == DoorStates.OPENED ?
                 Tiles.FLOOR.ordinal() : Tiles.DOOR_BLOCKED.ordinal();
     }

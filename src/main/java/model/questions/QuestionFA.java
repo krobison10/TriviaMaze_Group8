@@ -47,7 +47,7 @@ public class QuestionFA extends Question {
         int lastIndex = answer.length() - 1;
         Random random = new Random();
         int randomNumber;
-        String hint = "";
+        StringBuilder hint = new StringBuilder();
 
         if(lastIndex > 0) {
             randomNumber = random.nextInt(lastIndex);
@@ -56,11 +56,11 @@ public class QuestionFA extends Question {
         }
         for(int i = 0; i <= lastIndex; i++) {
             if (i == randomNumber || i == 0 || i == lastIndex) {
-                hint = hint + answer.charAt(i);
+                hint.append(answer.charAt(i));
             } else {
-                hint += "-";
+                hint.append("-");
             }
         }
-        return hint;
+        return hint.toString();
     }
 }

@@ -87,7 +87,6 @@ public class Room implements Serializable {
     }
 
     /**
-     *
      * @param theItem the Item to be added to the room.
      * @return true if the item was added successfully, false if the room already contained an item.
      * In the false case, the existing item will be kept and the item to be added will be ignored.

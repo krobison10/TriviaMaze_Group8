@@ -17,15 +17,15 @@ import java.util.Random;
  */
 public class MapGenerator {
     /**
-     *
+     * Number of erasers to put
      */
     private int myNumOfErasers = 3;
     /**
-     *
+     * Number of rulers to put
      */
     private int myNumOfRulers = 3;
     /**
-     *
+     * Number of pencils to put
      */
     private int myNumOfPencils = 3;
 
@@ -35,7 +35,7 @@ public class MapGenerator {
      * using FileWriter to print text file
      */
     public MapGenerator(){
-        FileWriter filename = null;
+        FileWriter filename;
         try {
             filename = new FileWriter("../TriviaMaze_Group8/src/main/resources/maps/randommap.txt");
             drawRoom(filename);
@@ -83,19 +83,19 @@ public class MapGenerator {
      * @return a new string with code for doors, walls and items
      */
     private String randomLineWithItems(){
-        String text = "";
+        StringBuilder text = new StringBuilder();
         for(int i = 0; i < 31; i++){
             if(i == 0 || i == 30){
-                text+= "1";
+                text.append("1");
             } else if (i == 6 || i == 12 || i == 18 || i == 24){
-                text+= "2";
+                text.append("2");
             } else if (i == 9 || i == 15 || i == 21 || i == 27){
-                text+= randomItem();
+                text.append(randomItem());
             } else {
-                text+= " ";
+                text.append(" ");
             }
         }
-        return text;
+        return text.toString();
     }
 
     /**

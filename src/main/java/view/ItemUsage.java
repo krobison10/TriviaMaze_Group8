@@ -26,34 +26,6 @@ import java.util.Random;
  * @author Minh Le
  */
 public class ItemUsage {
-
-    /**
-     * Represents the boolean value whether if the user used a help item for this question.
-     * if the player used a help item, getHelped  = true
-     * if the player has not used a help item, getHelped  = false
-     */
-    private boolean getHint;
-
-    /**
-     * Contain the item of the room
-     */
-    private final ItemInventory myInventory;
-
-    /**
-     * The Question object from which this popup get its data.
-     */
-    private Question myQuestion;
-
-    /**
-     * Item that is used by the player when they press the button get help
-     */
-    private static Item usedItem;
-
-    /**
-     * Panel of the hint window.
-     */
-    private JPanel hintWindow;
-
     /**
      * Constant for the width of the hint window.
      */
@@ -63,6 +35,25 @@ public class ItemUsage {
      * Constant for the height of the hint window.
      */
     public static final int HEIGHT = 150;
+    /**
+     * Represents the boolean value whether if the user used a help item for this question.
+     * if the player used a help item, getHelped  = true
+     * if the player has not used a help item, getHelped  = false
+     */
+    private boolean getHint;
+    /**
+     * Contain the item of the room
+     */
+    private final ItemInventory myInventory;
+    /**
+     * The Question object from which this popup get its data.
+     */
+    private Question myQuestion;
+    /**
+     * Panel of the hint window.
+     */
+    private final JPanel hintWindow;
+
 
     public ItemUsage() {
         this.myInventory = TriviaMaze.getInstance().inventory();
@@ -84,7 +75,7 @@ public class ItemUsage {
             } else if (!getHint){
                 getHelp();
             }
-            SidebarManager.getInstance().updateForCurrentRoom();
+            SidebarManager.getInstance().update();
             theWindow.revalidate();
             theWindow.repaint();
         });
@@ -120,7 +111,8 @@ public class ItemUsage {
             else if(myQuestion instanceof QuestionFA) {
                 itemType = "hint display";
             }
-            usedItem = myInventory.useItem(itemType);
+
+            Item usedItem = myInventory.useItem(itemType);
 
             if(usedItem != null){
 

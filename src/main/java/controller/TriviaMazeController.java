@@ -33,14 +33,15 @@ public class TriviaMazeController {
     /**
      * Indicates whether sounds should be played or not
      */
-    private boolean soundsEnabled;
+    private boolean mySoundsEnabled;
 
     /**
      * Initializes and starts the game.
+     * Private for singleton.
      */
     private TriviaMazeController() {
         instance = this;
-        soundsEnabled = false;
+        mySoundsEnabled = false;
         start();
     }
 
@@ -59,7 +60,7 @@ public class TriviaMazeController {
      * @param theFile the file to be checked.
      * @return a correctly named file.
      */
-    private static File validateFilename(final File theFile) {
+    public static File validateFilename(final File theFile) {
         var file = theFile;
         if (!FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("mze")) {
             file = new File(theFile.getParentFile(),
@@ -76,7 +77,7 @@ public class TriviaMazeController {
         if(!fromSave) {
             new TriviaMaze(5, 5, "CS_trivia_questions.db");
         }
-        Game.getMyInstance().start();
+        Game.getInstance().start();
     }
 
     /**
@@ -84,7 +85,7 @@ public class TriviaMazeController {
      */
     public void restart() {
         //Kill the main window
-        TriviaMazeUI.getMyInstance().window().dispose();
+        TriviaMazeUI.getInstance().window().dispose();
 
         //Wipe old instances of singletons in no specific order
         Game.resetInstance();
@@ -99,7 +100,7 @@ public class TriviaMazeController {
     /**
      * Saves the game to the selected file.
      * @param theFile the file to save to.
-     * @return true if the save was successful, false otherwise.
+     * @return true if the save was successful.
      */
     public boolean save(final File theFile) {
         boolean successful = false;
@@ -157,9 +158,10 @@ public class TriviaMazeController {
             playSound(Sounds.BUZZ);
         }
 
+        //Update door graphic in the game to reflect new state
         TriviaMaze.getInstance().tileManager().updateDoorTile(door);
         //Refresh sidebar
-        SidebarManager.getInstance().updateForCurrentRoom();
+        SidebarManager.getInstance().update();
 
         //Check if the game is still winnable
         if(!TriviaMaze.getInstance().existsPathToExit()) {
@@ -171,7 +173,7 @@ public class TriviaMazeController {
      * @return true if sounds are enabled, false otherwise.
      */
     public boolean soundsEnabled() {
-        return soundsEnabled;
+        return mySoundsEnabled;
     }
 
     /**
@@ -179,27 +181,27 @@ public class TriviaMazeController {
      * @param theCondition the new value.
      */
     public void setSoundsEnabled(final boolean theCondition) {
-        soundsEnabled = theCondition;
+        mySoundsEnabled = theCondition;
     }
 
     /**
      * Tells the sidebar manager to update its display for the current room.
      */
     void enteredNewRoom() {
-        SidebarManager.getInstance().updateForCurrentRoom();
+        SidebarManager.getInstance().update();
     }
 
     /**
-     * Shows a message dialogue and then restarts the game.
+     * Shows a message dialogue then restarts the game.
      */
     void gameWon() {
         playSound(Sounds.WINNER);
-        JOptionPane.showMessageDialog(TriviaMazeUI.getMyInstance().window(), "You Win!");
+        JOptionPane.showMessageDialog(TriviaMazeUI.getInstance().window(), "You Win!");
         restart();
     }
 
     /**
-     * Shows a message dialogue and then restarts the game.
+     * Shows a message dialogue then restarts the game.
      */
     void gameLost() {
         JOptionPane.showMessageDialog(TMPanel.getInstance(), "Game over :(");
@@ -215,9 +217,9 @@ public class TriviaMazeController {
      * @return True if the room is a new room, false otherwise.
      */
     boolean playerInNewRoom(final Room theRoom) {
-        boolean newRoom = theRoom != TriviaMaze.getInstance().player().getMyCurrentRoom();
+        boolean newRoom = theRoom != TriviaMaze.getInstance().player().getCurrentRoom();
         if(newRoom) {
-            TriviaMaze.getInstance().player().setMyCurrentRoom(theRoom);
+            TriviaMaze.getInstance().player().setCurrentRoom(theRoom);
         }
         return newRoom;
     }
@@ -226,7 +228,7 @@ public class TriviaMazeController {
      * Starts the game by building the starting window.
      */
     private void start() {
-        TriviaMazeUI.getMyInstance().buildFrame();
+        TriviaMazeUI.getInstance().buildFrame();
     }
 
     /**
@@ -234,7 +236,7 @@ public class TriviaMazeController {
      * @param theSound the sound to be played.
      */
     private void playSound(final Sounds theSound) {
-        if(soundsEnabled) {
+        if(mySoundsEnabled) {
             new Thread(() -> {
                 try {
                     String filename = theSound.name().toLowerCase() + ".wav";

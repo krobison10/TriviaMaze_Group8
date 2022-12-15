@@ -49,7 +49,7 @@ public class QuestionPopup {
     /**
      * Contains the icon for the popup.
      */
-    private final ImageIcon icon;
+    private final ImageIcon myIcon;
 
     /**
      * Represents the type of popup. 0 = undefined, 1 = Selection, 2 = Free answer.
@@ -62,7 +62,7 @@ public class QuestionPopup {
      * @param theQuestion the question Object to be used.
      */
     QuestionPopup(final Question theQuestion) {
-        icon = new ImageIcon();
+        myIcon = new ImageIcon();
         setIcon();
         myQuestion = theQuestion;
     }
@@ -75,7 +75,7 @@ public class QuestionPopup {
     public void promptQuestion() {
         Object[] options = {"Submit", "Close"};
         int result = JOptionPane.showOptionDialog(TMPanel.getInstance(), buildWindow(), "Question",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[0]);
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, myIcon, options, options[0]);
 
         if(result == 0) {
             if(getInput() != null) {
@@ -91,7 +91,7 @@ public class QuestionPopup {
         try {
             BufferedImage iconImage = ImageIO.read
                     (Objects.requireNonNull(getClass().getResourceAsStream("/icons/question-mark.png")));
-            icon.setImage(iconImage);
+            myIcon.setImage(iconImage);
         }
         catch (IOException e) {
             e.printStackTrace();

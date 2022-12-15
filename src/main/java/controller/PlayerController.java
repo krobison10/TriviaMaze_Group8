@@ -20,7 +20,7 @@ import model.tiles.Tiles;
 import view.TMPanel;
 
 /**
- * Handles game logic concerning the animation and movement of the player.
+ * Handles game logic concerning the animation, movement, and collision of the player.
  *
  * @author Kyler Robison & AJ Garcia
  */
@@ -29,18 +29,18 @@ public class PlayerController {
     /**
      * contains the sprite image.
      */
-    private static BufferedImage myUp1, myUp2, myDown1, myDown2, myLeft1, myLeft2, myRight1, myRight2,
-            myNeutralUp, myNeutralDown, myNeutralLeft, myNeutralRight;
+    private static BufferedImage up1, up2, down1, down2, left1, left2, right1, right2,
+            neutralUp, neutralDown, neutralLeft, neutralRight;
     /**
      * Singleton instance.
      */
-    private static PlayerController myInstance;
+    private static PlayerController instance;
     /**
      * Reference to KeyInput object to get current input from user.
      */
     private final KeyInput myKeys;
     /**
-     *
+     * Number of the sprite for animation
      */
     private int mySpriteNum = 1;
     /**
@@ -52,16 +52,18 @@ public class PlayerController {
      */
     public String myDirectionMemory;
     /**
-     *
+     * Counter for keyframe animation
      */
     private int mySpriteCounter = 0;
 
 
     /**
      * Initializes player object.
+     * Private for singleton
      */
     private PlayerController() {
-        myKeys = TMPanel.getInstance().getKeys();
+        myKeys = new KeyInput();
+        TMPanel.getInstance().addKeyListener(myKeys);
         initPlayer();
         loadSprites();
         updateCurrentRoom();
@@ -70,19 +72,20 @@ public class PlayerController {
     /**
      * Global point of access to instance of PlayerController.
      */
-    public static PlayerController getMyInstance() {
-        if(myInstance == null) {
-            myInstance = new PlayerController();
+    public static PlayerController getInstance() {
+        if(instance == null) {
+            instance = new PlayerController();
         }
-        return myInstance;
+        return instance;
     }
 
     /**
      * Resets the instance by setting the field to null.
      * Next time getInstance() is called, a new instance will be created.
+     * Enables singleton to work with serialization and game restarting.
      */
     public static void resetInstance() {
-        myInstance = null;
+        instance = null;
     }
 
     /**
@@ -95,65 +98,66 @@ public class PlayerController {
 
     /**
      * Draws player sprite position based on key press or depress.
-     * @param theGraph
-     * @param theLocationX
-     * @param theLocationY
+     * @param theGraph Graphics2D object to draw to.
+     * @param theX the X location of the player.
+     * @param theY the Y location of the player.
      */
-    public void drawMe(final Graphics2D theGraph, final int theLocationX, final int theLocationY) {
-        BufferedImage image = myNeutralDown;
+    public void drawMe(final Graphics2D theGraph, final int theX, final int theY) {
+        BufferedImage image = neutralDown;
         switch (myDirection) {
             case "up" -> {
                 if (mySpriteNum == 1) {
-                    image = myUp1;
+                    image = up1;
                 }
                 if (mySpriteNum == 2) {
-                    image = myUp2;
+                    image = up2;
                 }
             }
             case "down" -> {
                 if (mySpriteNum == 1) {
-                    image = myDown1;
+                    image = down1;
                 }
                 if (mySpriteNum == 2) {
-                    image = myDown2;
+                    image = down2;
                 }
             }
             case "left" -> {
                 if (mySpriteNum == 1) {
-                    image = myLeft1;
+                    image = left1;
                 }
                 if (mySpriteNum == 2) {
-                    image = myLeft2;
+                    image = left2;
                 }
             }
             case "right" -> {
                 if (mySpriteNum == 1) {
-                    image = myRight1;
+                    image = right1;
                 }
                 if (mySpriteNum == 2) {
-                    image = myRight2;
+                    image = right2;
                 }
             }
             default -> {
                 image = switch (myDirectionMemory) {
-                    case "up" -> myNeutralUp;
-                    case "down" -> myNeutralDown;
-                    case "left" -> myNeutralLeft;
-                    case "right" -> myNeutralRight;
+                    case "up" -> neutralUp;
+                    case "down" -> neutralDown;
+                    case "left" -> neutralLeft;
+                    case "right" -> neutralRight;
                     default -> image;
                 };
                 myDirection = myDirectionMemory;
             }
         }
-        theGraph.drawImage(image, theLocationX, theLocationY, TMPanel.TILE_SIZE,
-                TMPanel.TILE_SIZE, null);
+        theGraph.drawImage(image, theX, theY, TMPanel.TILE_SIZE, TMPanel.TILE_SIZE, null);
     }
 
     /**
      * Reads key press input and updates player location accordingly.
      */
     private void updatePlayerLocation() {
-        if (myKeys.getMyUp() || myKeys.getMyDown() || myKeys.getMyLeft() || myKeys.getMyRight() || myKeys.getMyNeutral()) {
+        if (myKeys.getMyUp() || myKeys.getMyDown() || myKeys.getMyLeft()
+                || myKeys.getMyRight() || myKeys.getMyNeutral()) {
+
             if (myKeys.getMyUp()) {
                 myDirection = "up";
                 movePlayer();
@@ -191,16 +195,15 @@ public class PlayerController {
     }
 
     /**
-     * Grabs the current position of the player, checks the position the player is requesting to go,
-     * and returns is the tile is collidable or not.
-     * @param theDir
-     * @return
+     * Determines if the immediately adjacent tile is collidable or not.
+     * @param theDir the direction to check in.
+     * @return if there is a collidable tile immediately adjacent in the direction.
      */
     private boolean isTileCollidable(final String theDir) {
 
         // stores player location x and y
-        int xLocation = TriviaMaze.getInstance().player().getMyLocationX();
-        int yLocation = TriviaMaze.getInstance().player().getMyLocationY();
+        int xLocation = TriviaMaze.getInstance().player().getLocationX();
+        int yLocation = TriviaMaze.getInstance().player().getLocationY();
         // uses player location x,y to find which tile in the maze player is on
         int mapRow = yLocation / TMPanel.TILE_SIZE;
         int mapCol = xLocation / TMPanel.TILE_SIZE;
@@ -231,18 +234,18 @@ public class PlayerController {
         Player p = TriviaMaze.getInstance().player();
         if (!isTileCollidable(myDirection)) {
             switch (myDirection) {
-                case "up" -> p.setMyLocationY(-p.getMySpeed());
-                case "down" -> p.setMyLocationY(p.getMySpeed());
-                case "left" -> p.setMyLocationX(-p.getMySpeed());
-                case "right" -> p.setMyLocationX(p.getMySpeed());
+                case "up" -> p.changeY(-p.getSpeed());
+                case "down" -> p.changeY(p.getSpeed());
+                case "left" -> p.changeX(-p.getSpeed());
+                case "right" -> p.changeX(p.getSpeed());
             }
         // used to go through walls within the maze.
         } else if (myKeys.getMyCheat()) {
             switch (myDirection) {
-                case "up" -> p.setMyLocationY(-p.getMySpeed() * 2);
-                case "down" -> p.setMyLocationY(p.getMySpeed() * 2);
-                case "left" -> p.setMyLocationX(-p.getMySpeed() * 2);
-                case "right" -> p.setMyLocationX(p.getMySpeed() * 2);
+                case "up" -> p.changeY(-p.getSpeed() * 2);
+                case "down" -> p.changeY(p.getSpeed() * 2);
+                case "left" -> p.changeX(-p.getSpeed() * 2);
+                case "right" -> p.changeX(p.getSpeed() * 2);
             }
         }
     }
@@ -251,8 +254,8 @@ public class PlayerController {
      * Does some math to compute which room of the maze the player is in using their location.
      */
     private void updateCurrentRoom() {
-        int tileX = TriviaMaze.getInstance().player().getMyLocationX() / TMPanel.TILE_SIZE;
-        int tileY = TriviaMaze.getInstance().player().getMyLocationY() / TMPanel.TILE_SIZE;
+        int tileX = TriviaMaze.getInstance().player().getLocationX() / TMPanel.TILE_SIZE;
+        int tileY = TriviaMaze.getInstance().player().getLocationY() / TMPanel.TILE_SIZE;
 
         int roomX = tileX % 6 == 0 ? -1 : (int) Math.ceil(tileX / 6f);
         int roomY = tileY % 6 == 0 ? -1 : (int) Math.ceil(tileY / 6f);
@@ -278,32 +281,32 @@ public class PlayerController {
     private void loadSprites() {
         try {
             // up sprites
-            myUp1 = ImageIO.read(new FileInputStream
+            up1 = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/Player/player_up1.png"));
-            myUp2 = ImageIO.read(new FileInputStream
+            up2 = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/Player/player_up2.png"));
-            myNeutralUp = ImageIO.read(new FileInputStream
+            neutralUp = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/player/player_up_neutral.png"));
             // down sprites
-            myDown1 = ImageIO.read(new FileInputStream
+            down1 = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/Player/player_down1.png"));
-            myDown2 = ImageIO.read(new FileInputStream
+            down2 = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/Player/player_down2.png"));
-            myNeutralDown = ImageIO.read(new FileInputStream
+            neutralDown = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/Player/player_down_neutral.png"));
             // right sprites
-            myRight1 = ImageIO.read(new FileInputStream
+            right1 = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/Player/player_right1.png"));
-            myRight2 = ImageIO.read(new FileInputStream
+            right2 = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/Player/player_right2.png"));
-            myNeutralRight = ImageIO.read(new FileInputStream
+            neutralRight = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/Player/player_right_neutral.png"));
             // left sprites
-            myLeft1 = ImageIO.read(new FileInputStream
+            left1 = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/player/Player_left1.png"));
-            myLeft2 = ImageIO.read(new FileInputStream
+            left2 = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/player/Player_left2.png"));
-            myNeutralLeft = ImageIO.read(new FileInputStream
+            neutralLeft = ImageIO.read(new FileInputStream
                     ("../TriviaMaze_Group8/src/main/resources/Player/player_left_neutral.png"));
         } catch(IOException e) {
             e.printStackTrace();

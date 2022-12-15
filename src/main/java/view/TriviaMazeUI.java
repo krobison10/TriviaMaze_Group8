@@ -25,7 +25,7 @@ public class TriviaMazeUI implements ActionListener {
     /**
      * Singleton instance.
      */
-    private static TriviaMazeUI myInstance;
+    private static TriviaMazeUI instance;
     /**
      * Frame
      */
@@ -45,11 +45,11 @@ public class TriviaMazeUI implements ActionListener {
     /**
      * Returns a reference to the singleton instance.
      */
-    public static TriviaMazeUI getMyInstance() {
-        if(myInstance == null) {
-            myInstance = new TriviaMazeUI();
+    public static TriviaMazeUI getInstance() {
+        if(instance == null) {
+            instance = new TriviaMazeUI();
         }
-        return myInstance;
+        return instance;
     }
 
     /**
@@ -57,7 +57,7 @@ public class TriviaMazeUI implements ActionListener {
      * Next time getInstance() is called, a new instance will be created.
      */
     public static void resetInstance() {
-        myInstance = null;
+        instance = null;
     }
 
     /**
@@ -242,7 +242,7 @@ public class TriviaMazeUI implements ActionListener {
         myMazeWindow.setVisible(true);
         myMazeWindow.add(new JButton("Click me!"));
         TriviaMazeController.getInstance().startNewGame(fromSave);
-        SidebarManager.getInstance().updateForCurrentRoom();
+        SidebarManager.getInstance().update();
     }
 
     /**
@@ -259,7 +259,6 @@ public class TriviaMazeUI implements ActionListener {
 
     /**
      * Displays the game rules when selected from the menu bar
-     * @return
      */
     @SuppressWarnings("SameReturnValue")
     private String gameRules() {
@@ -281,7 +280,6 @@ public class TriviaMazeUI implements ActionListener {
 
     /**
      * Displays the game credits when selected from the menu bar.
-     * @return
      */
     @SuppressWarnings("SameReturnValue")
     private String gameCredits() {
@@ -290,7 +288,6 @@ public class TriviaMazeUI implements ActionListener {
 
     /**
      * Shows the game controls when selected from the menu bar.
-     * @return
      */
     @SuppressWarnings("SameReturnValue")
     private String gameControls() {

@@ -7,7 +7,7 @@
 package model.mazeElements;
 
 /**
- * Represents the possible states of a door in the game.
+ * Enumerates the states of a door in the game.
  *
  * @author Kyler Robison
  */

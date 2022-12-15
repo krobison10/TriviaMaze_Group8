@@ -51,14 +51,14 @@ public class Player implements Serializable {
     /**
      * @return the player's location on the X axis.
      */
-    public int getMyLocationX() {
+    public int getLocationX() {
         return myLocationX;
     }
 
     /**
      * @return the player's location on the Y axis.
      */
-    public int getMyLocationY() {
+    public int getLocationY() {
         return myLocationY;
     }
 
@@ -67,9 +67,9 @@ public class Player implements Serializable {
      * Also ensures player image does not leave game window.
      * @param theChangeX the change in the X value.
      */
-    public void setMyLocationX(final int theChangeX) {
-        if (getMyLocationX() + theChangeX <= COORDINATE_MAX
-                && getMyLocationX() + theChangeX >= COORDINATE_MIN) {
+    public void changeX(final int theChangeX) {
+        if (getLocationX() + theChangeX <= COORDINATE_MAX
+                && getLocationX() + theChangeX >= COORDINATE_MIN) {
             myLocationX += theChangeX;
         }
     }
@@ -79,9 +79,9 @@ public class Player implements Serializable {
      * Also ensures player image does not leave game window.
      * @param theChangeY the change in the Y value.
      */
-    public void setMyLocationY(final int theChangeY) {
-        if (getMyLocationY() + theChangeY <= COORDINATE_MAX
-            && getMyLocationY() + theChangeY >= COORDINATE_MIN) {
+    public void changeY(final int theChangeY) {
+        if (getLocationY() + theChangeY <= COORDINATE_MAX
+            && getLocationY() + theChangeY >= COORDINATE_MIN) {
             myLocationY += theChangeY;
         }
     }
@@ -89,14 +89,14 @@ public class Player implements Serializable {
     /**
      * @return the speed value of the player object.
      */
-    public int getMySpeed() {
+    public int getSpeed() {
         return mySpeed;
     }
 
     /**
      * @return a reference to the room that contains the player.
      */
-    public Room getMyCurrentRoom() {
+    public Room getCurrentRoom() {
         return myCurrentRoom;
     }
 
@@ -104,7 +104,7 @@ public class Player implements Serializable {
      * Updates the current room of the player
      * @param theCurrentRoom the new room.
      */
-    public void setMyCurrentRoom(final Room theCurrentRoom) {
+    public void setCurrentRoom(final Room theCurrentRoom) {
         myCurrentRoom = theCurrentRoom;
     }
 }
